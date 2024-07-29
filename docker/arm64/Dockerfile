@@ -8,6 +8,6 @@ RUN DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Warsaw
 
 # Libraries installation
-RUN apt update && apt install build-essential \
+RUN apt update && apt install -y build-essential \
     cmake
 
