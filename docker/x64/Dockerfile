@@ -1,4 +1,4 @@
-# Height-Vision-PI/x64:0.0.2
+# Height-Vision-PI/x64:0.0.3
 FROM debian:12
 
 # Noninteractive package installation set
@@ -11,7 +11,9 @@ ENV TZ=Europe/Warsaw
 RUN apt update && apt install -y build-essential \
     cmake \
     git \
-    gdb
+    gdb \
+    libopencv-dev \
+    python3-opencv
 
 # Google Test installation
 RUN git clone https://github.com/google/googletest.git /googletest && \
