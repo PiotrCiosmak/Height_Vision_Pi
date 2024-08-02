@@ -10,9 +10,20 @@ IFS='.' read -r MAJOR MINOR PATCH <<< "$IMAGE_VERSION"
 ARCHITECTURE="$2"
 [[ "$ARCHITECTURE" != "x64" && "$ARCHITECTURE" != "arm64" ]] && echo "ERROR: <ARCHITECTURE> must be x64 or arm64" && exit 1
 
-IMAGE_NAME=" Height-Vision-PI/$ARCHITECTURE:$IMAGE_VERSION"
+IMAGE_NAME="ghcr.io/piotrciosmak/height-vision-pi/$ARCHITECTURE:$IMAGE_VERSION"
 
-docker build -t "$IMAGE_NAME" \
-  -f ./docker/"$ARCHITECTURE"/Dockerfile \
-  --progress=plain \
-  . >>docker-build.log
+if [[ "$ARCHITECTURE" == "arm64" ]]; then
+  docker buildx build --platform linux/arm64 \
+    -t "$IMAGE_NAME" \
+    -f ./docker/"$ARCHITECTURE"/Dockerfile \
+    --progress=plain \
+    . >>docker-build.log
+else
+    docker build \
+      -t "$IMAGE_NAME" \
+      -f ./docker/"$ARCHITECTURE"/Dockerfile \
+      --progress=plain \
+      . >>docker-build.log
+fi
+
+docker push "$IMAGE_NAME"
