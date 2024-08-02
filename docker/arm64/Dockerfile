@@ -1,4 +1,4 @@
-# Height-Vision-PI/arm64:0.0.1
+# height-vision-pi/arm64:0.1.0
 FROM arm64v8/debian:12
 
 # Noninteractive package installation set
@@ -9,5 +9,10 @@ ENV TZ=Europe/Warsaw
 
 # Libraries installation
 RUN apt update && apt install -y build-essential \
-    cmake
-
+    cmake \
+    git \
+    wget \
+    libusb-dev \
+    libjpeg-dev \
+    libopencv-dev \
+    pkg-config
