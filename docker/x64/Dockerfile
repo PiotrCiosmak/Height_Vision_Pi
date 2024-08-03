@@ -8,15 +8,11 @@ RUN DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Warsaw
 
 # Libraries installation
-RUN apt update && apt install -y build-essential \
+RUN apt update && apt install -y \
+    build-essential \
     cmake \
     git \
-    gdb \
-    libopencv-dev \
-    python3-opencv \
-    libusb-dev \
-    libjpeg-dev \
-    pkg-config
+    gdb
 
 # Google Test installation
 RUN git clone https://github.com/google/googletest.git /opt/googletest && \
