@@ -20,11 +20,11 @@ if [[ "$ARCHITECTURE" == "arm64" ]]; then
     --progress=plain \
     . >>docker-build.log
 else
-    docker build \
-      -t "$IMAGE_NAME" \
-      -f ./docker/"$ARCHITECTURE"/Dockerfile \
-      --progress=plain \
-      . >>docker-build.log
+  docker build \
+    -t "$IMAGE_NAME" \
+    -f ./docker/"$ARCHITECTURE"/Dockerfile \
+    --progress=plain \
+    . >>docker-build.log
 fi
 
 docker push "$IMAGE_NAME"
