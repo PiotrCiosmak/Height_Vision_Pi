@@ -8,6 +8,6 @@ pkg_check_modules(LIBCAMERA REQUIRED libcamera)
 
 include_directories(${PROJECT_SOURCE_DIR}/include ${LIBCAMERA_INCLUDE_DIRS})
 
-add_executable(Height_Vision_Pi apps/main.cpp src/camera/CameraController.cpp)
+add_executable(Height_Vision_Pi apps/main.cpp)
 
 target_link_libraries(Height_Vision_Pi ${LIBCAMERA_LIBRARIES})
