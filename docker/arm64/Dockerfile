@@ -8,7 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Warsaw
 
 # Libraries installation
-RUN apt update && apt full-upgrade && apt install -y \
+RUN apt update && apt full-upgrade -y && apt install -y \
     build-essential \
     cmake \
     git \
@@ -18,16 +18,14 @@ RUN apt update && apt full-upgrade && apt install -y \
     libavcodec-dev \
     libavformat-dev \
     libswscale-dev \
-    python3.8 \
+    python3 \
     python3-pip \
     python3-dev \
     python3-numpy \
-    libtbb2 \
     libtbb-dev \
     libjpeg-dev \
     libpng-dev \
-    libtiff-dev \
-    libdc1394-22-dev
+    libtiff-dev
 
 # Libcamera installation
 RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivariety-V4L2-Driver/releases/download/install_script/install_pivariety_pkgs.sh && \
