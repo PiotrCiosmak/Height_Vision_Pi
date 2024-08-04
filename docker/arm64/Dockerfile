@@ -1,4 +1,4 @@
-# height-vision-pi/arm64:0.1.0
+# height-vision-pi/arm64:0.1.1
 FROM dtcooper/raspberrypi-os:latest
 
 # Noninteractive package installation set
@@ -21,3 +21,5 @@ RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivarie
     sed -i 's/sudo //g' install_pivariety_pkgs.sh && \
     ./install_pivariety_pkgs.sh -p libcamera_dev && \
     ./install_pivariety_pkgs.sh -p libcamera_apps
+
+WORKDIR /Height_Vision_Pi
