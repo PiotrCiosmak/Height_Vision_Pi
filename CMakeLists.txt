@@ -6,8 +6,14 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(LIBCAMERA REQUIRED libcamera)
 
-include_directories(${PROJECT_SOURCE_DIR}/include ${LIBCAMERA_INCLUDE_DIRS})
+include_directories(
+        ${PROJECT_SOURCE_DIR}/include
+        ${LIBCAMERA_INCLUDE_DIRS}
+)
 
-add_executable(Height_Vision_Pi apps/main.cpp)
+add_executable(Height_Vision_Pi
+        apps/main.cpp
+        src/camera/CameraManagerWrapper.cpp
+)
 
 target_link_libraries(Height_Vision_Pi ${LIBCAMERA_LIBRARIES})
