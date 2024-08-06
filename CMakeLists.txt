@@ -5,15 +5,18 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(LIBCAMERA REQUIRED libcamera)
+find_package(OpenCV REQUIRED)
 
 include_directories(
         ${PROJECT_SOURCE_DIR}/include
         ${LIBCAMERA_INCLUDE_DIRS}
+        ${OpenCV_INCLUDE_DIRS}
 )
 
 add_executable(Height_Vision_Pi
         apps/main.cpp
         src/camera/CameraManagerWrapper.cpp
+        src/camera/CameraCapture.cpp
 )
 
-target_link_libraries(Height_Vision_Pi ${LIBCAMERA_LIBRARIES})
+target_link_libraries(Height_Vision_Pi ${LIBCAMERA_LIBRARIES} ${OpenCV_LIBS})
