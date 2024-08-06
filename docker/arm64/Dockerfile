@@ -22,12 +22,10 @@ RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivarie
     ./install_pivariety_pkgs.sh -p libcamera_dev && \
     ./install_pivariety_pkgs.sh -p libcamera_apps
 
-#Open CV installation
+#OpenCV installation
 RUN wget https://github.com/Qengineering/Install-OpenCV-Raspberry-Pi-64-bits/raw/main/OpenCV-4-10-0.sh && \
     chmod 755 ./OpenCV-4-10-0.sh && \
     sed -i 's/sudo //g' OpenCV-4-10-0.sh && \
     ./OpenCV-4-10-0.sh
-
-
 
 WORKDIR /Height_Vision_Pi
