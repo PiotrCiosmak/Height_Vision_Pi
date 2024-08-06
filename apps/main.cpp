@@ -1,34 +1,31 @@
 #include <opencv2/opencv.hpp>
+#include <iostream>
+
 using namespace std;
 using namespace cv;
 
 int main() {
+    // Inicjalizacja obiektu VideoCapture
+    VideoCapture cap(0); // Używa domyślnego backendu dla kamery
 
-    VideoCapture cap(0, CAP_V4L2);
     if (!cap.isOpened()) {
         cout << "Cannot open camera\n";
         return -1;
     }
 
     Mat frame;
-    namedWindow("Camera Feed", WINDOW_AUTOSIZE); // Tworzymy okno do wyświetlania obrazu
-
-    while (true) {
-        bool ret = cap.read(frame);
-        if (!ret) {
-            cout << "Error. Failed to receive frame.\n";
-            break;
+    if (cap.read(frame)) { // Próbuj odczytać jedną klatkę
+        // Zapisz klatkę do pliku
+        bool success = imwrite("captured_frame.jpg", frame); // Zapisuje obraz do pliku "captured_frame.jpg"
+        if (!success) {
+            cout << "Error: Failed to save the frame.\n";
+        } else {
+            cout << "Frame saved as 'captured_frame.jpg'.\n";
         }
-
-        imshow("Camera Feed", frame); // Wyświetlamy klatkę w oknie
-
-        if (waitKey(1) == 'q') { // Sprawdzamy, czy naciśnięto 'q'
-            break;
-        }
+    } else {
+        cout << "Error: Failed to capture frame.\n";
     }
 
     cap.release(); // Zwolnienie zasobów kamery
-    destroyAllWindows(); // Zamknięcie wszystkich okien OpenCV
-
     return 0;
 }
