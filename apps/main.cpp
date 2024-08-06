@@ -1,12 +1,13 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
+#include <libcamera/formats.h>
 
 using namespace std;
 using namespace cv;
 
 int main() {
     // Inicjalizacja obiektu VideoCapture
-    VideoCapture cap(0); // Używa domyślnego backendu dla kamery
+    VideoCapture cap(0, libcamera::formats::NV12); // Używa domyślnego backendu dla kamery
 
     if (!cap.isOpened()) {
         cout << "Cannot open camera\n";
