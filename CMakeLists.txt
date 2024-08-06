@@ -15,7 +15,6 @@ include_directories(
 add_executable(Height_Vision_Pi
         apps/main.cpp
         src/camera/CameraManagerWrapper.cpp
-        src/camera/CameraCapture.cpp
 )
 
 target_link_libraries(Height_Vision_Pi
