@@ -1,6 +1,11 @@
 #include "camera/CameraCapture.hpp"
 
 #include <opencv2/opencv.hpp>
+#include <iostream>
+#include <libcamera/libcamera.h>
+#include <libcamera/stream.h>
+#include <libcamera/camera_manager.h>
+#include <libcamera/camera.h>
 
 using namespace height_vision_pi;
 
@@ -31,6 +36,11 @@ void CameraCapture::startCapture()
         camera->release();
         exit(1);
     }
+
+    config->at(0).pixelFormat = libcamera::formats::YUV420;
+    config->at(0).size.width = 1920;
+    config->at(0).size.height = 1080;
+
     config->validate();
     if(camera->configure(config.get()))
     {
