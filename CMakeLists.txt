@@ -1,11 +1,10 @@
 cmake_minimum_required(VERSION 3.25.1)
 project(Height_Vision_Pi)
-
 set(CMAKE_CXX_STANDARD 20)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(LIBCAMERA REQUIRED libcamera)
 find_package(OpenCV REQUIRED)
+pkg_check_modules(LIBCAMERA REQUIRED libcamera)
 
 include_directories(
         ${PROJECT_SOURCE_DIR}/include
@@ -19,4 +18,6 @@ add_executable(Height_Vision_Pi
         src/camera/CameraCapture.cpp
 )
 
-target_link_libraries(Height_Vision_Pi ${LIBCAMERA_LIBRARIES} ${OpenCV_LIBS})
+target_link_libraries(Height_Vision_Pi
+        ${LIBCAMERA_LIBRARIES}
+        ${OpenCV_LIBS})
