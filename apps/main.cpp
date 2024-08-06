@@ -4,7 +4,7 @@ using namespace std;
 using namespace cv;
 
 int main() {
-    VideoCapture cap(0,CAP_V4L2);
+    VideoCapture cap(0);
     if (!cap.isOpened()) {
         cout << "Cannot open camera\n";
         return -1;
