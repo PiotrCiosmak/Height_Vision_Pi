@@ -54,7 +54,7 @@ void CameraCapture::startCapture()
         std::cerr<<"ERROR: Failed to start camera"<<std::endl;
     }
 
-    cv::VideoCapture cap(0);
+    cv::VideoCapture cap("v4l2src device=/dev/video0 ! video/x-raw,format=YUY2,width=1920,height=1080,framerate=30/1 ! videoconvert ! appsink");
     if (!cap.isOpened())
     {
         std::cerr << "ERROR: Could not open camera" << std::endl;
