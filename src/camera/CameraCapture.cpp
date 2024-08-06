@@ -54,29 +54,8 @@ void CameraCapture::startCapture()
         std::cerr<<"ERROR: Failed to start camera"<<std::endl;
     }
 
-    cv::VideoCapture cap("v4l2src device=/dev/video0 ! video/x-raw,format=YUY2,width=1920,height=1080,framerate=30/1 ! videoconvert ! appsink");
-    if (!cap.isOpened())
-    {
-        std::cerr << "ERROR: Could not open camera" << std::endl;
-        camera->stop();
-        camera->release();
-        exit(1);
-    }
+    std::cout<<"CHYBA DZIAŁAM\n";
 
-    cv::Mat frame;
-    while (true)
-    {
-        cap >> frame;
-        if (frame.empty())
-        {
-            std::cerr << "ERROR: Blank frame grabbed" << std::endl;
-            break;
-        }
-        imshow("Camera Feed", frame);
-        if (cv::waitKey(30) >= 0) break; // Exit on any key press
-    }
-
-    cap.release();
     cv::destroyAllWindows();
 
     camera->stop();
