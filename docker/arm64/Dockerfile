@@ -28,6 +28,7 @@ RUN wget https://github.com/Qengineering/Install-OpenCV-Raspberry-Pi-64-bits/raw
     sed -i 's/sudo //g' OpenCV-4-10-0.sh && \
     ./OpenCV-4-10-0.sh
 
+# Libevent installation
 RUN apt install -y libevent-dev
 
 WORKDIR /Height_Vision_Pi
