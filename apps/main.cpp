@@ -109,7 +109,7 @@ static void processRequest(Request *request)
 		cv::Mat image(1280,720, CV_8UC1, &buffer[0]);
 
 		// Save the image using OpenCV
-		std::string filename = "test/image_" + std::to_string(metadata.sequence) + ".png";
+		std::string filename = "image_" + std::to_string(metadata.sequence) + ".png";
 		if (cv::imwrite(filename, image)) {
 			std::cout << "Saved image to " << filename << std::endl;
 		} else {
