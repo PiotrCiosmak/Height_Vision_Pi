@@ -300,9 +300,10 @@ int main()
 	/*
 	 * The Camera configuration procedure fails with invalid parameters.
 	 */
+	streamConfig.size.width = 2704; //4096
+	streamConfig.size.height = 2032; //2560
 #if 0
-	streamConfig.size.width = 0; //4096
-	streamConfig.size.height = 0; //2560
+
 
 	int ret = camera->configure(config.get());
 	if (ret) {
