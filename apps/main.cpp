@@ -106,7 +106,7 @@ static void processRequest(Request *request)
 		 * must be mapped by the application
 		 */
 
-		cv::Mat image(stream->configuration().size.height,stream->configuration().size.height,stream->configuration().pixelFormat, buffer);
+		cv::Mat image(stream->configuration().size.height,stream->configuration().size.height, CV_8UC1, &buffer[0]);
 
 		// Save the image using OpenCV
 		std::string filename = "image_" + std::to_string(metadata.sequence) + ".png";
