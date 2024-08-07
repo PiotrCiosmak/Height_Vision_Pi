@@ -82,7 +82,7 @@ static void processRequest(Request *request)
 	 */
 	const Request::BufferMap &buffers = request->buffers();
 	for (auto bufferPair : buffers) {
-		// (Unused) Stream *stream = bufferPair.first;
+		const Stream *stream = bufferPair.first;
 		FrameBuffer *buffer = bufferPair.second;
 		const FrameMetadata &metadata = buffer->metadata();
 
@@ -106,8 +106,7 @@ static void processRequest(Request *request)
 		 * must be mapped by the application
 		 */
 
-		cv::Mat image(2704,2880, CV_8UC1, &buffer[0]);
-
+		cv::Mat image(stream->configuration().size.height,stream->configuration().size.height,stream->configuration().pixelFormat, buffer);
 
 		// Save the image using OpenCV
 		std::string filename = "image_" + std::to_string(metadata.sequence) + ".png";
@@ -300,10 +299,9 @@ int main()
 	/*
 	 * The Camera configuration procedure fails with invalid parameters.
 	 */
-	streamConfig.size.width = 2704; //4096
-	streamConfig.size.height = 2032; //2560
 #if 0
-
+	streamConfig.size.width = 0; //4096
+	streamConfig.size.height = 0; //2560
 
 	int ret = camera->configure(config.get());
 	if (ret) {
