@@ -10,6 +10,7 @@
 #include <memory>
 
 #include <libcamera/libcamera.h>
+#include <opencv2/opencv.hpp>
 
 #include "event_loop.h"
 
@@ -104,6 +105,16 @@ static void processRequest(Request *request)
 		 * Image data can be accessed here, but the FrameBuffer
 		 * must be mapped by the application
 		 */
+
+		cv::Mat image(2048,3234, CV_8UC1, buffer);
+
+		// Save the image using OpenCV
+		std::string filename = "image_" + std::to_string(metadata.sequence) + ".png";
+		if (cv::imwrite(filename, image)) {
+			std::cout << "Saved image to " << filename << std::endl;
+		} else {
+			std::cerr << "Failed to save image to " << filename << std::endl;
+		}
 	}
 
 	/* Re-queue the Request to the camera. */
