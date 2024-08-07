@@ -106,11 +106,14 @@ static void processRequest(Request *request)
 		 * must be mapped by the application
 		 */
 
-		cv::Mat image(1280,720, CV_16UC1, &buffer[0]);
+		cv::Mat image(1280,720, CV_8UC1, &buffer[0]);
+
+		cv::Mat rgbImage;
+		cv::cvtColor(image, rgbImage, cv::COLOR_BayerRG2BGR);
 
 		// Save the image using OpenCV
 		std::string filename = "image_" + std::to_string(metadata.sequence) + ".png";
-		if (cv::imwrite(filename, image)) {
+		if (cv::imwrite(filename, rgbImage)) {
 			std::cout << "Saved image to " << filename << std::endl;
 		} else {
 			std::cerr << "Failed to save image to " << filename << std::endl;
