@@ -1,4 +1,4 @@
-# height-vision-pi/arm64:0.2.0
+# height-vision-pi/arm64:0.3.0
 FROM dtcooper/raspberrypi-os:latest
 
 # Noninteractive package installation set
