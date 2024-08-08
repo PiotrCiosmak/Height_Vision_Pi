@@ -8,10 +8,11 @@
 #include <iomanip>
 #include <iostream>
 #include <memory>
-
+#include <opencv2/opencv.hpp>
 #include <libcamera/libcamera.h>
 
 #include "event_loop.h"
+#include <sys/mman.h>
 
 #define TIMEOUT_SEC 3
 
@@ -99,12 +100,13 @@ static void processRequest(Request *request)
 		}
 
 		std::cout << std::endl;
-
+		int fd = buffer->planes()[0].fd.get();
+		uint8_t *ptr = static_cast<uint8_t *>(mmap(NULL, buffer->planes()[0].length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0));
 		/*
 		 * Image data can be accessed here, but the FrameBuffer
 		 * must be mapped by the application
 		 */
-		cv::Mat image(stream->configuration().size.height,stream->configuration().size.height, CV_8UC1, &buffer[0]);
+		cv::Mat image(stream->configuration().size.height,stream->configuration().size.height, CV_8UC1, ptr, stream->configuration().stride);
 
 		// Save the image using OpenCV
 		std::string filename = "image_" + std::to_string(metadata.sequence) + ".png";
