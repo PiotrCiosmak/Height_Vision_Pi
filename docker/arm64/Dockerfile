@@ -24,7 +24,7 @@ RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivarie
     ./install_pivariety_pkgs.sh -p libcamera_apps
 
 # LibTorch installation
-RUN apt install python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev && \
+RUN apt install -y python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev && \
     mkvirtualenv pyt && \
     pip3 install setuptools numpy Cython && \
     pip3 install requests && \
