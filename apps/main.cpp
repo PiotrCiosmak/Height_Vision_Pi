@@ -10,7 +10,6 @@
 #include <memory>
 
 #include <libcamera/libcamera.h>
-#include <opencv2/opencv.hpp>
 
 #include "event_loop.h"
 
@@ -105,7 +104,6 @@ static void processRequest(Request *request)
 		 * Image data can be accessed here, but the FrameBuffer
 		 * must be mapped by the application
 		 */
-
 		cv::Mat image(stream->configuration().size.height,stream->configuration().size.height, CV_8UC1, &buffer[0]);
 
 		// Save the image using OpenCV
