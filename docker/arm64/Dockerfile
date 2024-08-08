@@ -15,10 +15,7 @@ RUN apt update && apt full-upgrade -y && apt install -y \
     wget \
     pkg-config \
     libevent-dev \
-    unzip \
-    python3 \
-    python3-pip \
-    python3-venv
+    unzip
 
 # Libcamera installation
 RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivariety-V4L2-Driver/releases/download/install_script/install_pivariety_pkgs.sh && \
@@ -28,27 +25,10 @@ RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivarie
     ./install_pivariety_pkgs.sh -p libcamera_apps && \
     rm -r libcamera* rpicam* install_pivariety_pkgs.sh packages.txt
 
-# LibTorch installation
-#RUN wget https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip && \
-#    unzip libtorch-shared-with-deps-latest.zip -d /usr/local && \
-#    rm libtorch-shared-with-deps-latest.zip
-# Set LibTorch environment variables
-#ENV LD_LIBRARY_PATH /usr/local/libtorch/share/cmake/Torch:$LD_LIBRARY_PATH
-
-# Create and activate a virtual environment
-RUN python3 -m venv /opt/venv
-
-# Ensure the virtual environment is used for pip and python commands
-ENV PATH="/opt/venv/bin:$PATH"
-
-# TorchVision installation in the virtual environment
-RUN pip install --upgrade pip && \
-    pip install torch torchvision
-
 # OpenCV installation
-#RUN wget https://github.com/Qengineering/Install-OpenCV-Raspberry-Pi-64-bits/raw/main/OpenCV-4-10-0.sh && \
-#    chmod 755 ./OpenCV-4-10-0.sh && \
-#    sed -i 's/sudo //g' OpenCV-4-10-0.sh && \
-#    ./OpenCV-4-10-0.sh
+RUN wget https://github.com/Qengineering/Install-OpenCV-Raspberry-Pi-64-bits/raw/main/OpenCV-4-10-0.sh && \
+    chmod 755 ./OpenCV-4-10-0.sh && \
+    sed -i 's/sudo //g' OpenCV-4-10-0.sh && \
+    ./OpenCV-4-10-0.sh
 
 WORKDIR /Height_Vision_Pi
