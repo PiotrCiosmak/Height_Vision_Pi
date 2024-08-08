@@ -14,7 +14,8 @@ RUN apt update && apt full-upgrade -y && apt install -y \
     git \
     wget \
     pkg-config \
-    libevent-dev
+    libevent-dev \
+    unzip
 
 # Libcamera installation
 RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivariety-V4L2-Driver/releases/download/install_script/install_pivariety_pkgs.sh && \
