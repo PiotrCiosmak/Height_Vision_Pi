@@ -24,11 +24,12 @@ RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivarie
     ./install_pivariety_pkgs.sh -p libcamera_apps
 
 # LibTorch installation
-RUN apt install -y python3-pip libjpeg-dev libopenblas-dev libopenmpi-dev libomp-dev && \
-    mkvirtualenv pyt && \
-    pip3 install setuptools numpy Cython && \
-    pip3 install requests && \
-    pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+RUN wget https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip && \
+    unzip libtorch-shared-with-deps-latest.zip -d /usr/local && \
+    rm libtorch-shared-with-deps-latest.zip
+
+# Set LibTorch environment variables
+ENV LD_LIBRARY_PATH /usr/local/libtorch/lib:$LD_LIBRARY_PATH
 
 # OpenCV installation
 #RUN wget https://github.com/Qengineering/Install-OpenCV-Raspberry-Pi-64-bits/raw/main/OpenCV-4-10-0.sh && \
