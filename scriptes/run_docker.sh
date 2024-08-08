@@ -1,6 +1,6 @@
 #!/bin/bash
 ARCHITECTURE=${1:-arm64}
-VERSION=${2:-0.3.0}
+VERSION=${2:-0.4.0}
 
 sudo xhost +Local:*
 
