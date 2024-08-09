@@ -1,28 +1,35 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
+using namespace std;
+
 int main() {
-	// Przetestuj różne indeksy od 0 do 7
-	for (int i = 0; i <= 7; ++i) {
-		cv::VideoCapture cap(i,cv::CAP_V4L2);
-		if (!cap.isOpened()) {
-			std::cout << "Camera at index " << i << " is not opened." << std::endl;
-			continue;
-		}
-		std::cout << "Camera at index " << i << " is opened." << std::endl;
+    cv::Mat frame;
+    cv::VideoCapture cap(cv::CAP_LIBCAMERA);
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 643); //Width selection, is auto adjusted for supported values
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 362); //Height Selection
+    cap.set(cv::CAP_PROP_MODE, 0); //PixelFormat Selection
+    cap.set(cv::CAP_PROP_FORMAT, 2); //StreamRole Selection
 
-		cv::Mat frame;
-		cap >> frame;
-		if (frame.empty()) {
-			std::cerr << "Error: Frame is empty for camera index " << i << "!" << std::endl;
-		} else {
-			std::cout << "Captured frame from camera index " << i << std::endl;
-			cv::imshow("Frame", frame);
-			cv::waitKey(5000); // Wyświetl przez 5 sekund
-		}
+    std::string a = cap.getBackendName();
+    cout << "Backend: " << a << std::endl;
 
-		cap.release();
-	}
+    if (cap.isOpened() == true) {
+        cout << "\nTrue" << std::endl;
+    } else {
+        cout << "False";
+    }
+    while (true) {
+        if (cap.read(frame)) {
+            cv::imwrite("test.png", frame);
+            int width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
+            int height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
 
-	return 0;
+            if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
+            {
+                break;
+            }
+        }
+    }
+    return 0;
 }

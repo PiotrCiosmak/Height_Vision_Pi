@@ -1,4 +1,4 @@
-# height-vision-pi/arm64:0.5.2
+# height-vision-pi/arm64:0.5.3
 FROM dtcooper/raspberrypi-os:latest
 
 # Noninteractive package installation set
@@ -25,19 +25,31 @@ RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivarie
     ./install_pivariety_pkgs.sh -p libcamera_apps && \
     rm -r libcamera* rpicam* install_pivariety_pkgs.sh packages.txt
 
-# OpenCV installation
-RUN wget https://github.com/Qengineering/Install-OpenCV-Raspberry-Pi-64-bits/raw/main/OpenCV-4-10-0.sh && \
-    chmod 755 ./OpenCV-4-10-0.sh && \
-    sed -i 's/sudo //g' OpenCV-4-10-0.sh && \
-    sed -i '/-D WITH_GSTREAMER=ON/a -D WITH_LIBCAMERA=ON \\' OpenCV-4-10-0.sh && \
-    ./OpenCV-4-10-0.sh
-RUN apt install -y \
-    libopencv-dev
-
 # GStreamer installation
-RUN apt install -y \
-    gstreamer1.0-plugins-good \
-    gstreamer1.0-plugins-bad \
-    gstreamer1.0-plugins-ugly
+RUN apt apt-get install -y \
+    libx264-dev \
+    libjpeg-dev \
+    libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev \
+    libgstreamer-plugins-bad1.0-dev \
+    gstreamer1.0-plugins-ugly \
+    gstreamer1.0-tools \
+    gstreamer1.0-gl \
+    gstreamer1.0-gtk3
+
+# OpenCV installation
+RUN git clone https://github.com/advait-0/opencv.git -b libcamera-final && \
+    cd opencv && \
+    mkdir build && \
+    cd build && \
+    cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_C_EXAMPLES=ON \
+      -D INSTALL_PYTHON_EXAMPLES=ON \
+      -D WITH_LIBCAMERA=ON \
+      -D OPENCV_GENERATE_PKGCONFIG=ON \
+      -D BUILD_EXAMPLES=ON .. && \
+    make -j8 && \
+    make install
 
 WORKDIR /Height_Vision_Pi
