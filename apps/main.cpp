@@ -2,7 +2,7 @@
 #include <opencv2/opencv.hpp>
 
 int main() {
-	cv::VideoCapture cap(0); // 0 oznacza domyślny aparat
+	cv::VideoCapture cap(0, cv::CAP_V4L2); // 0 oznacza domyślny aparat
 
 	if (!cap.isOpened()) {
 		std::cerr << "Error: Camera not found!" << std::endl;
