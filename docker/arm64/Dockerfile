@@ -26,7 +26,7 @@ RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivarie
     rm -r libcamera* rpicam* install_pivariety_pkgs.sh packages.txt
 
 # GStreamer installation
-RUN apt apt-get install -y \
+RUN apt install -y \
     libx264-dev \
     libjpeg-dev \
     libgstreamer1.0-dev \
