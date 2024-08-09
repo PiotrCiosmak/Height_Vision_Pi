@@ -2,22 +2,26 @@
 #include <opencv2/opencv.hpp>
 
 int main() {
-	cv::VideoCapture cap(0, cv::CAP_V4L2); // 0 oznacza domyślny aparat
+	// Przetestuj różne indeksy od 0 do 7
+	for (int i = 0; i <= 7; ++i) {
+		cv::VideoCapture cap(i);
+		if (!cap.isOpened()) {
+			std::cout << "Camera at index " << i << " is not opened." << std::endl;
+			continue;
+		}
+		std::cout << "Camera at index " << i << " is opened." << std::endl;
 
-	if (!cap.isOpened()) {
-		std::cerr << "Error: Camera not found!" << std::endl;
-		return -1;
-	}
-	int imageCount = 0;
-	cv::Mat frame;
-	while (true) {
-		cap.read(frame);
-		if (frame.empty()) break;
+		cv::Mat frame;
+		cap >> frame;
+		if (frame.empty()) {
+			std::cerr << "Error: Frame is empty for camera index " << i << "!" << std::endl;
+		} else {
+			std::cout << "Captured frame from camera index " << i << std::endl;
+			cv::imshow("Frame", frame);
+			cv::waitKey(5000); // Wyświetl przez 5 sekund
+		}
 
-		std::string filename = "frame_" + std::to_string(imageCount++) + ".jpg";
-		cv::imwrite(filename, frame);
-		std::cout << "Saved: " << filename << std::endl;
-		if (cv::waitKey(30) >= 0) break;
+		cap.release();
 	}
 
 	return 0;
