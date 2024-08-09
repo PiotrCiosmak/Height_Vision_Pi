@@ -11,7 +11,7 @@ int main() {
 	int imageCount = 0;
 	cv::Mat frame;
 	while (true) {
-		cap >> frame;
+		cap.read(frame);
 		if (frame.empty()) break;
 
 		std::string filename = "frame_" + std::to_string(imageCount++) + ".jpg";
