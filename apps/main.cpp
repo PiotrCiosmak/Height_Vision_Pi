@@ -4,7 +4,7 @@
 int main() {
 	// Przetestuj różne indeksy od 0 do 7
 	for (int i = 0; i <= 7; ++i) {
-		cv::VideoCapture cap(i);
+		cv::VideoCapture cap(i,cv::CAP_V4L2);
 		if (!cap.isOpened()) {
 			std::cout << "Camera at index " << i << " is not opened." << std::endl;
 			continue;
