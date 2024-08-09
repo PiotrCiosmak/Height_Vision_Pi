@@ -1,4 +1,4 @@
-# height-vision-pi/arm64:0.5.1
+# height-vision-pi/arm64:0.5.2
 FROM dtcooper/raspberrypi-os:latest
 
 # Noninteractive package installation set
@@ -31,5 +31,13 @@ RUN wget https://github.com/Qengineering/Install-OpenCV-Raspberry-Pi-64-bits/raw
     sed -i 's/sudo //g' OpenCV-4-10-0.sh && \
     sed -i '/-D WITH_GSTREAMER=ON/a -D WITH_LIBCAMERA=ON \\' OpenCV-4-10-0.sh && \
     ./OpenCV-4-10-0.sh
+RUN apt install -y \
+    libopencv-dev
+
+# GStreamer installation
+RUN apt install -y \
+    gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-bad \
+    gstreamer1.0-plugins-ugly
 
 WORKDIR /Height_Vision_Pi
