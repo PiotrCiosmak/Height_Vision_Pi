@@ -6,10 +6,8 @@ using namespace std;
 int main() {
     cv::Mat frame;
     cv::VideoCapture cap(cv::CAP_LIBCAMERA);
-    cap.set(cv::CAP_PROP_FRAME_WIDTH, 643); //Width selection, is auto adjusted for supported values
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 362); //Height Selection
-    cap.set(cv::CAP_PROP_MODE, 0); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_FORMAT, 2); //StreamRole Selection
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 1280); //Width selection, is auto adjusted for supported values
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 720); //Height Selection
 
     std::string a = cap.getBackendName();
     cout << "Backend: " << a << std::endl;
