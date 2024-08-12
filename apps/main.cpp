@@ -9,8 +9,8 @@ int main()
     cap.set(cv::CAP_PROP_FRAME_WIDTH, 4096); //Width selection, is auto adjusted for supported values
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, 3074); //Height Selection
     cap.set(cv::CAP_PROP_MODE, 1); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_FORMAT, 2); //StreamRole Selection
-    cap.set(cv::CAP_PROP_FORMAT, CV_8UC1);
+    cap.set(cv::CAP_PROP_FORMAT, 0); //StreamRole Selection
+   // cap.set(cv::CAP_PROP_FORMAT, CV_8UC1);
 
     std::string a = cap.getBackendName();
     cout << "Backend: " << a << std::endl;
