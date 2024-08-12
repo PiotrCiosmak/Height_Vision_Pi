@@ -27,6 +27,7 @@ int main()
 
     if (cap.read(frame))
     {
+        std::cout<<"TYPE!!"<<frame.type()<<std::endl;
         // Konwertuj obraz z formatu Bayera na BGR
         cv::Mat bgrImage;
         cv::cvtColor(frame, bgrImage, cv::COLOR_BayerRG2BGR); // Zmien na odpowiedni format Bayera
