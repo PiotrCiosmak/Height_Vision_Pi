@@ -25,20 +25,36 @@ int main()
         cout << "Camera successfully opened." << std::endl;
     }
 
+    // Sprawdź aktualny format
+    int fourcc = static_cast<int>(cap.get(cv::CAP_PROP_FOURCC));
+    cout << "Current FourCC format: " << fourcc << endl;
     if (cap.read(frame))
     {
-        std::cout<<"TYPE!!"<<frame.type()<<std::endl;
-        // Konwertuj obraz z formatu Bayera na BGR
-        cv::Mat bgrImage;
-        cv::cvtColor(frame, bgrImage, cv::COLOR_BayerRG2BGR); // Zmien na odpowiedni format Bayera
+        cout << "Frame captured successfully." << endl;
+        cout << "Frame size: " << frame.size() << endl;
+        cout << "Frame type: " << frame.type() << endl;
 
-        imshow("Captured Frame", bgrImage);
-        cv::waitKey(0); // Keep the window open until a key is pressed
+        // Obsłuż format Bayera lub inny odpowiedni format
+        if (frame.type() == CV_16UC1) // Sprawdź, czy to 16-bitowy obraz
+        {
+            cv::Mat bgrImage;
+            cv::cvtColor(frame, bgrImage, cv::COLOR_BayerRG2BGR); // Dostosuj konwersję, jeśli używasz formatu Bayera
+
+            // Wyświetl obraz
+            imshow("Captured Frame", bgrImage);
+            cv::waitKey(0); // Oczekuj na naciśnięcie klawisza
+        }
+        else
+        {
+            cout << "Unexpected frame format." << endl;
+            return -1;
+        }
     }
     else
     {
         cout << "Failed to capture frame" << endl;
         return -1;
     }
+
     return 0;
 }
