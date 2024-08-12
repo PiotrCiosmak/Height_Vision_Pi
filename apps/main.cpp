@@ -7,54 +7,26 @@ int main()
 {
     cv::Mat frame;
     cv::VideoCapture cap(cv::CAP_LIBCAMERA);
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 643); //Width selection, is auto adjusted for supported values
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 362); //Height Selection
+    cap.set(cv::CAP_PROP_MODE, 1); //PixelFormat Selection
+    cap.set(cv::CAP_PROP_FORMAT, 2); //StreamRole Selection
+    cap.set(cv::CAP_PROP_FORMAT, CV_8UC1);
 
-    // Ustaw rozdzielczość na rozmiar wspierany przez kamerę
-    cap.set(cv::CAP_PROP_FRAME_WIDTH, 4624); // Szerokość, dostosowana do kamery
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 3472); // Wysokość, dostosowana do kamery
+    std::string a = cap.getBackendName();
+    cout << "Backend: " << a << std::endl;
 
-    std::string backendName = cap.getBackendName();
-    cout << "Backend: " << backendName << std::endl;
-
-    if (!cap.isOpened())
+    if (cap.isOpened() == true)
     {
-        cout << "Failed to open the camera." << endl;
-        return -1;
+        cout << "\nTrue" << std::endl;
     }
     else
     {
-        cout << "Camera successfully opened." << std::endl;
+        cout << "False";
     }
-
-    // Sprawdź aktualny format
-    int fourcc = static_cast<int>(cap.get(cv::CAP_PROP_FOURCC));
-    cout << "Current FourCC format: " << fourcc << endl;
     if (cap.read(frame))
     {
-        cout << "Frame captured successfully." << endl;
-        cout << "Frame size: " << frame.size() << endl;
-        cout << "Frame type: " << frame.type() << endl;
-
-        // Obsłuż format Bayera lub inny odpowiedni format
-        if (frame.type() == CV_16UC1) // Sprawdź, czy to 16-bitowy obraz
-        {
-            cv::Mat bgrImage;
-            cv::cvtColor(frame, bgrImage, cv::COLOR_BayerRG2BGR); // Dostosuj konwersję, jeśli używasz formatu Bayera
-
-            // Wyświetl obraz
-            imshow("Captured Frame", bgrImage);
-            cv::waitKey(0); // Oczekuj na naciśnięcie klawisza
-        }
-        else
-        {
-            cout << "Unexpected frame format." << endl;
-            return -1;
-        }
+        imshow("Original Video", frame);
     }
-    else
-    {
-        cout << "Failed to capture frame" << endl;
-        return -1;
-    }
-
     return 0;
 }
