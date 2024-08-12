@@ -5,33 +5,32 @@ using namespace std;
 
 int main()
 {
+    cv::Mat frame;
     cv::VideoCapture cap(cv::CAP_LIBCAMERA);
     cap.set(cv::CAP_PROP_FRAME_WIDTH, 4096); //Width selection, is auto adjusted for supported values
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, 3074); //Height Selection
     cap.set(cv::CAP_PROP_MODE, 1); //PixelFormat Selection
     cap.set(cv::CAP_PROP_FORMAT, 0); //StreamRole Selection
-   // cap.set(cv::CAP_PROP_FORMAT, CV_8UC1);
 
     std::string a = cap.getBackendName();
     cout << "Backend: " << a << std::endl;
 
-    if (cap.isOpened() == true)
-    {
+    if (cap.isOpened() == true) {
         cout << "\nTrue" << std::endl;
-    }
-    else
-    {
+    } else {
         cout << "False";
     }
 
-    cv::Mat frame;
+    while (true) {
+        if (cap.read(frame)) {
+            imshow("Original Video", frame);
+            int width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
+            int height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
 
-    for (int i = 0; i < 20; ++i)
-    {
-        if (cap.read(frame))
-        {
-            imwrite("captured_frame.jpg", frame);
-            std::cout << "Klatka została zapisana jako captured_frame.jpg" << std::endl;
+            if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
+            {
+                break;
+            }
         }
     }
     return 0;
