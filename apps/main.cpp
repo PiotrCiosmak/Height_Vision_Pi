@@ -29,7 +29,7 @@ int main()
     if (cap.read(frame))
     {
         // Assuming you may need to handle Bayer format
-        // cv::cvtColor(frame, frame, cv::COLOR_BayerBG2BGR); // Uncomment if needed
+        cv::cvtColor(frame, frame, cv::COLOR_BayerBG2BGR); // Uncomment if needed
         imshow("Original Video", frame);
         cv::waitKey(0); // To keep the window open
     }
