@@ -5,7 +5,6 @@ using namespace std;
 
 int main()
 {
-    cv::Mat frame;
     cv::VideoCapture cap(cv::CAP_LIBCAMERA);
     cap.set(cv::CAP_PROP_FRAME_WIDTH, 4096); //Width selection, is auto adjusted for supported values
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, 3074); //Height Selection
@@ -16,20 +15,23 @@ int main()
     std::string a = cap.getBackendName();
     cout << "Backend: " << a << std::endl;
 
-    if (cap.isOpened() == true) {
+    if (cap.isOpened() == true)
+    {
         cout << "\nTrue" << std::endl;
-    } else {
+    }
+    else
+    {
         cout << "False";
     }
 
-    while (true) {
-        if (cap.read(frame)) {
-            imshow("Original Video", frame);
+    cv::Mat frame;
 
-            if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
-            {
-                break;
-            }
+    for (int i = 0; i < 20; ++i)
+    {
+        if (cap.read(frame))
+        {
+            imwrite("captured_frame.jpg", frame);
+            std::cout << "Klatka została zapisana jako captured_frame.jpg" << std::endl;
         }
     }
     return 0;
