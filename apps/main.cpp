@@ -11,6 +11,7 @@ int main()
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, 362); //Height Selection
     //cap.set(cv::CAP_PROP_MODE, 0); //PixelFormat Selection
     //cap.set(cv::CAP_PROP_FORMAT, 2); //StreamRole Selection
+    cap.set(cv::CAP_PROP_FORMAT, CV_8UC1);
 
     std::string a = cap.getBackendName();
     cout << "Backend: " << a << std::endl;
@@ -22,10 +23,20 @@ int main()
     else
     {
         cout << "False";
+        return -1;
     }
+
     if (cap.read(frame))
     {
+        // Assuming you may need to handle Bayer format
+        // cv::cvtColor(frame, frame, cv::COLOR_BayerBG2BGR); // Uncomment if needed
         imshow("Original Video", frame);
+        cv::waitKey(0); // To keep the window open
+    }
+    else
+    {
+        cout << "Failed to capture frame" << endl;
+        return -1;
     }
     return 0;
 }
