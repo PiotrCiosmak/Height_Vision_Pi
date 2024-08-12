@@ -1,4 +1,4 @@
-# height-vision-pi/arm64:0.5.3
+# height-vision-pi/arm64:0.5.4
 FROM dtcooper/raspberrypi-os:latest
 
 # Noninteractive package installation set
@@ -14,6 +14,7 @@ RUN apt update && apt full-upgrade -y && apt install -y \
     git \
     wget \
     pkg-config \
+    libgtk2.0-dev \
     libevent-dev \
     unzip
 
@@ -47,9 +48,10 @@ RUN git clone https://github.com/advait-0/opencv.git -b libcamera-final && \
       -D INSTALL_C_EXAMPLES=ON \
       -D INSTALL_PYTHON_EXAMPLES=ON \
       -D WITH_LIBCAMERA=ON \
+      -D WITH_GTK=ON \
       -D OPENCV_GENERATE_PKGCONFIG=ON \
       -D BUILD_EXAMPLES=ON .. && \
-    make -j8 && \
+    make -j$(nproc) && \
     make install
 
 WORKDIR /Height_Vision_Pi
