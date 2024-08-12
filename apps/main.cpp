@@ -16,17 +16,21 @@ int main()
     std::string a = cap.getBackendName();
     cout << "Backend: " << a << std::endl;
 
-    if (cap.isOpened() == true)
-    {
+    if (cap.isOpened() == true) {
         cout << "\nTrue" << std::endl;
-    }
-    else
-    {
+    } else {
         cout << "False";
     }
-    if (cap.read(frame))
-    {
-        imshow("Original Video", frame);
+
+    while (true) {
+        if (cap.read(frame)) {
+            imshow("Original Video", frame);
+
+            if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
+            {
+                break;
+            }
+        }
     }
     return 0;
 }
