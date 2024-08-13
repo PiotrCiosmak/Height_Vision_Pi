@@ -16,6 +16,7 @@ include_directories(
 
 add_executable(Height_Vision_Pi
         apps/main.cpp
+        src/camera/CameraController.cpp
 )
 
 target_link_libraries(Height_Vision_Pi
