@@ -1,4 +1,4 @@
-# height-vision-pi/arm64:0.5.4
+# height-vision-pi/arm64:0.5.5
 FROM dtcooper/raspberrypi-os:latest
 
 # Noninteractive package installation set
@@ -16,18 +16,7 @@ RUN apt update && apt full-upgrade -y && apt install -y \
     pkg-config \
     libgtk2.0-dev \
     libevent-dev \
-    unzip
-
-# Libcamera installation
-RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivariety-V4L2-Driver/releases/download/install_script/install_pivariety_pkgs.sh && \
-    chmod +x install_pivariety_pkgs.sh && \
-    sed -i 's/sudo //g' install_pivariety_pkgs.sh && \
-    ./install_pivariety_pkgs.sh -p libcamera_dev && \
-    ./install_pivariety_pkgs.sh -p libcamera_apps && \
-    rm -r libcamera* rpicam* install_pivariety_pkgs.sh packages.txt
-
-# GStreamer installation
-RUN apt install -y \
+    unzip \
     libx264-dev \
     libjpeg-dev \
     libgstreamer1.0-dev \
@@ -38,6 +27,14 @@ RUN apt install -y \
     gstreamer1.0-gl \
     gstreamer1.0-gtk3
 
+# Libcamera installation
+RUN wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivariety-V4L2-Driver/releases/download/install_script/install_pivariety_pkgs.sh && \
+    chmod +x install_pivariety_pkgs.sh && \
+    sed -i 's/sudo //g' install_pivariety_pkgs.sh && \
+    ./install_pivariety_pkgs.sh -p libcamera_dev && \
+    ./install_pivariety_pkgs.sh -p libcamera_apps && \
+    rm -r libcamera* rpicam* install_pivariety_pkgs.sh packages.txt
+
 # OpenCV installation
 RUN git clone https://github.com/advait-0/opencv.git -b libcamera-final && \
     cd opencv && \
@@ -45,12 +42,19 @@ RUN git clone https://github.com/advait-0/opencv.git -b libcamera-final && \
     cd build && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D CMAKE_INSTALL_PREFIX=/usr/local \
-      -D INSTALL_C_EXAMPLES=ON \
-      -D INSTALL_PYTHON_EXAMPLES=ON \
+      -D BUILD_opencv_java=OFF \
+      -D BUILD_opencv_python=OFF \
+      -D INSTALL_C_EXAMPLES=OFF \
+      -D WITH_TBB=ON \
+      -D ENABLE_FAST_MATH=1 \
+      -D WITH_CUBLAS=1 \
+      -D WITH_OPENGL=ON \
+      -D WITH_GSTREAMER=ON \
+      -D OPENCV_ENABLE_NONFREE=ON \
       -D WITH_LIBCAMERA=ON \
       -D WITH_GTK=ON \
       -D OPENCV_GENERATE_PKGCONFIG=ON \
-      -D BUILD_EXAMPLES=ON .. && \
+    .. && \
     make -j$(nproc) && \
     make install
 
