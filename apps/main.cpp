@@ -1,39 +1,14 @@
-#include <iostream>
-#include <opencv2/opencv.hpp>
+#include <camera/ArduCamCameraController.hpp>
 
-using namespace std;
+using namespace height_vision_pi;
 
 int main()
 {
-    cv::Mat frame;
-    cv::VideoCapture cap(cv::CAP_LIBCAMERA);
-    cap.set(cv::CAP_PROP_FRAME_WIDTH, 2048); //Width selection, is auto adjusted for supported values
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 1537); //Height Selection
-    cap.set(cv::CAP_PROP_MODE, true); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_FPS, 30); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_AUTOFOCUS, true); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_AUTO_EXPOSURE, true); //PixelFormat Selection
+    const auto camera_controller = std::make_unique<ArduCamCameraController>(CameraConfig{});
 
-    std::string a = cap.getBackendName();
-    cout << "Backend: " << a << std::endl;
-
-    if (cap.isOpened() == true) {
-        cout << "\nTrue" << std::endl;
-    } else {
-        cout << "False";
+    while (true)
+    {
+        auto frame = camera_controller->getFrame();
+        imshow("NAZWA", frame);
     }
-
-    while (true) {
-        if (cap.read(frame)) {
-            imshow("Original Video", frame);
-            int width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
-            int height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
-
-            if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
-            {
-                break;
-            }
-        }
-    }
-    return 0;
 }
