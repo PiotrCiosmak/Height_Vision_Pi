@@ -10,10 +10,10 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     video_capture.set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y);
     video_capture.set(cv::CAP_PROP_FPS, camera_config.fps);
     video_capture.set(cv::CAP_PROP_MODE, camera_config.capture_mode);
-    video_capture.set(cv::CAP_PROP_BRIGHTNESS, camera_config.brightness);
-    video_capture.set(cv::CAP_PROP_SATURATION, camera_config.saturation);
-    video_capture.set(cv::CAP_PROP_HUE, camera_config.hue);
-    video_capture.set(cv::CAP_PROP_GAIN, camera_config.gain);
+    //video_capture.set(cv::CAP_PROP_BRIGHTNESS, camera_config.brightness);
+    //video_capture.set(cv::CAP_PROP_SATURATION, camera_config.saturation);
+    //video_capture.set(cv::CAP_PROP_HUE, camera_config.hue);
+    //video_capture.set(cv::CAP_PROP_GAIN, camera_config.gain);
     video_capture.set(cv::CAP_PROP_AUTOFOCUS, camera_config.auto_focus);
     video_capture.set(cv::CAP_PROP_AUTO_EXPOSURE, camera_config.auto_exposure);
     if (!video_capture.isOpened())
