@@ -7,8 +7,8 @@ int main()
 {
     cv::Mat frame;
     cv::VideoCapture cap(cv::CAP_LIBCAMERA);
-    cap.set(cv::CAP_PROP_FRAME_WIDTH, 2312); //Width selection, is auto adjusted for supported values
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 1736); //Height Selection
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 2048); //Width selection, is auto adjusted for supported values
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 1537); //Height Selection
     cap.set(cv::CAP_PROP_MODE, true); //PixelFormat Selection
     cap.set(cv::CAP_PROP_FPS, 30); //PixelFormat Selection
 
