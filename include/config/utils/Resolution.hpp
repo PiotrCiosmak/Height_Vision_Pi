@@ -6,5 +6,5 @@ namespace height_vision_pi
     {
         int x;
         int y;
-    }
+    };
 }
