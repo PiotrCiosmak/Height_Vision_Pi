@@ -11,6 +11,7 @@ int main()
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, 1537); //Height Selection
     cap.set(cv::CAP_PROP_MODE, true); //PixelFormat Selection
     cap.set(cv::CAP_PROP_FPS, 30); //PixelFormat Selection
+    cap.set(cv::CAP_PROP_AUTOFOCUS, true); //PixelFormat Selection
 
     std::string a = cap.getBackendName();
     cout << "Backend: " << a << std::endl;
