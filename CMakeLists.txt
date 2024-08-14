@@ -16,7 +16,7 @@ include_directories(
 
 add_executable(Height_Vision_Pi
         apps/main.cpp
-        src/camera/CameraController.cpp
+        src/camera/ArduCamCameraController.cpp
 )
 
 target_link_libraries(Height_Vision_Pi
