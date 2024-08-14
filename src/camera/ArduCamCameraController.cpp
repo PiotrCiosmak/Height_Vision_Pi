@@ -28,4 +28,8 @@ void ArduCamCameraController::getFrame(cv::Mat& frame)
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
     }
+    if(frame.empty())
+    {
+        std::cerr << "ERROR: Captured frame is empty" << std::endl;
+    }
 }
