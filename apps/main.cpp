@@ -8,7 +8,8 @@ int main()
 
     while (true)
     {
-        auto frame = camera_controller->getFrame();
-        imshow("NAZWA", frame);
+        cv::Mat frame;
+        camera_controller->getFrame(frame);
+        imshow("NAZWA_OKNA", frame);
     }
 }

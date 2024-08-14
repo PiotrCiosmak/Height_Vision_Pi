@@ -22,12 +22,10 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     }
 }
 
-auto ArduCamCameraController::getFrame() -> cv::Mat
+void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
-    cv::Mat frame;
     if (!video_capture.read(frame))
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
     }
-    return frame;
 }
