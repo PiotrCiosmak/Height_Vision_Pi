@@ -46,8 +46,6 @@ int main()
         if (cap.read(frame))
         {
             imshow("Original Video", frame);
-            int width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
-            int height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
 
             if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
             {
