@@ -24,6 +24,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 auto ArduCamCameraController::getFrame() -> cv::Mat
 {
+    cv::Mat frame;
     if (!video_capture.isOpened() == true)
     {
         std::cout << "\nFalse" << std::endl;
