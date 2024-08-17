@@ -5,13 +5,10 @@ using namespace height_vision_pi;
 int main()
 {
     const auto camera_controller = std::make_unique<ArduCamCameraController>(CameraConfig{});
-    cv::Mat frame;
-    camera_controller->getFrame(frame);
 
     while (true)
     {
-        cv::Mat frame;
-        camera_controller->getFrame(frame);
+        auto frame = camera_controller->getFrame();
         imshow("NAZWA_OKNA", frame);
         if (cv::waitKey(1) == 'q')
         {
