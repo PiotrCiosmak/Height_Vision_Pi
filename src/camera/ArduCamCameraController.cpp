@@ -3,8 +3,8 @@
 using namespace height_vision_pi;
 
 ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_config) :
-    CameraController(new_camera_config) //,
-// video_capture{cv::CAP_LIBCAMERA}
+    CameraController(new_camera_config),
+    video_capture{cv::CAP_LIBCAMERA}
 {
     video_capture.set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x);
     video_capture.set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y);
