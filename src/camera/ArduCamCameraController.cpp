@@ -24,6 +24,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 auto ArduCamCameraController::getFrame() -> cv::Mat
 {
+    cv::Mat frame;
     cv::VideoCapture video_capture(cv::CAP_LIBCAMERA);
     video_capture.set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x);
     video_capture.set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y);
@@ -39,7 +40,6 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     {
         std::cerr << "ERROR: Camera isn't working" << std::endl;
     }
-    cv::Mat frame;
     if (!video_capture.read(frame))
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
