@@ -1,4 +1,4 @@
-#include <camera/ArduCamCameraController.hpp>
+/*#include <camera/ArduCamCameraController.hpp>
 
 using namespace height_vision_pi;
 
@@ -18,12 +18,12 @@ while (true)
         break;
     }
 }
-}*/
+}#1#*/
 
 //TODO 1. Make DummyCameraController
 //TODO 2. Test for CameraController
 
-/*
+
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
@@ -58,4 +58,4 @@ int main()
     }
     return 0;
 }
-*/
+
