@@ -22,7 +22,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     }
 }
 
-void ArduCamCameraController::getFrame(cv::Mat& frame)
+void ArduCamCameraController::getFrame(cv::Mat& fram1e)
 {
     cv::Mat frame;
     cv::VideoCapture cap(cv::CAP_LIBCAMERA);
