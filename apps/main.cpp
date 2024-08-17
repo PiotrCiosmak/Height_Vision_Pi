@@ -8,8 +8,7 @@ int main()
 
     while (true)
     {
-        auto frame = camera_controller->getFrame();
-        imshow("NAZWA_OKNA", frame);
+       [[maybe_unused]] auto frame = camera_controller->getFrame();
         if (cv::waitKey(1) == 'q')
         {
             break;
