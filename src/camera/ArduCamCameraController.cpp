@@ -6,6 +6,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     CameraController(new_camera_config),
     video_capture(cv::CAP_LIBCAMERA)
 {
+    video_capture.set(cv::CAP_PROP_BUFFERSIZE, 2);
     video_capture.set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x);
     video_capture.set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y);
     video_capture.set(cv::CAP_PROP_FPS, camera_config.fps);
@@ -24,9 +25,10 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
-    video_capture.read(frame.clone());
+    video_capture.read(frame);
     imshow("Original Video", frame);
 
+    //TODO IMSHOW POZA
     if (!video_capture.read(frame))
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
