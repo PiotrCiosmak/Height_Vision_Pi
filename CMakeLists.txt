@@ -20,9 +20,10 @@ add_executable(Height_Vision_Pi
         src/camera/DummyCameraController.cpp
 )
 
-add_executable(AllTests
+#TODO
+#[[add_executable(AllTests
         tests/camera/CameraControllerTests.cpp
-)
+)]]
 
 target_link_libraries(Height_Vision_Pi
         ${LIBCAMERA_LIBRARIES}

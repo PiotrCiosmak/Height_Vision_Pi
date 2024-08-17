@@ -17,7 +17,7 @@ int main()
 //TODO 1. Make DummyCameraController
 //TODO 2. Test for CameraController
 
-#include <iostream>	#include <camera/ArduCamCameraController.hpp>
+#include <iostream>
 #include <opencv2/opencv.hpp>
 
 using namespace std;

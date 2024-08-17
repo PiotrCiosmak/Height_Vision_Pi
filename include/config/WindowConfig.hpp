@@ -1,4 +1,5 @@
 #pragma once
+
 namespace height_vision_pi
 {
 struct WindowConfig
