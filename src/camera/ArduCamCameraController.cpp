@@ -24,13 +24,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
-    if (!video_capture.read(frame))
-    {
-        std::cerr << "ERROR: Can't capture frame" << std::endl;
-    }
-    if(frame.empty())
-    {
-        std::cerr << "ERROR: Captured frame is empty" << std::endl;
-    }
-    imshow("Dasda",frame);//TODO REMOVE
+    video_capture.read(frame);
+
+    imshow("DGDFGDFasda",frame);//TODO REMOVE
 }
