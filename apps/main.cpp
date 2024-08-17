@@ -11,6 +11,10 @@ int main()
         cv::Mat frame;
         camera_controller->getFrame(frame);
         imshow("NAZWA_OKNA", frame);
+if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
+            {
+                break;
+            }
     }
 }*/
 
@@ -42,6 +46,11 @@ int main()
         if (cap.read(frame))
         {
             imshow("Original Video", frame);
+
+            if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
+            {
+                break;
+            }
         }
     }
     return 0;
