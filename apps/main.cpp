@@ -10,7 +10,7 @@ int main()
     while (true)
     {
         camera_controller->getFrame(frame);
-        imshow("dasda", frame);
+        //imshow("dasda", frame);TODO FIX
         if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
         {
             break;
