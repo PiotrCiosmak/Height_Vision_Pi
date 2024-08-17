@@ -33,5 +33,5 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     {
         std::cerr << "ERROR: Captured frame is empty" << std::endl;
     }
-    return frame;
+    return frame.clone();
 }
