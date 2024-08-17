@@ -27,8 +27,8 @@ void ArduCamCameraController::getFrame(cv::Mat& frame)
     cv::VideoCapture cap(cv::CAP_LIBCAMERA);
     cap.set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x); //Width selection, is auto adjusted for supported values
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y); //Height Selection
-    cap.set(cv::CAP_PROP_MODE, camera_config.capture_mode); //PixelFormat Selection
     cap.set(cv::CAP_PROP_FPS, camera_config.fps); //PixelFormat Selection
+    cap.set(cv::CAP_PROP_MODE, camera_config.capture_mode); //PixelFormat Selection
     cap.set(cv::CAP_PROP_AUTOFOCUS, camera_config.auto_focus); //PixelFormat Selection
     cap.set(cv::CAP_PROP_AUTO_EXPOSURE, camera_config.auto_exposure); //PixelFormat Selection
     if (!cap.isOpened() == true)
@@ -47,17 +47,7 @@ void ArduCamCameraController::getFrame(cv::Mat& frame)
             }
         }
     }
-    /*cv::VideoCapture video_capture{cv::CAP_LIBCAMERA};
-    video_capture.set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x);
-    video_capture.set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y);
-    video_capture.set(cv::CAP_PROP_FPS, camera_config.fps);
-    video_capture.set(cv::CAP_PROP_MODE, camera_config.capture_mode);
-    video_capture.set(cv::CAP_PROP_AUTOFOCUS, camera_config.auto_focus);
-    video_capture.set(cv::CAP_PROP_AUTO_EXPOSURE, camera_config.auto_exposure);
-    if (!video_capture.isOpened())
-    {
-        std::cerr << "ERROR: Camera isn't working" << std::endl;
-    }
+   /*
     if (!video_capture.read(frame))
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
