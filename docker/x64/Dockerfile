@@ -15,7 +15,6 @@ RUN apt update && apt install -y \
     gdb \
     wget
 
-
 # Google Test installation
 RUN git clone https://github.com/google/googletest.git /opt/googletest && \
     cd /opt/googletest && mkdir build && cd build && \

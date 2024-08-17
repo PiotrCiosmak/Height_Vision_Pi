@@ -58,4 +58,11 @@ RUN git clone https://github.com/advait-0/opencv.git -b libcamera-final && \
     make -j$(nproc) && \
     make install
 
+# Google Tests installation
+RUN git clone https://github.com/google/googletest.git \
+    cd googletest && \
+    cmake . && \
+    make && \
+    make install
+
 WORKDIR /Height_Vision_Pi
