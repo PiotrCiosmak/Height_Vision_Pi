@@ -32,8 +32,6 @@ int main()
     cap.set(cv::CAP_PROP_FPS, 30); //PixelFormat Selection
     cap.set(cv::CAP_PROP_AUTOFOCUS, true); //PixelFormat Selection
     cap.set(cv::CAP_PROP_AUTO_EXPOSURE, true); //PixelFormat Selection
-    std::string a = cap.getBackendName();
-    cout << "Backend: " << a << std::endl;
     if (cap.isOpened() == true)
     {
         cout << "\nTrue" << std::endl;
