@@ -8,7 +8,7 @@ int main()
     cv::Mat frame;
     camera_controller->getFrame(frame);
 }
-/*cv::Mat frame;
+/*
 while (true)
 {
     camera_controller->getFrame(frame);
