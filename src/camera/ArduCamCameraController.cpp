@@ -24,8 +24,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
-    if (video_capture.read(frame))
-    {
-        imshow("Original Video", frame);
-    }
+    video_capture.read(frame);
+    imshow("Original Video", frame);
+
 }
