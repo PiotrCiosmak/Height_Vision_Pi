@@ -5,10 +5,8 @@ using namespace height_vision_pi;
 int main()
 {
     const auto camera_controller = std::make_unique<ArduCamCameraController>(CameraConfig{});
-    cv::Mat frame;
-    camera_controller->getFrame(frame);
 
-    /*cv::Mat frame;
+    cv::Mat frame;
     while (true)
     {
         camera_controller->getFrame(frame);
@@ -17,7 +15,7 @@ int main()
         {
             break;
         }
-    }*/
+    }
 }
 
 //TODO 1. Make DummyCameraController
