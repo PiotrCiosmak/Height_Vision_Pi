@@ -24,13 +24,17 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
-    if (!video_capture.isOpened() == true)
-    {
-        std::cout << "\nFalse" << std::endl;
-    }
     while (true)
     {
-        if (video_capture.read(frame))
+        if (!video_capture.read(frame))
+        {
+            std::cerr << "ERROR: Can't capture frame" << std::endl;
+        }
+        if (frame.empty())
+        {
+            std::cerr << "ERROR: Captured frame is empty" << std::endl;
+        }
+        else
         {
             imshow("Original Video", frame);
 
@@ -40,13 +44,4 @@ void ArduCamCameraController::getFrame(cv::Mat& frame)
             }
         }
     }
-    /*
-     if (!video_capture.read(frame))
-     {
-         std::cerr << "ERROR: Can't capture frame" << std::endl;
-     }
-     if (frame.empty())
-     {
-         std::cerr << "ERROR: Captured frame is empty" << std::endl;
-     }*/
 }
