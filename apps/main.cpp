@@ -9,7 +9,7 @@ int main()
    // while (true)
     //{
         cv::Mat frame;
-        camera_controller->getFrame();
+        camera_controller->getFrame(frame);
         //imshow("NAZWA_OKNA", frame);
     //}
 }

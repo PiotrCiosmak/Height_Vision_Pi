@@ -8,6 +8,6 @@ namespace height_vision_pi
     {
     public:
         explicit DummyCameraController(const CameraConfig& new_camera_config);
-        [[nodiscard]] auto getFrame() -> cv::Mat override;
+        void getFrame(cv::Mat& frame) override;
     };
 }

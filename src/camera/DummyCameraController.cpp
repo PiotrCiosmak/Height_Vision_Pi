@@ -8,10 +8,8 @@ DummyCameraController::DummyCameraController(const CameraConfig& new_camera_conf
 {
 }
 
-auto DummyCameraController::getFrame() -> cv::Mat
+void DummyCameraController::getFrame(cv::Mat& frame)
 {
-    cv::Mat frame;
-    return frame;
 }
 
 /*
