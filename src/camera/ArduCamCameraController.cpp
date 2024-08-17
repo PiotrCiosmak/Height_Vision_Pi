@@ -24,13 +24,17 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
-    //TODO powielenie kodu
+    cv::VideoCapture video_capture{cv::CAP_LIBCAMERA};
+    video_capture.set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x);
+    video_capture.set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y);
+    video_capture.set(cv::CAP_PROP_FPS, camera_config.fps);
+    video_capture.set(cv::CAP_PROP_MODE, camera_config.capture_mode);
+    video_capture.set(cv::CAP_PROP_AUTOFOCUS, camera_config.auto_focus);
+    video_capture.set(cv::CAP_PROP_AUTO_EXPOSURE, camera_config.auto_exposure);
     if (!video_capture.isOpened())
     {
         std::cerr << "ERROR: Camera isn't working" << std::endl;
-        return;
     }
-
     if (!video_capture.read(frame))
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
