@@ -1,4 +1,4 @@
-/*#include <camera/ArduCamCameraController.hpp>
+#include <camera/ArduCamCameraController.hpp>
 
 using namespace height_vision_pi;
 
@@ -7,7 +7,7 @@ int main()
     const auto camera_controller = std::make_unique<ArduCamCameraController>(CameraConfig{});
     cv::Mat frame;
     camera_controller->getFrame(frame);
-
+}
 /*cv::Mat frame;
 while (true)
 {
@@ -18,12 +18,12 @@ while (true)
         break;
     }
 }
-}#1#*/
+}
 
 //TODO 1. Make DummyCameraController
 //TODO 2. Test for CameraController
 
-
+/*
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
