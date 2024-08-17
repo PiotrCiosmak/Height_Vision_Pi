@@ -25,21 +25,11 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 void ArduCamCameraController::getFrame(cv::Mat& _)
 {
     cv::Mat frame;
-    cv::VideoCapture cap(cv::CAP_LIBCAMERA);
-    cap.set(cv::CAP_PROP_FRAME_WIDTH, 2048); //Width selection, is auto adjusted for supported values
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 1537); //Height Selection
-    cap.set(cv::CAP_PROP_MODE, true); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_FPS, 30); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_AUTOFOCUS, true); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_AUTO_EXPOSURE, true); //PixelFormat Selection
-    if (!cap.isOpened() == true)
-    {
-        std::cout << "\nFalse" << std::endl;
-    }
+
 
     while (true)
     {
-        if (cap.read(frame))
+        if (video_capture.read(frame))
         {
             imshow("Original Video", frame);
 
