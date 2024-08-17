@@ -26,17 +26,8 @@ void ArduCamCameraController::getFrame(cv::Mat& _)
 {
     cv::Mat frame;
 
-
-    while (true)
+    if (video_capture.read(frame))
     {
-        if (video_capture.read(frame))
-        {
-            imshow("Original Video", frame);
-
-            if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
-            {
-                break;
-            }
-        }
+        imshow("Original Video", frame);
     }
 }

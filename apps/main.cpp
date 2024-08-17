@@ -6,5 +6,12 @@ int main()
 {
     const auto camera_controller = std::make_unique<ArduCamCameraController>(CameraConfig{});
     cv::Mat frame;
-    camera_controller->getFrame(frame);
+    while (true)
+    {
+        camera_controller->getFrame(frame);
+        if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
+        {
+            break;
+        }
+    }
 }
