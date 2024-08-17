@@ -11,6 +11,6 @@ namespace height_vision_pi
         void getFrame(cv::Mat& frame) override;
 
     private:
-      //  cv::VideoCapture video_capture;
+        cv::VideoCapture video_capture;
     };
 }

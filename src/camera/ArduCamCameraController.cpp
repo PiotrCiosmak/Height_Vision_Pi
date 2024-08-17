@@ -3,10 +3,10 @@
 using namespace height_vision_pi;
 
 ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_config) :
-    CameraController(new_camera_config)//,
-   // video_capture{cv::CAP_LIBCAMERA}
+    CameraController(new_camera_config) //,
+// video_capture{cv::CAP_LIBCAMERA}
 {
-    /*video_capture.set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x);
+    video_capture.set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x);
     video_capture.set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y);
     video_capture.set(cv::CAP_PROP_FPS, camera_config.fps);
     video_capture.set(cv::CAP_PROP_MODE, camera_config.capture_mode);
@@ -19,25 +19,18 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     if (!video_capture.isOpened())
     {
         std::cerr << "ERROR: Camera isn't working" << std::endl;
-    }*/
+    }
 }
 
 void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
-    cv::VideoCapture cap(cv::CAP_LIBCAMERA);
-    cap.set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x); //Width selection, is auto adjusted for supported values
-    cap.set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y); //Height Selection
-    cap.set(cv::CAP_PROP_FPS, camera_config.fps); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_MODE, camera_config.capture_mode); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_AUTOFOCUS, camera_config.auto_focus); //PixelFormat Selection
-    cap.set(cv::CAP_PROP_AUTO_EXPOSURE, camera_config.auto_exposure); //PixelFormat Selection
-    if (!cap.isOpened() == true)
+    if (!video_capture.isOpened() == true)
     {
         std::cout << "\nFalse" << std::endl;
     }
     while (true)
     {
-        if (cap.read(frame))
+        if (video_capture.read(frame))
         {
             imshow("Original Video", frame);
 
@@ -47,13 +40,13 @@ void ArduCamCameraController::getFrame(cv::Mat& frame)
             }
         }
     }
-   /*
-    if (!video_capture.read(frame))
-    {
-        std::cerr << "ERROR: Can't capture frame" << std::endl;
-    }
-    if (frame.empty())
-    {
-        std::cerr << "ERROR: Captured frame is empty" << std::endl;
-    }*/
+    /*
+     if (!video_capture.read(frame))
+     {
+         std::cerr << "ERROR: Can't capture frame" << std::endl;
+     }
+     if (frame.empty())
+     {
+         std::cerr << "ERROR: Captured frame is empty" << std::endl;
+     }*/
 }
