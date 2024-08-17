@@ -25,7 +25,13 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
     cv::Mat frame;
-    video_capture.read(frame);
-
-    imshow("DGDFGDFasda",frame);//TODO REMOVE
+    while (true)
+    {
+        video_capture.read(frame);
+        imshow("dasda", frame);
+        if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
+        {
+            break;
+        }
+    }
 }
