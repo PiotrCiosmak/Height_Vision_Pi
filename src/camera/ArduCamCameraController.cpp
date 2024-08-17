@@ -28,4 +28,12 @@ void ArduCamCameraController::getFrame(cv::Mat& frame)
     {
         imshow("Original Video", frame);
     }
+    if (!video_capture.read(frame))
+    {
+        std::cerr << "ERROR: Can't capture frame" << std::endl;
+    }
+    if (frame.empty())
+    {
+        std::cerr << "ERROR: Captured frame is empty" << std::endl;
+    }
 }
