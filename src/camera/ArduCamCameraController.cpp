@@ -23,7 +23,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 }
 
 void ArduCamCameraController::getFrame(cv::Mat& frame)
-{ cv::Mat frame;
+{
     cv::VideoCapture cap(cv::CAP_LIBCAMERA);
     cap.set(cv::CAP_PROP_FRAME_WIDTH, 2048); //Width selection, is auto adjusted for supported values
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, 1537); //Height Selection
