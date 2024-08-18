@@ -30,8 +30,9 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     cv::Mat frame;
     if (video_capture.read(frame))
     {
-        auto x=frame.clone();
-        cv::imshow("OLE"/*window_config.name*/, x);
+        cv::Mat x;
+        frame.copyTo(x);
+        //cv::imshow("OLE"/*window_config.name*/, x);
         return x;
         std::cout << "PROBLEM";
     }

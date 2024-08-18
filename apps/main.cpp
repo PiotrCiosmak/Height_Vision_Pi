@@ -10,7 +10,8 @@ int main()
     while (true)
     {
         auto frame = camera_controller->getFrame();
-        //imshow("OLE"/*window_config.name*/, frame);
+        std::cout<<"AAAAAAAAAAAAAA:"<<frame.dims;
+        imshow("OLE"/*window_config.name*/, frame);
         //cv::resizeWindow(window_config.name, window_config.resolution.x, window_config.resolution.y);
         if (cv::waitKey(1) == 'q')
         {
