@@ -12,7 +12,7 @@ int main()
     while (true)
     {
         auto frame = camera_controller->getFrame();
-        //imshow(window_config.name, frame);
+        imshow("Height_Vision_Pi"/*window_config.name*/, frame);
         //cv::resizeWindow(window_config.name, window_config.resolution.x, window_config.resolution.y);
         if (cv::waitKey(1) == 'q')
         {
