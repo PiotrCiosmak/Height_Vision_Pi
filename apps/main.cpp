@@ -9,8 +9,8 @@ int main()
     while (true)
     {
         camera_controller->getFrame(frame);
-        std::cout<<frame.dims;
-        if (cv::waitKey(1) == 'q') // Press 'q' to exit the loop
+        imshow("Dasd", frame);
+        if (cv::waitKey(1) == 'q')
         {
             break;
         }

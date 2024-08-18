@@ -1,5 +1,7 @@
 #include "camera/ArduCamCameraController.hpp"
 
+#include <opencv2/opencv.hpp>
+
 using namespace height_vision_pi;
 
 ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_config) :
@@ -25,18 +27,18 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
-    if(video_capture.read(frame))
-    {
-        imshow("Original Video", frame);
-    }
+    cv::Mat tmp;
+    video_capture.read(tmp);
+    frame=tmp.clone();
 
     //TODO IMSHOW POZA
     /*if (!video_capture.read(frame))
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
     }
+    */
     if (frame.empty())
     {
         std::cerr << "ERROR: Captured frame is empty" << std::endl;
-    }*/
+    }
 }
