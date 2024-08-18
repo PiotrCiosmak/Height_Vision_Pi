@@ -27,9 +27,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 void ArduCamCameraController::getFrame(cv::Mat& frame)
 {
-    cv::Mat tmp;
-    video_capture.read(tmp);
-    frame=tmp.clone();
+    video_capture>>frame;
 
     //TODO IMSHOW POZA
     /*if (!video_capture.read(frame))
