@@ -1,4 +1,5 @@
 #pragma once
+
 #include "config/CameraConfig.hpp"
 
 #include <opencv2/opencv.hpp>
