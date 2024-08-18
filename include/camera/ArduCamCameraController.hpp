@@ -11,6 +11,6 @@ namespace height_vision_pi
         [[nodiscard]] auto getFrame() -> cv::Mat override;
 
     private:
-        cv::VideoCapture video_capture;
+        std::unique_ptr<cv::VideoCapture> video_capture;
     };
 }
