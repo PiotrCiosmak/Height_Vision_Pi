@@ -25,17 +25,17 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     }
 }
 
-auto ArduCamCameraController::getFrame() -> cv::Mat
+auto ArduCamCameraController::getFrame() -> cv::Mat&
 {
-    cv::Mat frame;
+    static cv::Mat frame;
     if (video_capture.read(frame))
     {
         //auto x=frame.clone();
         //imshow("OLE"/*window_config.name*/, x);
-        return frame.clone();
+        return frame;
     }
         std::cout << "PROBLEM";
-        return cv::Mat{};
+        return frame;
     /*else
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
