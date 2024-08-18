@@ -39,7 +39,7 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     }
     else
     {
-        std::cerr << "ERROR: Captured frame is empty" << std::endl;
+        std::cerr << "ERROR: Can't capture frame" << std::endl;
     }
     return frame;
 }
