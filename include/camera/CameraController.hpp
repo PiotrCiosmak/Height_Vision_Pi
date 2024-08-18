@@ -12,7 +12,7 @@ namespace height_vision_pi
         {
         }
 
-        [[nodiscard]] virtual auto getFrame() -> cv::Mat& = 0;
+        [[nodiscard]] virtual auto getFrame() -> cv::Mat = 0;
         virtual ~CameraController() = default;
 
     protected:

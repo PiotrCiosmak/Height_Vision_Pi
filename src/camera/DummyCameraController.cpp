@@ -8,14 +8,14 @@ DummyCameraController::DummyCameraController(const CameraConfig& new_camera_conf
 {
 }
 
-auto DummyCameraController::getFrame() -> cv::Mat&
+auto DummyCameraController::getFrame() -> cv::Mat
 {
     static auto x = cv::Mat{};
     return x;
 }
 
 /*
-auto getFrame() -> cv::Mat&
+auto getFrame() -> cv::Mat
 {
     //const auto camera_resolution = camera_config.resolution;
     //auto frame = cv::Mat::ones(camera_resolution.x, camera_resolution.y, CV_8UC3) * 255;
