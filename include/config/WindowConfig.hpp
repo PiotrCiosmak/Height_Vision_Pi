@@ -2,12 +2,9 @@
 
 namespace height_vision_pi
 {
-struct WindowConfig
-{
-    struct Resolution
+    struct WindowConfig
     {
-        int x = 578;
-        int y = 434;
+        std::string name = "Height Vision Pi";
+        Resolution resolution{578, 434};
     };
-};
 }
