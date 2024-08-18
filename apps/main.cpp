@@ -7,11 +7,11 @@ using namespace height_vision_pi;
 
 int main()
 {
-    constexpr auto camera_config = CameraConfig{};
+    const auto camera_config = CameraConfig{};
     const std::chrono::milliseconds frame_duration{1000 / camera_config.fps};
 
     const auto camera_controller = std::make_unique<ArduCamCameraController>(CameraConfig{});
-    constexpr auto window_config = WindowConfig{};
+    const auto window_config = WindowConfig{};
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
