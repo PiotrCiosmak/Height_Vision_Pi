@@ -32,6 +32,7 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     {
         return frame.clone();
     }
+    std::cout<<"PROBLEM";
     /*else
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
