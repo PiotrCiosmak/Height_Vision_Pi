@@ -27,12 +27,12 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 auto ArduCamCameraController::getFrame() -> cv::Mat
 {
-    cv::Mat frame, tmp_frame;
-    if (video_capture.read(tmp_frame))
+    cv::Mat frame;
+    if (video_capture.read(frame))
     {
-        return tmp_frame.clone();
+        return frame.clone();
     }
-    else
+    /*else
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
     }
@@ -40,5 +40,5 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     {
         std::cerr << "ERROR: Captured frame is empty" << std::endl;
     }
-    return frame;
+    return frame;*/
 }
