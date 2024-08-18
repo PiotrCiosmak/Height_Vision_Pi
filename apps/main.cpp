@@ -9,7 +9,7 @@ int main()
     while (true)
     {
         camera_controller->getFrame(frame);
-        imshow("Dasd", frame);
+        //imshow("Dasd", frame);
         if (cv::waitKey(1) == 'q')
         {
             break;
