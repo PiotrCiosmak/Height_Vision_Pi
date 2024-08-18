@@ -25,11 +25,10 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     }
 }
 
-void ArduCamCameraController::getFrame(cv::Mat& frame)
+auto ArduCamCameraController::getFrame() -> cv::Mat
 {
-    if(video_capture.read(frame))
+    if (video_capture.read(frame))
     {
-        auto x = frame.clone();
-        imshow("Original Video", x);
+        return frame.clone();
     }
 }
