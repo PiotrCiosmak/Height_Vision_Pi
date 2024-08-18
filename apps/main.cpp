@@ -18,6 +18,10 @@ int main()
             imshow(window_config.name, frame);
             cv::resizeWindow(window_config.name, window_config.resolution.x, window_config.resolution.y);
         }
+        else
+        {
+            std::cerr << "NIE POWINNO MNIE BYC!!!\n";
+        }
         if (cv::waitKey(1) == 'q')
         {
             break;
