@@ -7,7 +7,7 @@ namespace height_vision_pi
     struct CameraConfig
     {
         Resolution resolution{2048, 1537};
-        double fps = 30;
+        int fps = 20;
         bool capture_mode = true;
         double brightness = 0.5;
         double contrast = 0.5;
