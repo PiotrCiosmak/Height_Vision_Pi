@@ -35,7 +35,7 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
         {
             std::cerr << "ERROR: Captured frame is empty" << std::endl;
         }
-        //imshow("Height_Vision_Pi", frame);
+        imshow("Height_Vision_Pi", frame);
     }
     else
     {
