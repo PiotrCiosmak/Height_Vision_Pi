@@ -21,6 +21,10 @@ int main()
             imshow(window_config.name, frame);
             cv::resizeWindow(window_config.name, window_config.resolution.x, window_config.resolution.y);
         }
+        if (cv::waitKey(1) == 'q')
+        {
+            break;
+        }
 
         const auto end_time = std::chrono::high_resolution_clock::now();
         const auto elapsed_time = end_time - start_time;
