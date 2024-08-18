@@ -9,6 +9,7 @@ target_include_directories(AllUnitTests PUBLIC
         ${PROJECT_SOURCE_DIR}/tests/utils
         ${GTEST_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
+        ${Boost_INCLUDE_DIRS}
 )
 
 target_link_libraries(AllUnitTests
@@ -16,6 +17,7 @@ target_link_libraries(AllUnitTests
         GTest::gmock
         GTest::gtest_main
         ${OpenCV_LIBS}
+        ${Boost_LIBRARIES}
 )
 
 enable_testing()
