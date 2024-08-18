@@ -1,4 +1,4 @@
-# height-vision-pi/arm64:0.5.5
+# height-vision-pi/arm64:0.6.0
 FROM dtcooper/raspberrypi-os:latest
 
 # Noninteractive package installation set
@@ -58,6 +58,13 @@ RUN git clone https://github.com/advait-0/opencv.git -b libcamera-final && \
     make -j$(nproc) && \
     make install
 
-#TODO add google test
+# Google Test installation
+RUN git clone https://github.com/google/googletest.git /opt/googletest && \
+    cd /opt/googletest && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make && \
+    make install
 
 WORKDIR /Height_Vision_Pi
