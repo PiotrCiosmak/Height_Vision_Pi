@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://example.com/example.json",
+  "description": "Height vision pi config json schema",
+  "camera": {
+    "type": "object",
+    "required": [
+      "resolution",
+      "fps",
+      "brightness",
+      "contrast",
+      "saturation",
+      "auto_exposure"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "resolution": {
+        "type": "object",
+        "required": [
+          "x",
+          "y"
+        ],
+        "additionalProperties": false,
+        "x": {
+          "description": "Horizontal resolution of the camera in pixels",
+          "type": "integer",
+          "minimum": 1280,
+          "maximum": 9152
+        },
+        "y": {
+          "description": "Vertical resolution of the camera in pixels",
+          "type": "integer",
+          "minimum": 720,
+          "maximum": 6944
+        }
+      },
+      "fps": {
+        "description": "Frames per second that the camera should capture",
+        "type": "number",
+        "minimum": 2.7,
+        "maximum": 120
+      },
+      "brightness": {
+        "description": "Brightness level of the camera image, from 0 (darkest) to 1 (brightest)",
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "contrast": {
+        "description": "Contrast level of the camera image, from 0 (low contrast) to 1 (high contrast)",
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "saturation": {
+        "description": "Saturation level of the camera image, from 0 (grayscale) to 1 (fully saturated)",
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "auto_exposure": {
+        "description": "Enable or disable automatic exposure adjustment",
+        "type": "boolean"
+      }
+    }
+  }
+}

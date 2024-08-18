@@ -1,0 +1,16 @@
+{
+  "camera": {
+    "resolution": {
+      "x": 2312,
+      "y": 1736
+    },
+    "fps": 10,
+    "brightness": 1,
+    "contrast": 1,
+    "saturation": 1,
+    "auto_exposure": true
+  },
+  "window": {
+
+  }
+}
