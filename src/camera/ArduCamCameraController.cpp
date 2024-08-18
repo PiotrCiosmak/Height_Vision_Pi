@@ -27,19 +27,15 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
 
 auto ArduCamCameraController::getFrame() -> cv::Mat
 {
-    cv::Mat frame, tmp_frame;
-    if (video_capture.read(tmp_frame))
-    {
-        frame = tmp_frame.clone();
-        if (frame.empty())
-        {
-            std::cerr << "ERROR: Captured frame is empty" << std::endl;
-        }
-        //imshow("Height_Vision_Pi", frame);
-    }
-    else
+    cv::Mat tmp_frame;
+    if (!video_capture.read(tmp_frame))
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
+    }
+    auto frame = tmp_frame.clone();
+    if (frame.empty())
+    {
+        std::cerr << "ERROR: Captured frame is empty" << std::endl;
     }
     return frame;
 }
