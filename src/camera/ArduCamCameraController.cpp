@@ -30,7 +30,7 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     cv::Mat frame, tmp_frame;
     if (video_capture.read(tmp_frame))
     {
-        frame = tmp_frame.clone();
+        return tmp_frame.clone();
     }
     else
     {
