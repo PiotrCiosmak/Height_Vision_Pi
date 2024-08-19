@@ -22,6 +22,7 @@ add_executable(Height_Vision_Pi
         src/camera/ArduCamCameraController.cpp
         src/camera/DummyCameraController.cpp
         src/Injector.cpp
+        src/config/Config.cpp
 )
 
 target_link_libraries(Height_Vision_Pi
