@@ -19,6 +19,7 @@ void Config::load(const std::string& file_path)
     if (!file.is_open())
     {
         std::cerr << "ERROR: Could not open config file: " << file_path << std::endl;
+        exit(1);
     }
 
     nlohmann::json json_data;
