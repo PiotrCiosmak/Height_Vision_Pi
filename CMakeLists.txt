@@ -14,12 +14,14 @@ include_directories(
         ${LIBCAMERA_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIRS}
+        /opt/boost-di/include
 )
 
 add_executable(Height_Vision_Pi
         apps/main.cpp
         src/camera/ArduCamCameraController.cpp
         src/camera/DummyCameraController.cpp
+        src/Injector.cpp
 )
 
 target_link_libraries(Height_Vision_Pi

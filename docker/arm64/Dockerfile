@@ -1,4 +1,4 @@
-# height-vision-pi/arm64:0.7.0
+# height-vision-pi/arm64:0.7.1
 FROM dtcooper/raspberrypi-os:latest
 
 # Noninteractive package installation set
@@ -70,5 +70,14 @@ RUN git clone https://github.com/google/googletest.git /opt/googletest && \
 # Boost installation
 RUN apt install -y \
     libboost-all-dev
+
+# Boost di installation
+RUN git clone https://github.com/boost-experimental/di.git /opt/boost-di && \
+    cd /opt/boost-di && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make && \
+    make install
 
 WORKDIR /Height_Vision_Pi

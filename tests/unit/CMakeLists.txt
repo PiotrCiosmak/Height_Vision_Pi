@@ -10,6 +10,7 @@ target_include_directories(AllUnitTests PUBLIC
         ${GTEST_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIRS}
+        /opt/boost-di/include
 )
 
 target_link_libraries(AllUnitTests
