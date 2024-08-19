@@ -2,66 +2,133 @@
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "$id": "https://example.com/example.json",
   "description": "Height vision pi config json schema",
-  "camera": {
-    "type": "object",
-    "required": [
-      "resolution",
-      "fps",
-      "brightness",
-      "contrast",
-      "saturation",
-      "auto_exposure"
-    ],
-    "additionalProperties": false,
-    "properties": {
-      "resolution": {
-        "type": "object",
-        "required": [
-          "x",
-          "y"
-        ],
-        "additionalProperties": false,
-        "x": {
-          "description": "Horizontal resolution of the camera in pixels",
-          "type": "integer",
-          "minimum": 1280,
-          "maximum": 9152
+  "type": "object",
+  "required": [
+    "camera",
+    "window",
+    "data_source"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "camera": {
+      "type": "object",
+      "required": [
+        "resolution",
+        "fps",
+        "brightness",
+        "contrast",
+        "saturation",
+        "gain",
+        "hue",
+        "auto_focus",
+        "auto_exposure"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "resolution": {
+          "type": "object",
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": false,
+          "x": {
+            "description": "Horizontal resolution of the camera in pixels",
+            "type": "integer",
+            "minimum": 1280,
+            "maximum": 9152
+          },
+          "y": {
+            "description": "Vertical resolution of the camera in pixels",
+            "type": "integer",
+            "minimum": 720,
+            "maximum": 6944
+          }
         },
-        "y": {
-          "description": "Vertical resolution of the camera in pixels",
-          "type": "integer",
-          "minimum": 720,
-          "maximum": 6944
+        "fps": {
+          "description": "Frames per second that the camera should capture",
+          "type": "number",
+          "minimum": 2.7,
+          "maximum": 120
+        },
+        "brightness": {
+          "description": "Brightness level of the camera image, from 0 (darkest) to 1 (brightest)",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "contrast": {
+          "description": "Contrast level of the camera image, from 0 (low contrast) to 1 (high contrast)",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "saturation": {
+          "description": "Saturation level of the camera image, from 0 (grayscale) to 1 (fully saturated)",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "gain": {
+          "description": "Gain level applied to the camera image, from 0 (no gain) to 1 (maximum gain)",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "hue": {
+          "description": "Hue adjustment of the camera image, from 0 (no hue shift) to 1 (maximum hue shift)",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "auto_focus": {
+          "description": "Indicates whether the camera's autofocus feature is enabled, where true represents enabled and false represents disabled",
+          "type": "boolean"
+        },
+        "auto_exposure": {
+          "description": "Enable or disable automatic exposure adjustment",
+          "type": "boolean"
         }
-      },
-      "fps": {
-        "description": "Frames per second that the camera should capture",
-        "type": "number",
-        "minimum": 2.7,
-        "maximum": 120
-      },
-      "brightness": {
-        "description": "Brightness level of the camera image, from 0 (darkest) to 1 (brightest)",
-        "type": "number",
-        "minimum": 0,
-        "maximum": 1
-      },
-      "contrast": {
-        "description": "Contrast level of the camera image, from 0 (low contrast) to 1 (high contrast)",
-        "type": "number",
-        "minimum": 0,
-        "maximum": 1
-      },
-      "saturation": {
-        "description": "Saturation level of the camera image, from 0 (grayscale) to 1 (fully saturated)",
-        "type": "number",
-        "minimum": 0,
-        "maximum": 1
-      },
-      "auto_exposure": {
-        "description": "Enable or disable automatic exposure adjustment",
-        "type": "boolean"
       }
+    },
+    "window": {
+      "type": "object",
+      "required": [
+        "name",
+        "resolution"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "Name of the main window app",
+          "type": "string"
+        },
+        "resolution": {
+          "type": "object",
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": false,
+          "x": {
+            "description": "Horizontal resolution of the camera in pixels",
+            "type": "integer",
+            "minimum": 1280,
+            "maximum": 9152
+          },
+          "y": {
+            "description": "Vertical resolution of the camera in pixels",
+            "type": "integer",
+            "minimum": 720,
+            "maximum": 6944
+          }
+        }
+      }
+    },
+    "data_source": {
+      "description": "Data source for the configuration",
+      "type": "string",
+      "enum": ["stream", "none"]
     }
   }
 }
