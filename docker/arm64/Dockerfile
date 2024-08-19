@@ -72,12 +72,6 @@ RUN apt install -y \
     libboost-all-dev
 
 # Boost di installation
-RUN git clone https://github.com/boost-experimental/di.git -b v1.3.0 /opt/boost-di && \
-    cd /opt/boost-di && \
-    mkdir build && \
-    cd build && \
-    cmake .. && \
-    make && \
-    make install
+RUN git clone https://github.com/boost-experimental/di.git -b v1.3.0 /opt/boost-di
 
 WORKDIR /Height_Vision_Pi
