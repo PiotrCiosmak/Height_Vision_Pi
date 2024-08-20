@@ -6,7 +6,6 @@
 
 using namespace height_vision_pi;
 
-
 auto height_vision_pi::cameraControllerInjector() -> boost::di::injector<std::unique_ptr<CameraController>>
 {
     switch (Config::get().data_source)
