@@ -12,39 +12,39 @@ std::once_flag Config::init_flag;
 auto Config::get() -> Config&
 {
     static Config config;
-    std::call_once(init_flag, []() {
-           config.load("../config/config.json");
-       });
+    std::call_once(init_flag, []()
+    {
+        config.load("../config/config.json");
+    });
     return config;
 }
 
 void Config::load(const std::string& file_path)
 {
-    std::ifstream file(file_path);
+    auto file = std::ifstream{file_path};
     if (!file.is_open())
     {
         std::cerr << "ERROR: Could not open config file: " << file_path << std::endl;
         exit(1);
     }
 
-    nlohmann::json json_data;
-    file >> json_data;
+    auto data = nlohmann::json::parse(file);
 
-    camera.resolution.x = json_data["camera"]["resolution"]["x"];
-    camera.resolution.y = json_data["camera"]["resolution"]["y"];
-    camera.fps = json_data["camera"]["fps"];
-    camera.capture_mode = json_data["camera"]["capture_mode"];
-    camera.brightness = json_data["camera"]["brightness"];
-    camera.contrast = json_data["camera"]["contrast"];
-    camera.saturation = json_data["camera"]["saturation"];
-    camera.gain = json_data["camera"]["gain"];
-    camera.hue = json_data["camera"]["hue"];
-    camera.auto_focus = json_data["camera"]["auto_focus"];
-    camera.auto_exposure = json_data["camera"]["auto_exposure"];
+    camera.resolution.x = data["camera"]["resolution"]["x"].get<int>();
+    camera.resolution.y = data["camera"]["resolution"]["y"].get<int>();
+    camera.fps = data["camera"]["fps"].get<double>();
+    camera.capture_mode = data["camera"]["capture_mode"].get<bool>();
+    camera.brightness = data["camera"]["brightness"].get<double>();
+    camera.contrast = data["camera"]["contrast"].get<double>();
+    camera.saturation = data["camera"]["saturation"].get<double>();
+    camera.gain = data["camera"]["gain"].get<double>();
+    camera.hue = data["camera"]["hue"].get<double>();
+    camera.auto_focus = data["camera"]["auto_focus"].get<bool>();
+    camera.auto_exposure = data["camera"]["auto_exposure"].get<bool>();
 
-    window.name = json_data["window"]["name"];
-    window.resolution.x = json_data["window"]["resolution"]["x"];
-    window.resolution.y = json_data["window"]["resolution"]["y"];
+    data_source = data["data_source"].get<DataSourceConfig>();
 
-    data_source = json_data["data_source"];
+    window.name = data["window"]["name"].get<std::string>();
+    window.resolution.x = data["window"]["resolution"]["x"].get<int>();
+    window.resolution.y = data["window"]["resolution"]["y"].get<int>();
 }
