@@ -5,6 +5,7 @@
 #include "config/WindowConfig.hpp"
 
 #include <string>
+#include <mutex>
 
 namespace height_vision_pi
 {
@@ -12,7 +13,6 @@ namespace height_vision_pi
     {
     public:
         [[nodiscard]] static auto get() -> Config&;
-        void load(const std::string& file_path);
 
         CameraConfig camera;
         DataSourceConfig data_source;
@@ -20,5 +20,10 @@ namespace height_vision_pi
 
     private:
         Config() = default;
+        Config(const Config&) = delete;
+        Config& operator=(const Config&) = delete;
+        void load(const std::string& file_path);
+
+        static std::once_flag init_flag;
     };
 }

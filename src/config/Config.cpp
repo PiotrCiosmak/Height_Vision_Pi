@@ -7,9 +7,14 @@
 
 using namespace height_vision_pi;
 
+std::once_flag Config::init_flag;
+
 auto Config::get() -> Config&
 {
     static Config config;
+    std::call_once(init_flag, []() {
+           config.load("../config/config.json");
+       });
     return config;
 }
 
