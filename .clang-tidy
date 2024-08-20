@@ -1,0 +1,5 @@
+---
+Checks: '*,-fuchsia-*,-google-*,-zircon-*,-abseil-*,-llvm*,-altera-unroll-loops,-modernize-use-trailing-return-type,-cppcoreguidelines-non-private-member-variables-in-classe'
+WarningsAsErrors: '*'
+HeaderFilterRegex: ''
+FormatStyle: none
