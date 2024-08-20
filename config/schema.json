@@ -128,7 +128,10 @@
     "data_source": {
       "description": "Data source for the configuration",
       "type": "string",
-      "enum": ["stream", "none"]
+      "enum": [
+        "stream",
+        "none"
+      ]
     }
   }
 }
