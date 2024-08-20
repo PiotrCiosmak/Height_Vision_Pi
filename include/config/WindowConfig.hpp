@@ -1,5 +1,7 @@
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include <string>
 
 namespace height_vision_pi
@@ -8,5 +10,10 @@ namespace height_vision_pi
     {
         std::string name;
         Resolution resolution;
+
+
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(WindowConfig,
+                                       name,
+                                       resolution)
     };
 }

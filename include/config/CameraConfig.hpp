@@ -16,5 +16,17 @@ namespace height_vision_pi
         double hue;
         bool auto_focus;
         bool auto_exposure;
+
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(CameraConfig,
+                                       resolution,
+                                       fps,
+                                       capture_mode,
+                                       brightness,
+                                       contrast,
+                                       saturation,
+                                       gain,
+                                       hue,
+                                       auto_focus,
+                                       auto_exposure)
     };
 }

@@ -30,21 +30,7 @@ void Config::load(const std::string& file_path)
 
     auto data = nlohmann::json::parse(file);
 
-    camera.resolution.x = data["camera"]["resolution"]["x"].get<int>();
-    camera.resolution.y = data["camera"]["resolution"]["y"].get<int>();
-    camera.fps = data["camera"]["fps"].get<double>();
-    camera.capture_mode = data["camera"]["capture_mode"].get<bool>();
-    camera.brightness = data["camera"]["brightness"].get<double>();
-    camera.contrast = data["camera"]["contrast"].get<double>();
-    camera.saturation = data["camera"]["saturation"].get<double>();
-    camera.gain = data["camera"]["gain"].get<double>();
-    camera.hue = data["camera"]["hue"].get<double>();
-    camera.auto_focus = data["camera"]["auto_focus"].get<bool>();
-    camera.auto_exposure = data["camera"]["auto_exposure"].get<bool>();
-
+    camera = data["camera"].get<CameraConfig>();
     data_source = data["data_source"].get<DataSourceConfig>();
-
-    window.name = data["window"]["name"].get<std::string>();
-    window.resolution.x = data["window"]["resolution"]["x"].get<int>();
-    window.resolution.y = data["window"]["resolution"]["y"].get<int>();
+    window = data["window"].get<WindowConfig>();
 }
