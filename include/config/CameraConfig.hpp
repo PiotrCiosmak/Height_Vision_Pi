@@ -29,4 +29,4 @@ namespace height_vision_pi
                                        auto_focus,
                                        auto_exposure)
     };
-}
+} // namespace height_vision_pi

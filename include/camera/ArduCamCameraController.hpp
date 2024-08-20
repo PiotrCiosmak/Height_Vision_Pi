@@ -13,4 +13,4 @@ namespace height_vision_pi
     private:
         std::unique_ptr<cv::VideoCapture> video_capture;
     };
-}
+} // namespace height_vision_pi

@@ -11,9 +11,6 @@ namespace height_vision_pi
         std::string name;
         Resolution resolution;
 
-
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(WindowConfig,
-                                       name,
-                                       resolution)
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(WindowConfig, name, resolution)
     };
-}
+} // namespace height_vision_pi

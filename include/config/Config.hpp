@@ -4,8 +4,8 @@
 #include "config/DataSourceConfig.hpp"
 #include "config/WindowConfig.hpp"
 
-#include <string>
 #include <mutex>
+#include <string>
 
 namespace height_vision_pi
 {
@@ -26,4 +26,4 @@ namespace height_vision_pi
 
         static std::once_flag init_flag;
     };
-}
+} // namespace height_vision_pi

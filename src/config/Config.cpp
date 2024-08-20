@@ -12,10 +12,7 @@ std::once_flag Config::init_flag;
 auto Config::get() -> Config&
 {
     static Config config;
-    std::call_once(init_flag, []()
-    {
-        config.load("../config/config.json");
-    });
+    std::call_once(init_flag, [] { config.load("../config/config.json"); });
     return config;
 }
 
@@ -24,7 +21,7 @@ void Config::load(const std::string& file_path)
     auto file = std::ifstream{file_path};
     if (!file.is_open())
     {
-        std::cerr << "ERROR: Could not open config file: " << file_path << std::endl;
+        std::cerr << "ERROR: Could not open config file: " << file_path << '\n';
         exit(1);
     }
 
