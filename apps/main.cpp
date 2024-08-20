@@ -1,5 +1,6 @@
+#include "Injector.hpp"
 #include "camera/ArduCamCameraController.hpp"
-#include "config/WindowConfig.hpp"
+#include "config/Config.hpp"
 
 #include <thread>
 
@@ -7,19 +8,18 @@ using namespace height_vision_pi;
 
 int main()
 {
-    const auto camera_config = CameraConfig{};
-    const std::chrono::milliseconds frame_duration{1000 / camera_config.fps};
+    const std::chrono::milliseconds frame_duration{1000 / static_cast<int>(Config::get().camera.fps)};
 
-    const auto camera_controller = std::make_unique<ArduCamCameraController>(CameraConfig{});
-    const auto window_config = WindowConfig{};
+    const auto camera_controller = cameraControllerInjector().create<std::unique_ptr<CameraController>>();
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {
-            imshow(window_config.name, frame);
-            cv::resizeWindow(window_config.name, window_config.resolution.x, window_config.resolution.y);
+            imshow(Config::get().window.name, frame);
+            cv::resizeWindow(Config::get().window.name, Config::get().camera.resolution.x,
+                             Config::get().camera.resolution.y);
         }
         if (cv::waitKey(1) == 'q')
         {

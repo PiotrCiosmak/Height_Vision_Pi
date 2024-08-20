@@ -5,7 +5,7 @@
 using namespace height_vision_pi;
 
 ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_config) :
-    CameraController(new_camera_config),
+    CameraController{new_camera_config},
     video_capture{std::make_unique<cv::VideoCapture>(cv::CAP_LIBCAMERA)}
 {
     video_capture->set(cv::CAP_PROP_BUFFERSIZE, 2);
@@ -22,6 +22,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     if (!video_capture->isOpened())
     {
         std::cerr << "ERROR: Camera isn't working" << std::endl;
+        exit(1);
     }
 }
 
@@ -31,11 +32,13 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     if (!video_capture->read(tmp_frame))
     {
         std::cerr << "ERROR: Can't capture frame" << std::endl;
+        exit(1);
     }
     auto frame = tmp_frame.clone();
     if (frame.empty())
     {
         std::cerr << "ERROR: Captured frame is empty" << std::endl;
+        exit(1);
     }
     return frame;
 }

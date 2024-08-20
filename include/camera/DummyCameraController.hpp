@@ -4,7 +4,7 @@
 
 namespace height_vision_pi
 {
-    class DummyCameraController : CameraController
+    class DummyCameraController final : public CameraController
     {
     public:
         explicit DummyCameraController(const CameraConfig& new_camera_config);
