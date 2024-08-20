@@ -25,6 +25,8 @@ TODO
 - gStreamer
 - GoogleTests
 - Boost
+- Boost di
+- Clang
 - Git
 - GitHub
 
