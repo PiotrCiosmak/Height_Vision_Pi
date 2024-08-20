@@ -5,7 +5,7 @@
 using namespace height_vision_pi;
 
 ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_config) :
-    CameraController(new_camera_config),
+    CameraController{new_camera_config},
     video_capture{std::make_unique<cv::VideoCapture>(cv::CAP_LIBCAMERA)}
 {
     video_capture->set(cv::CAP_PROP_BUFFERSIZE, 2);
