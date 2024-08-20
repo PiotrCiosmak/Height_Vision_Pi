@@ -21,14 +21,14 @@ auto height_vision_pi::cameraControllerInjector() -> boost::di::injector<std::un
 }
 
 
-auto height_vision_pi::dummyCameraControllerInjector() ->  boost::di::injector<std::unique_ptr<CameraController>>
+auto height_vision_pi::dummyCameraControllerInjector() -> boost::di::injector<std::unique_ptr<CameraController>>
 {
     return make_injector(
-          boost::di::bind<CameraConfig>().to(Config::get().camera),
-          boost::di::bind<CameraController>().to<DummyCameraController>().in(boost::di::unique));
+        boost::di::bind<CameraConfig>().to(Config::get().camera),
+        boost::di::bind<CameraController>().to<DummyCameraController>().in(boost::di::unique));
 }
 
-auto height_vision_pi::arduCamCameraControllerInjector() ->boost::di::injector<std::unique_ptr<CameraController>>
+auto height_vision_pi::arduCamCameraControllerInjector() -> boost::di::injector<std::unique_ptr<CameraController>>
 {
     return make_injector(
         boost::di::bind<CameraConfig>().to(Config::get().camera),
