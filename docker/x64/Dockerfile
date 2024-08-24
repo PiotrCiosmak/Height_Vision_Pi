@@ -1,4 +1,4 @@
-# height-vision-pi/x64:0.2.1
+# height-vision-pi/x64:0.2.2
 FROM ubuntu:latest
 
 # Noninteractive package installation set
@@ -33,7 +33,9 @@ RUN apt update && apt full-upgrade -y && apt install -y \
     liblapack-dev \
     libeigen3-dev \
     libopencv-dev \
-    libboost-all-dev
+    libboost-all-dev \
+    gdb \
+    nlohmann-json3-dev
 
 # OpenCV installation
 RUN git clone --depth 1 --branch 4.9.0 https://github.com/opencv/opencv_contrib.git && \
@@ -69,8 +71,5 @@ RUN git clone https://github.com/google/googletest.git /opt/googletest && \
 
 # Boost di installation
 RUN git clone https://github.com/boost-experimental/di.git -b v1.3.0 /opt/boost-di
-
-# GDB installation
-RUN apt install -y gdb
 
 WORKDIR /Height_Vision_Pi
