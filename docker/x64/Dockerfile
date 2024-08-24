@@ -1,4 +1,4 @@
-# height-vision-pi/x64:0.2.0
+# height-vision-pi/x64:0.2.1
 FROM ubuntu:latest
 
 # Noninteractive package installation set
@@ -69,5 +69,8 @@ RUN git clone https://github.com/google/googletest.git /opt/googletest && \
 
 # Boost di installation
 RUN git clone https://github.com/boost-experimental/di.git -b v1.3.0 /opt/boost-di
+
+# GDB installation
+RUN apt install -y gdb
 
 WORKDIR /Height_Vision_Pi
