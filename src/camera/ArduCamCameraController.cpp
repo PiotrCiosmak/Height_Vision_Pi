@@ -31,8 +31,7 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     cv::Mat tmp_frame;
     if (!video_capture->read(tmp_frame))
     {
-        std::cerr << "ERROR: Can't capture frame" << std::endl;
-        exit(1);
+        std::cerr << "WARNING: Can't capture frame" << std::endl;
     }
     auto frame = tmp_frame.clone();
     if (frame.empty())
