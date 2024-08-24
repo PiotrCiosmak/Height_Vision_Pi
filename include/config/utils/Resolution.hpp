@@ -9,8 +9,6 @@ namespace height_vision_pi
         int x;
         int y;
 
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Resolution,
-                                       x,
-                                       y)
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Resolution, x, y)
     };
-}
+} // namespace height_vision_pi

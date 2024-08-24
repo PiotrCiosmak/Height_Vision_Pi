@@ -31,6 +31,6 @@ target_link_libraries(Height_Vision_Pi
         ${Boost_LIBRARIES}
 )
 
-if(ENABLE_TESTS)
+if (ENABLE_TESTS)
     add_subdirectory(tests)
-endif()
+endif ()

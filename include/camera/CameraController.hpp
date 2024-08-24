@@ -9,7 +9,8 @@ namespace height_vision_pi
     class CameraController
     {
     public:
-        explicit CameraController(const CameraConfig& new_camera_config): camera_config{new_camera_config}
+        explicit CameraController(const CameraConfig& new_camera_config) :
+            camera_config{new_camera_config}
         {
         }
 
@@ -19,4 +20,4 @@ namespace height_vision_pi
     protected:
         CameraConfig camera_config;
     };
-}
+} // namespace height_vision_pi
