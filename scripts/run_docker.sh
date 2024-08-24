@@ -4,10 +4,10 @@
 
 [[ "$#" -ne 0 && "$#" -ne 2 && "$#" -ne 3 ]] && echo "ERROR: Usage: $0 <ARCHITECTURE (x64 or arm64)> <IMAGE_VERSION> [start-app]" && exit 1
 
-ARCHITECTURE=${1:-"arm64"}
+ARCHITECTURE=${1:-arm64}
 [[ "$ARCHITECTURE" != "x64" && "$ARCHITECTURE" != "arm64" ]] && echo "ERROR: <ARCHITECTURE> must be x64 or arm64" && exit 1
 
-VERSION=${2:-"0.7.1"}
+VERSION=${2:-0.7.1}
 IFS='.' read -r MAJOR MINOR PATCH <<< "$IMAGE_VERSION"
 ! [[ $MAJOR =~ ^[0-9]+$ ]] || ! [[ $MINOR =~ ^[0-9]+$ ]] || ! [[ $PATCH =~ ^[0-9]+$ ]] && echo "ERROR: <IMAGE_VERSION> must be in format NUMBER.NUMBER.NUMBER" && exit 1
 
