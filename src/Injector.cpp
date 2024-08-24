@@ -1,5 +1,5 @@
 #include "Injector.hpp"
-
+#include "Logger.hpp"
 #include "camera/ArduCamCameraController.hpp"
 #include "camera/DummyCameraController.hpp"
 #include "config/Config.hpp"
@@ -16,8 +16,7 @@ auto height_vision_pi::cameraControllerInjector()
     case DataSourceConfig::none:
         return dummyCameraControllerInjector();
     }
-    std::cerr << "ERROR: Invalid data source. Check config file!" << std::endl;
-    exit(1);
+    Logger::error("Invalid data source. Check config file!");
 }
 
 auto height_vision_pi::dummyCameraControllerInjector()

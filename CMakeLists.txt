@@ -23,6 +23,7 @@ add_executable(Height_Vision_Pi
         src/camera/DummyCameraController.cpp
         src/Injector.cpp
         src/config/Config.cpp
+        src/Logger.cpp
 )
 
 target_link_libraries(Height_Vision_Pi
