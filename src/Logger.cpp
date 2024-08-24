@@ -64,7 +64,7 @@ namespace height_vision_pi
         oss << format;
     }
 
-    [[noreturn]] void Logger::exit_thread_safe()
+    void Logger::exit_thread_safe()
     {
         const std::lock_guard lock(exit_mutex);
         std::exit(EXIT_FAILURE);
