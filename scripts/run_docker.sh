@@ -17,7 +17,7 @@ START_APP=${3:-}
 sudo xhost +Local:*
 
 if [ "$START_APP" ]; then
-    docker run --network host -it -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --privileged -e DISPLAY=${DISPLAY} ghcr.io/piotrciosmak/height-vision-pi/$ARCHITECTURE:$VERSION /bin/bash -c "./scripts/start_app.sh"
+    docker run --network host -it -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --privileged -e DISPLAY=${DISPLAY} ghcr.io/piotrciosmak/height-vision-pi/$ARCHITECTURE:$VERSION /bin/bash -c "chmod +x ./scripts/start_app.sh && ./scripts/start_app.sh"
 else
     docker run --network host -it -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --privileged -e DISPLAY=${DISPLAY} --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/$ARCHITECTURE:$VERSION
 fi
