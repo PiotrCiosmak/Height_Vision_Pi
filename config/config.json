@@ -1,8 +1,8 @@
 {
   "camera": {
     "resolution": {
-      "x": 2312,
-      "y": 1736
+      "x": 2048,
+      "y": 1537
     },
     "fps": 10,
     "capture_mode": true,
