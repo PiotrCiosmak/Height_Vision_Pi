@@ -26,19 +26,23 @@ RUN apt update && apt full-upgrade -y && apt install -y \
     gstreamer1.0-tools \
     gstreamer1.0-gl \
     gstreamer1.0-gtk3 \
+    libtbbmalloc2 \
+    libtbb-dev \
+    libatlas-base-dev \
+    libblas-dev \
+    liblapack-dev \
+    libeigen3-dev \
     libopencv-dev \
-    libopencv-core4.5 \
-    libopencv-imgproc4.5 \
-    libopencv-highgui4.5 \
-    libopencv-video4.5 \
     libboost-all-dev
 
 # OpenCV installation
-RUN git clone https://github.com/opencv/opencv.git -b master && \
+RUN git clone --depth 1 --branch 4.9.0 https://github.com/opencv/opencv_contrib.git && \
+    git clone --depth 1 --branch 4.9.0 https://github.com/opencv/opencv.git && \
     cd opencv && \
     mkdir build && \
     cd build && \
-    cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    cmake .. \
+      -D CMAKE_BUILD_TYPE=RELEASE \
       -D CMAKE_INSTALL_PREFIX=/usr/local \
       -D BUILD_opencv_java=OFF \
       -D BUILD_opencv_python=OFF \
@@ -49,10 +53,9 @@ RUN git clone https://github.com/opencv/opencv.git -b master && \
       -D WITH_OPENGL=ON \
       -D WITH_GSTREAMER=ON \
       -D OPENCV_ENABLE_NONFREE=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=/opencv_contrib/modules \
       -D WITH_GTK=ON \
-      -D OPENCV_GENERATE_PKGCONFIG=ON \
-    .. && \
-    make -j$(nproc) && \
+    make && \
     make install
 
 # Google Test installation
