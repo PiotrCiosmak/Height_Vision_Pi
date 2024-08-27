@@ -1,5 +1,6 @@
 add_executable(AllUnitTests
         camera/CameraControllerTests.cpp
+        LoggerTests.cpp
 )
 
 find_package(GTest REQUIRED)
@@ -14,6 +15,7 @@ target_include_directories(AllUnitTests PUBLIC
 )
 
 target_link_libraries(AllUnitTests
+        HeightVisionPiSources
         GTest::gtest
         GTest::gmock
         GTest::gtest_main
@@ -22,3 +24,4 @@ target_link_libraries(AllUnitTests
 )
 
 enable_testing()
+add_test(NAME AllUnitTests COMMAND AllUnitTests)

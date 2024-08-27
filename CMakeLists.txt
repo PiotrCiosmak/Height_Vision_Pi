@@ -17,18 +17,26 @@ include_directories(
         /opt/boost-di/include
 )
 
-add_executable(Height_Vision_Pi
-        apps/main.cpp
+add_library(HeightVisionPiSources
         src/camera/ArduCamCameraController.cpp
         src/camera/DummyCameraController.cpp
         src/Injector.cpp
         src/config/Config.cpp
+        src/Logger.cpp
 )
 
-target_link_libraries(Height_Vision_Pi
+target_link_libraries(HeightVisionPiSources
         ${LIBCAMERA_LIBRARIES}
         ${OpenCV_LIBS}
         ${Boost_LIBRARIES}
+)
+
+add_executable(Height_Vision_Pi
+        apps/main.cpp
+)
+
+target_link_libraries(Height_Vision_Pi
+        HeightVisionPiSources
 )
 
 if (ENABLE_TESTS)

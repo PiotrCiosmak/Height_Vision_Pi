@@ -1,4 +1,5 @@
 #include "config/Config.hpp"
+#include "Logger.hpp"
 
 #include <nlohmann/json.hpp>
 
@@ -21,8 +22,7 @@ void Config::load(const std::string& file_path)
     auto file = std::ifstream{file_path};
     if (!file.is_open())
     {
-        std::cerr << "ERROR: Could not open config file: " << file_path << '\n';
-        exit(1);
+        Logger::error("Could not open config file: {}", file_path);
     }
 
     auto data = nlohmann::json::parse(file);

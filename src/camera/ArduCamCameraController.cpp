@@ -1,4 +1,5 @@
 #include "camera/ArduCamCameraController.hpp"
+#include "Logger.hpp"
 
 #include <opencv2/opencv.hpp>
 
@@ -21,8 +22,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     video_capture->set(cv::CAP_PROP_AUTO_EXPOSURE, camera_config.auto_exposure);
     if (!video_capture->isOpened())
     {
-        std::cerr << "ERROR: Camera isn't working" << std::endl;
-        exit(1);
+        Logger::error("Camera isn't working");
     }
 }
 
@@ -31,12 +31,12 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     cv::Mat tmp_frame;
     if (!video_capture->read(tmp_frame))
     {
-        std::cerr << "WARNING: Can't capture frame" << std::endl;
+        Logger::warn("Can't capture frame");
     }
     auto frame = tmp_frame.clone();
     if (frame.empty())
     {
-        std::cerr << "WARNING: Captured frame is empty" << std::endl;
+        Logger::warn("Captured frame is empty");
     }
     return frame;
 }
