@@ -17,6 +17,7 @@ auto height_vision_pi::cameraControllerInjector()
         return dummyCameraControllerInjector();
     }
     Logger::error("Invalid data source. Check config file!");
+    return dummyCameraControllerInjector();
 }
 
 auto height_vision_pi::dummyCameraControllerInjector()
