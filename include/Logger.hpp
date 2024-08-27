@@ -24,13 +24,13 @@ namespace height_vision_pi
             switch (level)
             {
             case Level::INFO:
-                std::cout << "[INFO] " << oss.str() << '\n';
+                std::cout << "[INFO] " << oss.str() << '\n' << std::flush;
                 break;
             case Level::WARN:
-                std::cout << "[WARN] " << oss.str() << '\n';
+                std::cout << "[WARN] " << oss.str() << '\n' << std::flush;
                 break;
             case Level::ERROR:
-                std::cerr << "[ERROR] " << oss.str() << '\n';
+                std::cerr << "[ERROR] " << oss.str() << '\n' << std::flush;
                 std::exit(EXIT_FAILURE);
             }
         }
