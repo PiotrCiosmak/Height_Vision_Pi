@@ -32,7 +32,7 @@ int main()
 
         const auto end_time = std::chrono::high_resolution_clock::now();
         const auto elapsed_time = end_time - start_time;
-        auto sleep_duration =
+        const auto sleep_duration =
             frame_duration - std::chrono::duration_cast<std::chrono::milliseconds>(elapsed_time);
         Logger::info("Main loop must wait: {} ms", sleep_duration);
         if (sleep_duration.count() > 0)
