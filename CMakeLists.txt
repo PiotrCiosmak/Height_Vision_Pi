@@ -23,6 +23,7 @@ add_library(HeightVisionPiSources
         src/Injector.cpp
         src/config/Config.cpp
         src/Logger.cpp
+        src/monitor/CpuTemperatureMonitor.cpp
 )
 
 target_link_libraries(HeightVisionPiSources
