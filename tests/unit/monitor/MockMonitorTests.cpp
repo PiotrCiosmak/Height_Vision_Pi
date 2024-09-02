@@ -23,7 +23,7 @@ TEST_F(MockMonitorTest, ShouldCallCheckCPUTemperatureOnce)
     // when: Calling checkCPUTemperature on the monitor once
     mock_monitor.checkCPUTemperature();
 
-    // then: checkCPUTemperature was called exactly once
+    // then: Function checkCPUTemperature was called exactly once
 }
 
 TEST_F(MockMonitorTest, ShouldNotCallCheckCPUTemperature)
@@ -33,7 +33,7 @@ TEST_F(MockMonitorTest, ShouldNotCallCheckCPUTemperature)
 
     // when: Do not calling checkCPUTemperature
 
-    // then: checkCPUTemperature was not called
+    // then: Function checkCPUTemperature was not called
 }
 
 TEST_F(MockMonitorTest, ShouldCallCheckCPUTemperatureAtLeastOnce)
@@ -45,5 +45,5 @@ TEST_F(MockMonitorTest, ShouldCallCheckCPUTemperatureAtLeastOnce)
     mock_monitor.checkCPUTemperature();
     mock_monitor.checkCPUTemperature();
 
-    // then: checkCPUTemperature was called at least once
+    // then: Function checkCPUTemperature was called at least once
 }
