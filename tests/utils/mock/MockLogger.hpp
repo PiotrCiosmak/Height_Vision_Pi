@@ -6,7 +6,7 @@
 
 namespace height_vision_pi
 {
-    class MockLogger
+    class MockLogger final
     {
     public:
         enum class Level
