@@ -3,6 +3,7 @@
 #include "camera/ArduCamCameraController.hpp"
 #include "camera/DummyCameraController.hpp"
 #include "config/Config.hpp"
+#include "monitor/Monitor.hpp"
 
 using namespace height_vision_pi;
 
@@ -34,4 +35,10 @@ auto height_vision_pi::arduCamCameraControllerInjector()
     return make_injector(
         boost::di::bind<CameraConfig>().to(Config::get().camera),
         boost::di::bind<CameraController>().to<ArduCamCameraController>().in(boost::di::unique));
+}
+
+auto height_vision_pi::monitorInjector() -> boost::di::injector<std::unique_ptr<DeviceMonitor>>
+{
+    return make_injector(boost::di::bind<MonitorConfig>().to(Config::get().monitor),
+                         boost::di::bind<DeviceMonitor>.to<Monitor>().in(boost::di::unique));
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "camera/CameraController.hpp"
+#include "monitor/DeviceMonitor.hpp"
 
 #include <boost/di.hpp>
 
@@ -10,4 +11,5 @@ namespace height_vision_pi
     [[nodiscard]] auto cameraControllerInjector() -> UniqueInjector<CameraController>;
     [[nodiscard]] auto dummyCameraControllerInjector() -> UniqueInjector<CameraController>;
     [[nodiscard]] auto arduCamCameraControllerInjector() -> UniqueInjector<CameraController>;
+    [[nodiscard]] auto monitorInjector() -> UniqueInjector<DeviceMonitor>;
 } // namespace height_vision_pi
