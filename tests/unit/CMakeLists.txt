@@ -3,6 +3,7 @@ add_executable(AllUnitTests
         LoggerTests.cpp
         ../utils/mock/MockLogger.cpp
         mock/MockLoggerTests.cpp
+        monitor/MonitorTests.cpp
 )
 
 find_package(GTest REQUIRED)
