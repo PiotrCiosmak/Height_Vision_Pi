@@ -1,5 +1,5 @@
 add_executable(AllUnitTests
-        camera/MockCameraControllerTests.cpp
+        camera/CameraControllerTests.cpp
         camera/DummyCameraControllerTests.cpp
         LoggerTests.cpp
         ../utils/mock/MockLogger.cpp
