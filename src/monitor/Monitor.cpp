@@ -1,13 +1,14 @@
-#include "monitor/CpuTemperatureMonitor.hpp"
+#include "monitor/Monitor.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
 
 using namespace height_vision_pi;
 
-void CPUTemperatureMonitor::checkTemperature()
+void Monitor::checkCPUTemperature()
 {
-    const auto temperature = getTemperature();
+    const auto temperature = getCPUTemperature();
+    //TODO values from config
     constexpr auto warning_temperature = 80.0F;
     constexpr auto error_temperature = 85.0F;
 
@@ -31,8 +32,9 @@ void CPUTemperatureMonitor::checkTemperature()
     }
 }
 
-auto CPUTemperatureMonitor::getTemperature() -> float
+auto Monitor::getCPUTemperature() -> float
 {
+    //TODO path from config
     auto file = std::ifstream{"/sys/class/thermal/thermal_zone0/temp"};
     if (!file.is_open())
     {
