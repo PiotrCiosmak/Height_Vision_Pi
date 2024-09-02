@@ -81,15 +81,9 @@ namespace height_vision_pi
             }
         }
 
-        static void formatMessage(std::ostringstream& oss, const std::string& format)
-        {
-            oss << format;
-        }
+        static void formatMessage(std::ostringstream& oss, const std::string& format);
 
         static std::vector<std::string> logs;
         static bool errorOccurred;
     };
-
-    std::vector<std::string> MockLogger::logs;
-    bool MockLogger::errorOccurred = false;
 } // namespace height_vision_pi
