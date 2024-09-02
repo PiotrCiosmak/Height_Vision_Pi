@@ -5,7 +5,7 @@
 using namespace height_vision_pi;
 using ::testing::Return;
 
-TEST(CameraControllerTest, ShouldGetFrame)
+TEST(MockCameraControllerTest, ShouldGetFrame)
 {
     // given: Camera config
     constexpr auto camera_config =
