@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 
 using namespace height_vision_pi;
+
 using ::testing::Return;
 
 TEST(MockCameraControllerTest, ShouldGetFrame)

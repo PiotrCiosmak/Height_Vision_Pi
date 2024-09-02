@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 
 using namespace height_vision_pi;
+
 using ::testing::AtLeast;
 using ::testing::Return;
 using ::testing::StrictMock;
