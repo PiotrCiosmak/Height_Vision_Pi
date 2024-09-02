@@ -12,7 +12,7 @@ int main()
     const std::chrono::milliseconds frame_duration{1000
                                                    / static_cast<int>(Config::get().camera.fps)};
 
-    const auto monitor = monitorInjector().create<std::unique_ptr<DeviceMonitor>>();
+    const auto monitor = monitorInjector().create<std::unique_ptr<MonitorDevice>>();
     const auto camera_controller =
         cameraControllerInjector().create<std::unique_ptr<CameraController>>();
     while (true)

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "monitor/DeviceMonitor.hpp"
+#include "monitor/MonitorDevice.hpp"
 
 namespace height_vision_pi
 {
-    class Monitor final : public DeviceMonitor
+    class Monitor final : public MonitorDevice
     {
     public:
         explicit Monitor(const MonitorConfig& new_monitor_config);

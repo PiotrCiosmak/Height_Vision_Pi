@@ -4,16 +4,16 @@
 
 namespace height_vision_pi
 {
-    class DeviceMonitor
+    class MonitorDevice
     {
     public:
-        explicit DeviceMonitor(const MonitorConfig& new_monitor_config) :
+        explicit MonitorDevice(const MonitorConfig& new_monitor_config) :
             monitor_config{new_monitor_config}
         {
         }
 
         virtual void checkCPUTemperature() = 0;
-        virtual ~DeviceMonitor() = default;
+        virtual ~MonitorDevice() = default;
 
     protected:
         MonitorConfig monitor_config;

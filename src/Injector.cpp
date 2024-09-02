@@ -37,8 +37,8 @@ auto height_vision_pi::arduCamCameraControllerInjector()
         boost::di::bind<CameraController>().to<ArduCamCameraController>().in(boost::di::unique));
 }
 
-auto height_vision_pi::monitorInjector() -> boost::di::injector<std::unique_ptr<DeviceMonitor>>
+auto height_vision_pi::monitorInjector() -> boost::di::injector<std::unique_ptr<MonitorDevice>>
 {
     return make_injector(boost::di::bind<MonitorConfig>().to(Config::get().monitor),
-                         boost::di::bind<DeviceMonitor>.to<Monitor>().in(boost::di::unique));
+                         boost::di::bind<MonitorDevice>.to<Monitor>().in(boost::di::unique));
 }

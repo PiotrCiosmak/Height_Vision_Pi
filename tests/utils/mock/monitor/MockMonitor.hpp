@@ -1,16 +1,16 @@
 #pragma once
 
-#include "monitor/DeviceMonitor.hpp"
+#include "monitor/MonitorDevice.hpp"
 
 #include <gmock/gmock.h>
 
 namespace height_vision_pi
 {
-    class MockMonitor : public DeviceMonitor
+    class MockMonitor : public MonitorDevice
     {
     public:
         explicit MockMonitor(const MonitorConfig& new_monitor_config) :
-            DeviceMonitor{new_monitor_config}
+            MonitorDevice{new_monitor_config}
         {
         }
 

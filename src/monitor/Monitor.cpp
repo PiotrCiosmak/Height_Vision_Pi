@@ -5,7 +5,7 @@
 
 using namespace height_vision_pi;
 
-Monitor::Monitor(const MonitorConfig& new_monitor_config) : DeviceMonitor{new_monitor_config} {}
+Monitor::Monitor(const MonitorConfig& new_monitor_config) : MonitorDevice{new_monitor_config} {}
 
 void Monitor::checkCPUTemperature()
 {
