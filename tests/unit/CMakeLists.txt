@@ -1,9 +1,9 @@
 add_executable(AllUnitTests
-        camera/CameraControllerTests.cpp
+        camera/MockCameraControllerTests.cpp
         LoggerTests.cpp
         ../utils/mock/MockLogger.cpp
         MockLoggerTests.cpp
-        monitor/MonitorTests.cpp
+        monitor/MockMonitorTests.cpp
 )
 
 find_package(GTest REQUIRED)
