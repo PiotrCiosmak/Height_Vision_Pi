@@ -5,12 +5,13 @@
 
 using namespace height_vision_pi;
 
+Monitor::Monitor(const MonitorConfig& new_monitor_config) : DeviceMonitor{new_monitor_config} {}
+
 void Monitor::checkCPUTemperature()
 {
     const auto temperature = getCPUTemperature();
-    //TODO values from config
-    constexpr auto warning_temperature = 80.0F;
-    constexpr auto error_temperature = 85.0F;
+    const auto warning_temperature = monitor_config.cpu_monitor.warning_temperature;
+    const auto error_temperature = monitor_config.cpu_monitor.error_temperature;
 
     if (temperature >= error_temperature)
     {
@@ -34,8 +35,7 @@ void Monitor::checkCPUTemperature()
 
 auto Monitor::getCPUTemperature() -> float
 {
-    //TODO path from config
-    auto file = std::ifstream{"/sys/class/thermal/thermal_zone0/temp"};
+    auto file = std::ifstream{monitor_config.cpu_monitor.thermal_zone_path};
     if (!file.is_open())
     {
         Logger::error("Unable to open temperature file");

@@ -12,7 +12,7 @@ using ::testing::StrictMock;
 class MockMonitorTest : public ::testing::Test
 {
 protected:
-    StrictMock<MockMonitor> mock_monitor;
+    StrictMock<MockMonitor> mock_monitor{MonitorConfig{"/test/path", 80.0, 85.0}};
 };
 
 TEST_F(MockMonitorTest, ShouldCallCheckCPUTemperatureOnce)
