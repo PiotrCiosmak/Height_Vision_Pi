@@ -12,6 +12,6 @@ namespace height_vision_pi
     [[nodiscard]] auto dummyCameraControllerInjector() -> UniqueInjector<CameraController>;
     [[nodiscard]] auto arduCamCameraControllerInjector() -> UniqueInjector<CameraController>;
     [[nodiscard]] auto monitorDeviceInjector() -> UniqueInjector<MonitorDevice>;
-    [[nodiscard]] auto monitorInjector() -> UniqueInjector<MonitorDevice>;
     [[nodiscard]] auto dummyMonitorInjector() -> UniqueInjector<MonitorDevice>;
+    [[nodiscard]] auto monitorInjector() -> UniqueInjector<MonitorDevice>;
 } // namespace height_vision_pi
