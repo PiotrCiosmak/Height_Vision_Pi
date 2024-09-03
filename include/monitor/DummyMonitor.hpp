@@ -7,7 +7,11 @@ namespace height_vision_pi
     class DummyMonitor final : public MonitorDevice
     {
     public:
-        explicit DummyMonitor(const MonitorConfig& new_monitor_config);
+        DummyMonitor();
         void checkCPUTemperature() override;
+        void checkCPUUsage() override;
+        void checkDiskUsage() override;
+        void checkRAMUsage() override;
+        void checkGPUUsage() override;
     };
 } // namespace height_vision_pi
