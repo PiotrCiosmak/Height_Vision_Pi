@@ -12,11 +12,13 @@ int main()
     const std::chrono::milliseconds frame_duration{1000
                                                    / static_cast<int>(Config::get().camera.fps)};
 
+    const auto monitor = monitorInjector().create<std::unique_ptr<MonitorDevice>>();
     const auto camera_controller =
         cameraControllerInjector().create<std::unique_ptr<CameraController>>();
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
+        monitor->checkCPUTemperature();
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {

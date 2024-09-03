@@ -21,5 +21,12 @@
       "y": 434
     }
   },
-  "data_source": "stream"
+  "data_source": "stream",
+  "monitor": {
+    "cpu_monitor": {
+      "thermal_zone_path": "/sys/class/thermal/thermal_zone0/temp",
+      "warning_temperature": 80.0,
+      "error_temperature": 85.0
+    }
+  }
 }

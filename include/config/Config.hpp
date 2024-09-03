@@ -2,6 +2,7 @@
 
 #include "config/CameraConfig.hpp"
 #include "config/DataSourceConfig.hpp"
+#include "config/MonitorConfig.hpp"
 #include "config/WindowConfig.hpp"
 
 #include <mutex>
@@ -17,6 +18,7 @@ namespace height_vision_pi
         CameraConfig camera;
         DataSourceConfig data_source;
         WindowConfig window;
+        MonitorConfig monitor;
 
     private:
         Config() = default;

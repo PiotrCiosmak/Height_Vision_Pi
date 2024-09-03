@@ -4,7 +4,6 @@
 #include <nlohmann/json.hpp>
 
 #include <fstream>
-#include <iostream>
 
 using namespace height_vision_pi;
 
@@ -30,4 +29,5 @@ void Config::load(const std::string& file_path)
     camera = data["camera"].get<CameraConfig>();
     data_source = data["data_source"].get<DataSourceConfig>();
     window = data["window"].get<WindowConfig>();
+    monitor = data["monitor"].get<MonitorConfig>();
 }

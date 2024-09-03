@@ -6,7 +6,8 @@
   "required": [
     "camera",
     "window",
-    "data_source"
+    "data_source",
+    "monitor"
   ],
   "additionalProperties": false,
   "properties": {
@@ -132,6 +133,42 @@
         "stream",
         "none"
       ]
+    },
+    "monitor": {
+      "description": "Monitor settings for system health monitoring",
+      "type": "object",
+      "required": [
+        "cpu_monitor"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "cpu_monitor": {
+          "description": "CPU monitoring configuration",
+          "type": "object",
+          "required": [
+            "thermal_zone_path",
+            "warning_temperature",
+            "error_temperature"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "thermal_zone_path": {
+              "description": "Path to the thermal zone file for CPU temperature monitoring",
+              "type": "string"
+            },
+            "warning_temperature": {
+              "description": "Temperature threshold in Celsius at which a warning is triggered",
+              "type": "number",
+              "minimum": 0
+            },
+            "error_temperature": {
+              "description": "Temperature threshold in Celsius at which an error is triggered",
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        }
+      }
     }
   }
 }

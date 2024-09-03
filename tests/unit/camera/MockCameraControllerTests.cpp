@@ -3,9 +3,10 @@
 #include <gtest/gtest.h>
 
 using namespace height_vision_pi;
+
 using ::testing::Return;
 
-TEST(CameraControllerTest, ShouldGetFrame)
+TEST(MockCameraControllerTest, ShouldGetFrame)
 {
     // given: Camera config
     constexpr auto camera_config =
@@ -13,7 +14,7 @@ TEST(CameraControllerTest, ShouldGetFrame)
     // given: Mocked camera controller
     const auto camera_controller = std::make_unique<MockCameraController>(camera_config);
     // given: Camera resolution
-    const auto camera_resolution = camera_config.resolution;
+    constexpr auto camera_resolution = camera_config.resolution;
 
     // when: Preparing the expected frame
     const auto expected_frame = cv::Mat::zeros(camera_resolution.x, camera_resolution.y, CV_8UC3);
