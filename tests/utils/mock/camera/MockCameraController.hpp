@@ -9,10 +9,7 @@ namespace height_vision_pi
     class MockCameraController final : public CameraController
     {
     public:
-        explicit MockCameraController(const CameraConfig& new_camera_config) :
-            CameraController{new_camera_config}
-        {
-        }
+        explicit MockCameraController() : CameraController{CameraConfig{}} {}
 
         MOCK_METHOD(cv::Mat, getFrame, (), (override));
     };
