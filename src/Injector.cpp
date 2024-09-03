@@ -3,9 +3,8 @@
 #include "camera/ArduCamCameraController.hpp"
 #include "camera/DummyCameraController.hpp"
 #include "config/Config.hpp"
+#include "monitor/DummyMonitor.hpp"
 #include "monitor/Monitor.hpp"
-
-#include <monitor/DummyMonitor.hpp>
 
 using namespace height_vision_pi;
 
