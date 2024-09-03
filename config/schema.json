@@ -138,11 +138,11 @@
       "description": "Monitor settings for system health monitoring",
       "type": "object",
       "required": [
-        "cpu"
+        "cpu_monitor"
       ],
       "additionalProperties": false,
       "properties": {
-        "cpu": {
+        "cpu_monitor": {
           "description": "CPU monitoring configuration",
           "type": "object",
           "required": [
