@@ -42,10 +42,10 @@ auto Monitor::getCPUTemperature() -> float
         return 0;
     }
 
-    std::string line;
-    std::getline(file, line);
+    std::string temperature;
+    std::getline(file, temperature);
     file.close();
 
     constexpr auto millicelsius_to_celsius = 1000.0F;
-    return std::stof(line) / millicelsius_to_celsius;
+    return std::stof(temperature) / millicelsius_to_celsius;
 }
