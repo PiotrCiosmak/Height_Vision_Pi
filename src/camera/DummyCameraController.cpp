@@ -2,10 +2,7 @@
 
 using namespace height_vision_pi;
 
-DummyCameraController::DummyCameraController(const CameraConfig& new_camera_config) :
-    CameraController{new_camera_config}
-{
-}
+DummyCameraController::DummyCameraController() : CameraController{CameraConfig{}} {}
 
 auto DummyCameraController::getFrame() -> cv::Mat
 {
