@@ -24,6 +24,7 @@ add_library(HeightVisionPiSources
         src/config/Config.cpp
         src/Logger.cpp
         src/monitor/Monitor.cpp
+        src/monitor/DummyMonitor.cpp
 )
 
 target_link_libraries(HeightVisionPiSources
