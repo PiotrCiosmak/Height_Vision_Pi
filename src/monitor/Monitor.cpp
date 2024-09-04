@@ -78,7 +78,7 @@ void Monitor::checkDiskUsage()
     {
         Logger::warn("Disk usage is {} % , which exceeds the warning threshold of {} %.",
                      usage,
-                     error_usage);
+                     warning_usage);
     }
 }
 
