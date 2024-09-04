@@ -108,6 +108,7 @@ auto Monitor::getDiskStatistics(const std::string& all_disk_statistics) -> std::
 
 auto Monitor::getDiskPercentageUsage(const std::string& disk_statistics) -> int
 {
+    std::cout<<"disk_statistics"<<disk_statistics<<"\n";
     const auto percent_position = disk_statistics.find('%');
 
     if (percent_position != std::string::npos)
