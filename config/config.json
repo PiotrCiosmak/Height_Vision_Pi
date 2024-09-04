@@ -30,7 +30,7 @@
     },
     "disk_monitor": {
       "path": "/dev/mmcblk0p2",
-      "warning_usage_percentage": 90,
+      "warning_usage_percentage": 5,
       "error_usage_percentage": 95
     }
   }
