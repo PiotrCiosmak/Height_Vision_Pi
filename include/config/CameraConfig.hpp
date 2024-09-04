@@ -1,12 +1,12 @@
 #pragma once
 
-#include "config/utils/Resolution.hpp"
+#include "config/utils/ResolutionConfig.hpp"
 
 namespace height_vision_pi
 {
     struct CameraConfig
     {
-        Resolution resolution;
+        ResolutionConfig resolution;
         double fps;
         bool capture_mode;
         double brightness;
