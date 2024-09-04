@@ -97,6 +97,7 @@ auto Monitor::getDiskStatistics(const std::string& all_disk_statistics) -> std::
 
     while (std::getline(stream, line))
     {
+        std::cout<<"WWWWWWWWWW: "<<line<<std::endl;
         if (line.find(monitor_config.disk_monitor.path))
         {
             return line;
