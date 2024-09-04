@@ -118,6 +118,7 @@ auto Monitor::getDiskPercentageUsage(const std::string& disk_statistics) -> int
         {
             const auto number_str =
                 disk_statistics.substr(space_position + 1, percent_position - space_position - 1);
+            std::cout<<"nuU"<<number_str<<std::endl;
             return std::stoi(number_str);
         }
     }
