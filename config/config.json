@@ -27,6 +27,11 @@
       "thermal_zone_path": "/sys/class/thermal/thermal_zone0/temp",
       "warning_temperature": 80.0,
       "error_temperature": 85.0
+    },
+    "disk_monitor": {
+      "path": "/dev/mmcblk0p2",
+      "warning_usage_percentage": 90,
+      "error_usage_percentage": 95
     }
   }
 }
