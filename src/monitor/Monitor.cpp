@@ -85,6 +85,7 @@ void Monitor::checkDiskUsage()
 auto Monitor::getDiskUsage() -> int
 {
     const auto all_disk_statistics = runBashCommand("df").value();
+    std::cout<<"all_disk_statistics"<<all_disk_statistics<<"\n";
     const auto disk_statistics = getDiskStatistics(all_disk_statistics);
     const auto disk_usage = getDiskPercentageUsage(disk_statistics);
     return disk_usage;
@@ -98,7 +99,7 @@ auto Monitor::getDiskStatistics(const std::string& all_disk_statistics) -> std::
     while (std::getline(stream, line))
     {
         if (line.find(monitor_config.disk_monitor.path))
-        {std::cout<<"LINE: "<<line<<std::endl;
+        {
             return line;
         }
     }
@@ -108,7 +109,7 @@ auto Monitor::getDiskStatistics(const std::string& all_disk_statistics) -> std::
 
 auto Monitor::getDiskPercentageUsage(const std::string& disk_statistics) -> int
 {
-    std::cout<<"disk_statistics"<<disk_statistics<<"\n";
+    std::cout << "disk_statistics" << disk_statistics << "\n";
     const auto percent_position = disk_statistics.find('%');
 
     if (percent_position != std::string::npos)
@@ -119,7 +120,7 @@ auto Monitor::getDiskPercentageUsage(const std::string& disk_statistics) -> int
         {
             const auto number_str =
                 disk_statistics.substr(space_position + 1, percent_position - space_position - 1);
-            std::cout<<"nuU"<<number_str<<std::endl;
+            std::cout << "nuU" << number_str << std::endl;
             return std::stoi(number_str);
         }
     }
