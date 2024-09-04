@@ -4,13 +4,13 @@
 
 namespace height_vision_pi
 {
-    struct CPUMonitor
+    struct CPUMonitorConfig
     {
         std::string thermal_zone_path;
         double warning_temperature;
         double error_temperature;
 
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(CPUMonitor,
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(CPUMonitorConfig,
                                        thermal_zone_path,
                                        warning_temperature,
                                        error_temperature)
