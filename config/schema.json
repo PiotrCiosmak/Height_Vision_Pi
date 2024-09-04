@@ -167,6 +167,35 @@
               "minimum": 0
             }
           }
+        },
+        ,
+        "disk_monitor": {
+          "description": "Disk usage monitoring configuration",
+          "type": "object",
+          "required": [
+            "path",
+            "warning_usage_percentage",
+            "error_usage_percentage"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "description": "Path to the disk or partition to monitor",
+              "type": "string"
+            },
+            "warning_usage_percentage": {
+              "description": "Disk usage percentage at which a warning is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "error_usage_percentage": {
+              "description": "Disk usage percentage at which an error is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
         }
       }
     }
