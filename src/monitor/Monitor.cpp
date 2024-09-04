@@ -123,6 +123,7 @@ auto Monitor::getDiskPercentageUsage(const std::string& disk_statistics) -> int
     }
 
     Logger::error("Disk {} percentage usage not found", disk_statistics);
+    return 0;
 }
 
 void Monitor::checkRAMUsage()
