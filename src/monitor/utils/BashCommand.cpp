@@ -18,7 +18,7 @@ auto height_vision_pi::runBashCommand(std::string_view command)
     }
     while (fgets(command_buffor.data(), command_buffor.size(), pipe.get()) != nullptr)
     {
-        result += command_buffor.data()+'\n';
+        result += command_buffor.data();
     }
     return result;
 }
