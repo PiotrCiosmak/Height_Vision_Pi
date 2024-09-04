@@ -168,7 +168,6 @@
             }
           }
         },
-        ,
         "disk_monitor": {
           "description": "Disk usage monitoring configuration",
           "type": "object",

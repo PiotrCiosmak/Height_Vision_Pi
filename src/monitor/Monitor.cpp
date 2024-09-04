@@ -16,14 +16,14 @@ void Monitor::checkCPUTemperature()
 
     if (temperature >= error_temperature)
     {
-        Logger::error("CPU temperature is {} °C , which exceeds the critical threshold of {} °C. "
+        Logger::error("CPU temperature is {} °C, which exceeds the critical threshold of {} °C. "
                       "The application will now shut down.",
                       temperature,
                       error_temperature);
     }
     else if (temperature >= warning_temperature)
     {
-        Logger::warn("CPU temperature is {} °C , which exceeds the warning threshold of {} °C.",
+        Logger::warn("CPU temperature is {} °C, which exceeds the warning threshold of {} °C.",
                      temperature,
                      warning_temperature);
     }
@@ -69,14 +69,14 @@ void Monitor::checkDiskUsage()
 
     if (usage >= error_usage)
     {
-        Logger::error("Disk usage is {} % , which exceeds the critical threshold of {} %. The "
+        Logger::error("Disk usage is {} %, which exceeds the critical threshold of {} %. The "
                       "application will now shut down.",
                       usage,
                       error_usage);
     }
     else if (usage >= warning_usage)
     {
-        Logger::warn("Disk usage is {} % , which exceeds the warning threshold of {} %.",
+        Logger::warn("Disk usage is {} %, which exceeds the warning threshold of {} %.",
                      usage,
                      warning_usage);
     }
