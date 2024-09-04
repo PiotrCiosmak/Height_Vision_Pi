@@ -85,7 +85,6 @@ void Monitor::checkDiskUsage()
 auto Monitor::getDiskUsage() -> int
 {
     const auto all_disk_statistics = runBashCommand("df").value();
-    std::cout<<"all_disk_statistics"<<all_disk_statistics<<"\n";
     const auto disk_statistics = getDiskStatistics(all_disk_statistics);
     const auto disk_usage = getDiskPercentageUsage(disk_statistics);
     return disk_usage;
