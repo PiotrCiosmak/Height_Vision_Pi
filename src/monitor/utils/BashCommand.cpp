@@ -4,9 +4,8 @@
 #include <array>
 #include <memory>
 
-using namespace height_vision_pi;
-
-auto runBashCommand(std::string_view command) -> std::expected<std::string, std::string>
+auto height_vision_pi::runBashCommand(std::string_view command)
+    -> std::expected<std::string, std::string>
 {
     using namespace std::string_literals;
     auto command_buffor = std::array<char, 128>{};
@@ -17,8 +16,7 @@ auto runBashCommand(std::string_view command) -> std::expected<std::string, std:
     {
         Logger::error("Couldn't run bash command");
     }
-    while (fgets(command_buffor.data(), static_cast<int>((command_buffor.size())), pipe.get())
-           != nullptr)
+    while (fgets(command_buffor.data(), command_buffor.size(), pipe.get()) != nullptr)
     {
         result += command_buffor.data();
     }
