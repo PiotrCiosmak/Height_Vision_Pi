@@ -69,14 +69,15 @@ void Monitor::checkDiskUsage()
 
     if (usage >= error_usage)
     {
-        Logger::error("Disk usage is {} %, which exceeds the critical threshold of {} %. The "
-                      "application will now shut down.",
-                      usage,
-                      error_usage);
+        Logger::error(
+            "Disk usage is equal to {} %, which exceeds the critical threshold of {} %. The "
+            "application will now shut down.",
+            usage,
+            error_usage);
     }
     else if (usage >= warning_usage)
     {
-        Logger::warn("Disk usage is {} %, which exceeds the warning threshold of {} %.",
+        Logger::warn("Disk usage is equal to {} %, which exceeds the warning threshold of {} %.",
                      usage,
                      warning_usage);
     }
@@ -86,8 +87,7 @@ auto Monitor::getDiskUsage() -> int
 {
     const auto all_disk_statistics = runBashCommand("df").value();
     const auto disk_statistics = getDiskStatistics(all_disk_statistics);
-    const auto disk_usage = getDiskPercentageUsage(disk_statistics);
-    return disk_usage;
+    return getDiskPercentageUsage(disk_statistics);
 }
 
 auto Monitor::getDiskStatistics(const std::string& all_disk_statistics) -> std::string
@@ -104,6 +104,7 @@ auto Monitor::getDiskStatistics(const std::string& all_disk_statistics) -> std::
     }
 
     Logger::error("Disk {} not found", monitor_config.disk_monitor.path);
+    return "";
 }
 
 auto Monitor::getDiskPercentageUsage(const std::string& disk_statistics) -> int
@@ -128,12 +129,72 @@ auto Monitor::getDiskPercentageUsage(const std::string& disk_statistics) -> int
 
 void Monitor::checkRAMUsage()
 {
-    // TODO
+    const auto usage = getRAMUsage();
+    const auto warning_usage = monitor_config.ram_monitor.warning_usage_percentage;
+    const auto error_usage = monitor_config.ram_monitor.error_usage_percentage;
+
+    if (usage >= error_usage)
+    {
+        Logger::error(
+            "RAM usage is equal to {} %, which exceeds the critical threshold of {} %. The "
+            "application will now shut down.",
+            usage,
+            error_usage);
+    }
+    else if (usage >= warning_usage)
+    {
+        Logger::warn("Disk usage is equal to {} %, which exceeds the warning threshold of {} %.",
+                     usage,
+                     warning_usage);
+    }
 }
 
-auto Monitor::getRAMUsage() -> float
+auto Monitor::getRAMUsage() -> int
 {
-    // TODO
+    const auto all_ram_statistics = runBashCommand("free").value();
+    const auto ram_statistics = getRAMStatistics(all_ram_statistics);
+    return getRAMPercentageUsage(ram_statistics);
+}
+
+auto Monitor::getRAMStatistics(const std::string& all_ram_statistics) -> std::string
+{
+    auto stream = std::istringstream{all_ram_statistics};
+    auto line = std::string{};
+
+    while (std::getline(stream, line))
+    {
+        if (line.find("Mem:") != std::string::npos)
+        {
+            return line;
+        }
+    }
+
+    Logger::error("Ram statistics not found");
+    return "";
+}
+
+auto Monitor::getRAMPercentageUsage(const std::string& ram_statistics) -> int
+{
+    auto stream = std::istringstream{ram_statistics};
+    auto numbers = std::vector<int>{};
+    auto word = std::string{};
+
+    while (stream >> word)
+    {
+        {
+            numbers.emplace_back(std::stoi(word));
+        }
+    }
+
+    if (numbers.size() >= 3)
+    {
+        auto total = numbers[0];
+        auto free = numbers[2];
+        return static_cast<int>(std::round(total / free));
+    }
+
+    Logger::error("Unable to parse RAM statistics");
+    return 0;
 }
 
 void Monitor::checkGPUUsage()
