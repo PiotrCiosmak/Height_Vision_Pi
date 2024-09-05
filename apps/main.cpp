@@ -20,6 +20,7 @@ int main()
         const auto start_time = std::chrono::high_resolution_clock::now();
         monitor->checkCPUTemperature();
         monitor->checkDiskUsage();
+        monitor->checkRAMUsage();
         //TODO dodac wywolania 3 innych funkcji
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
