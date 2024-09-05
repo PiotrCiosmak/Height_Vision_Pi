@@ -138,7 +138,9 @@
       "description": "Monitor settings for system health monitoring",
       "type": "object",
       "required": [
-        "cpu_monitor"
+        "cpu_monitor",
+        "disk_monitor",
+        "ram_monitor"
       ],
       "additionalProperties": false,
       "properties": {
@@ -190,6 +192,29 @@
             },
             "error_usage_percentage": {
               "description": "Disk usage percentage at which an error is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        },
+        "ram_monitor": {
+          "description": "RAM usage monitoring configuration",
+          "type": "object",
+          "required": [
+            "warning_usage_percentage",
+            "error_usage_percentage"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "warning_usage_percentage": {
+              "description": "RAM usage percentage at which a warning is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "error_usage_percentage": {
+              "description": "RAM usage percentage at which an error is triggered",
               "type": "integer",
               "minimum": 0,
               "maximum": 100
