@@ -229,9 +229,13 @@ auto Monitor::getRAMsUsagePercent(const std::vector<std::string>& rams_statistic
 
         while (stream >> word)
         {
+            try
             {
-                Logger::info("OOOOOOO: {}",word);
                 numbers.emplace_back(std::stoi(word));
+            }
+            catch (const std::invalid_argument&)
+            {
+                continue;
             }
         }
 
