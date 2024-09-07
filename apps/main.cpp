@@ -18,13 +18,7 @@ int main()
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
-
-        monitor->checkCPUTemperature();
-        monitor->checkCPUUsage();
-        monitor->checkDiskUsage();
-        monitor->checkRAMsUsage();
-        monitor->checkGPUTemperature();
-        monitor->checkGPUUsage();
+        monitor->check();
 
         auto frame = camera_controller->getFrame();
         if (!frame.empty())

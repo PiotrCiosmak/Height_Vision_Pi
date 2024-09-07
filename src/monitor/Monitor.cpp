@@ -8,6 +8,16 @@ using namespace height_vision_pi;
 
 Monitor::Monitor(const MonitorConfig& new_monitor_config) : MonitorDevice{new_monitor_config} {}
 
+void Monitor::check()
+{
+    checkCPUTemperature();
+    checkCPUUsage();
+    checkDiskUsage();
+    checkRAMsUsage();
+    checkGPUTemperature();
+    checkGPUUsage();
+}
+
 void Monitor::checkCPUTemperature()
 {
     const auto temperature = getCPUTemperature();

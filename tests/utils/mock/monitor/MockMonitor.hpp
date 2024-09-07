@@ -11,11 +11,6 @@ namespace height_vision_pi
     public:
         explicit MockMonitor() : MonitorDevice{MonitorConfig{}} {}
 
-        MOCK_METHOD(void, checkCPUTemperature, (), (override));
-        MOCK_METHOD(void, checkCPUUsage, (), (override));
-        MOCK_METHOD(void, checkDiskUsage, (), (override));
-        MOCK_METHOD(void, checkRAMsUsage, (), (override));
-        MOCK_METHOD(void, checkGPUTemperature, (), (override));
-        MOCK_METHOD(void, checkGPUUsage, (), (override));
+        MOCK_METHOD(void, check, (), (override));
     };
 } // namespace height_vision_pi

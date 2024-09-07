@@ -8,11 +8,6 @@ namespace height_vision_pi
     {
     public:
         DummyMonitor();
-        void checkCPUTemperature() override{};
-        void checkCPUUsage() override{};
-        void checkDiskUsage() override{};
-        void checkRAMsUsage() override{};
-        void checkGPUTemperature() override{};
-        void checkGPUUsage() override{};
+        void check() override{};
     };
 } // namespace height_vision_pi

@@ -8,14 +8,15 @@ namespace height_vision_pi
     {
     public:
         explicit Monitor(const MonitorConfig& new_monitor_config);
-        void checkCPUTemperature() override;
-        void checkCPUUsage() override;
-        void checkDiskUsage() override;
-        void checkRAMsUsage() override;
-        void checkGPUTemperature() override;
-        void checkGPUUsage() override;
+        void check() override;
 
     private:
+        void checkCPUTemperature();
+        void checkCPUUsage();
+        void checkDiskUsage();
+        void checkRAMsUsage();
+        void checkGPUTemperature();
+        void checkGPUUsage();
         [[nodiscard]] auto getCPUTemperature() const -> double;
         [[nodiscard]] auto getCPUUsage() const -> int;
         [[nodiscard]] auto getDiskUsage() const -> int;
