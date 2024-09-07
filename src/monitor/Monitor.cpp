@@ -239,11 +239,11 @@ auto Monitor::getRAMsUsagePercent(const std::vector<std::string>& rams_statistic
             }
         }
 
-        if (numbers.size() >= 3)
+        if (numbers.size() >= 2)
         {
-            auto total = numbers[0];
-            auto free = numbers[2];
-            rams_usage_percent.push_back(static_cast<int>(std::round(total / free)));
+            const auto total = numbers[0];
+            const auto used = numbers[1];
+            rams_usage_percent.push_back(static_cast<int>(std::round(1.0 * total / used * 100)));
         }
     }
 
