@@ -276,7 +276,7 @@ auto Monitor::getGPUTemperature() const -> double
     const auto gpu_temperature_statistics = runBashCommand("vcgencmd measure_temp").value();
     const auto start_index = gpu_temperature_statistics.find('=') + 1;
     const auto end_index = gpu_temperature_statistics.find('C');
-    const auto temperature_str = temperature_str.substr(start_index, end_index - start_index - 1);
+    const auto temperature_str = gpu_temperature_statistics.substr(start_index, end_index - start_index - 1);
     const auto temperature = std::stod(temperature_str);
     return temperature;
 }
