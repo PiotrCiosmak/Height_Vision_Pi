@@ -153,7 +153,6 @@ auto Monitor::getDiskUsagePercent(const std::string& disk_statistics) const -> i
         {
             const auto number_str =
                 disk_statistics.substr(space_position + 1, percent_position - space_position - 1);
-            Logger::info("OOOOOOO: {}",number_str);
             return std::stoi(number_str);
         }
     }
@@ -231,6 +230,7 @@ auto Monitor::getRAMsUsagePercent(const std::vector<std::string>& rams_statistic
         while (stream >> word)
         {
             {
+                Logger::info("OOOOOOO: {}",word);
                 numbers.emplace_back(std::stoi(word));
             }
         }
