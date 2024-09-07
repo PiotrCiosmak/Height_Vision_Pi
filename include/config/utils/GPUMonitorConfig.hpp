@@ -4,12 +4,12 @@
 
 namespace height_vision_pi
 {
-    struct RAMMonitorConfig
+    struct GPUMonitorConfig
     {
-        double warning_usage;
-        double error_usage;
+        int warning_usage;
+        int error_usage;
 
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(RAMMonitorConfig,
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(GPUMonitorConfig,
                                        warning_usage,
                                        error_usage)
     };
