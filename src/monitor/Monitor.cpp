@@ -16,14 +16,14 @@ void Monitor::checkCPUTemperature()
 
     if (temperature >= error_temperature)
     {
-        Logger::error("CPU temperature is {} °C, which exceeds the critical threshold of {} °C. "
+        Logger::error("CPU temperature is {}°C, which exceeds the critical threshold of {}°C. "
                       "The application will now shut down.",
                       temperature,
                       error_temperature);
     }
     else if (temperature >= warning_temperature)
     {
-        Logger::warn("CPU temperature is {} °C, which exceeds the warning threshold of {} °C.",
+        Logger::warn("CPU temperature is {}°C, which exceeds the warning threshold of {}°C.",
                      temperature,
                      warning_temperature);
     }
@@ -54,15 +54,14 @@ void Monitor::checkCPUUsage()
 
     if (usage >= error_usage)
     {
-        Logger::error(
-            "CPU usage is equal to {} %, which exceeds the critical threshold of {} %. The "
-            "application will now shut down.",
-            usage,
-            error_usage);
+        Logger::error("CPU usage is equal to {}%, which exceeds the critical threshold of {}%. The "
+                      "application will now shut down.",
+                      usage,
+                      error_usage);
     }
     else if (usage >= warning_usage)
     {
-        Logger::warn("CPU usage is equal to {} %, which exceeds the warning threshold of {} %.",
+        Logger::warn("CPU usage is equal to {}%, which exceeds the warning threshold of {}%.",
                      usage,
                      warning_usage);
     }
@@ -99,14 +98,14 @@ void Monitor::checkDiskUsage()
     if (usage >= error_usage)
     {
         Logger::error(
-            "Disk usage is equal to {} %, which exceeds the critical threshold of {} %. The "
+            "Disk usage is equal to {}%, which exceeds the critical threshold of {}%. The "
             "application will now shut down.",
             usage,
             error_usage);
     }
     else if (usage >= warning_usage)
     {
-        Logger::warn("Disk usage is equal to {} %, which exceeds the warning threshold of {} %.",
+        Logger::warn("Disk usage is equal to {}%, which exceeds the warning threshold of {}%.",
                      usage,
                      warning_usage);
     }
@@ -167,14 +166,14 @@ void Monitor::checkRAMsUsage()
         if (usage >= error_usage)
         {
             Logger::error(
-                "RAM usage is equal to {} %, which exceeds the critical threshold of {} %. The "
+                "RAM usage is equal to {}%, which exceeds the critical threshold of {}%. The "
                 "application will now shut down.",
                 usage,
                 error_usage);
         }
         else if (usage >= warning_usage)
         {
-            Logger::warn("RAM usage is equal to {} %, which exceeds the warning threshold of {} %.",
+            Logger::warn("RAM usage is equal to {}%, which exceeds the warning threshold of {}%.",
                          usage,
                          warning_usage);
         }
@@ -258,14 +257,14 @@ void Monitor::checkGPUTemperature()
 
     if (temperature >= error_temperature)
     {
-        Logger::error("GPU temperature is {} °C, which exceeds the critical threshold of {} °C. "
+        Logger::error("GPU temperature is {}°C, which exceeds the critical threshold of {}°C. "
                       "The application will now shut down.",
                       temperature,
                       error_temperature);
     }
     else if (temperature >= warning_temperature)
     {
-        Logger::warn("GPU temperature is {} °C, which exceeds the warning threshold of {} °C.",
+        Logger::warn("GPU temperature is {}°C, which exceeds the warning threshold of {}°C.",
                      temperature,
                      warning_temperature);
     }
@@ -276,7 +275,8 @@ auto Monitor::getGPUTemperature() const -> double
     const auto gpu_temperature_statistics = runBashCommand("vcgencmd measure_temp").value();
     const auto start_index = gpu_temperature_statistics.find('=') + 1;
     const auto end_index = gpu_temperature_statistics.find('C');
-    const auto temperature_str = gpu_temperature_statistics.substr(start_index, end_index - start_index - 1);
+    const auto temperature_str =
+        gpu_temperature_statistics.substr(start_index, end_index - start_index - 1);
     const auto temperature = std::stod(temperature_str);
     return temperature;
 }
@@ -289,15 +289,14 @@ void Monitor::checkGPUUsage()
 
     if (usage >= error_usage)
     {
-        Logger::error(
-            "GPU usage is equal to {} %, which exceeds the critical threshold of {} %. The "
-            "application will now shut down.",
-            usage,
-            error_usage);
+        Logger::error("GPU usage is equal to {}%, which exceeds the critical threshold of {}%. The "
+                      "application will now shut down.",
+                      usage,
+                      error_usage);
     }
     else if (usage >= warning_usage)
     {
-        Logger::warn("GPU usage is equal to {} %, which exceeds the warning threshold of {} %.",
+        Logger::warn("GPU usage is equal to {}%, which exceeds the warning threshold of {}%.",
                      usage,
                      warning_usage);
     }
