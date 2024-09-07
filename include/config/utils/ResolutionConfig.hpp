@@ -4,11 +4,11 @@
 
 namespace height_vision_pi
 {
-    struct Resolution
+    struct ResolutionConfig
     {
         int x;
         int y;
 
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Resolution, x, y)
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(ResolutionConfig, x, y)
     };
 } // namespace height_vision_pi

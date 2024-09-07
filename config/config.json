@@ -26,7 +26,25 @@
     "cpu_monitor": {
       "thermal_zone_path": "/sys/class/thermal/thermal_zone0/temp",
       "warning_temperature": 80.0,
-      "error_temperature": 85.0
+      "error_temperature": 85.0,
+      "usage_path": "/proc/loadavg",
+      "warning_usage": 90,
+      "error_usage": 99
+    },
+    "disk_monitor": {
+      "path": "/dev/mmcblk0p2",
+      "warning_usage": 90,
+      "error_usage": 95
+    },
+    "ram_monitor": {
+      "warning_usage": 85,
+      "error_usage": 90
+    },
+    "gpu_monitor": {
+      "warning_temperature": 80.0,
+      "error_temperature": 85.0,
+      "warning_usage": 90,
+      "error_usage": 99
     }
   }
 }

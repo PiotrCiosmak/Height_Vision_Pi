@@ -12,7 +12,7 @@ namespace height_vision_pi
         {
         }
 
-        virtual void checkCPUTemperature() = 0;
+        virtual void check() = 0;
         virtual ~MonitorDevice() = default;
 
     protected:

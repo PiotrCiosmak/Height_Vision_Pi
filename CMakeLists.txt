@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.25.1)
 project(Height_Vision_Pi)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 find_package(PkgConfig REQUIRED)
 find_package(OpenCV REQUIRED)
@@ -25,6 +25,7 @@ add_library(HeightVisionPiSources
         src/Logger.cpp
         src/monitor/Monitor.cpp
         src/monitor/DummyMonitor.cpp
+        src/monitor/utils/BashCommand.cpp
 )
 
 target_link_libraries(HeightVisionPiSources

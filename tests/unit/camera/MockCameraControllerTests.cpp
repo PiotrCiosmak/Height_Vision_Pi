@@ -12,7 +12,7 @@ TEST(MockCameraControllerTest, ShouldGetFrame)
     constexpr auto camera_config =
         CameraConfig{{2312, 1736}, 10.0, true, 0.5, 0.5, 0.5, 0.5, 0.5, true, true};
     // given: Mocked camera controller
-    const auto camera_controller = std::make_unique<MockCameraController>(camera_config);
+    const auto camera_controller = std::make_unique<MockCameraController>();
     // given: Camera resolution
     constexpr auto camera_resolution = camera_config.resolution;
 

@@ -138,7 +138,10 @@
       "description": "Monitor settings for system health monitoring",
       "type": "object",
       "required": [
-        "cpu_monitor"
+        "cpu_monitor",
+        "disk_monitor",
+        "ram_monitor",
+        "gpu_monitor"
       ],
       "additionalProperties": false,
       "properties": {
@@ -148,7 +151,10 @@
           "required": [
             "thermal_zone_path",
             "warning_temperature",
-            "error_temperature"
+            "error_temperature",
+            "usage_path",
+            "warning_usage",
+            "error_usage"
           ],
           "additionalProperties": false,
           "properties": {
@@ -164,7 +170,111 @@
             "error_temperature": {
               "description": "Temperature threshold in Celsius at which an error is triggered",
               "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "usage_path": {
+              "description": "Path to the file that contains the average CPU usage",
+              "type": "string"
+            },
+            "warning_usage": {
+              "description": "CPU usage percentage at which a warning is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "error_usage": {
+              "description": "CPU usage percentage at which an error is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        },
+        "disk_monitor": {
+          "description": "Disk usage monitoring configuration",
+          "type": "object",
+          "required": [
+            "path",
+            "warning_usage",
+            "error_usagee"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "description": "Path to the disk or partition to monitor",
+              "type": "string"
+            },
+            "warning_usage": {
+              "description": "Disk usage percentage at which a warning is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "error_usage": {
+              "description": "Disk usage percentage at which an error is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        },
+        "ram_monitor": {
+          "description": "RAM usage monitoring configuration",
+          "type": "object",
+          "required": [
+            "warning_usage",
+            "error_usage"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "warning_usage": {
+              "description": "RAM usage percentage at which a warning is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "error_usage": {
+              "description": "RAM usage percentage at which an error is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        },
+        "gpu_monitor": {
+          "description": "GPU usage monitoring configuration",
+          "type": "object",
+          "required": [
+            "warning_temperature",
+            "error_temperature",
+            "warning_usage",
+            "error_usage"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "warning_temperature": {
+              "description": "Temperature threshold in Celsius at which a warning is triggered",
+              "type": "number",
               "minimum": 0
+            },
+            "error_temperature": {
+              "description": "Temperature threshold in Celsius at which an error is triggered",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "warning_usage": {
+              "description": "GPU usage percentage at which a warning is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "error_usage": {
+              "description": "GPU usage percentage at which an error is triggered",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
             }
           }
         }

@@ -12,38 +12,38 @@ using ::testing::StrictMock;
 class MockMonitorTest : public ::testing::Test
 {
 protected:
-    StrictMock<MockMonitor> mock_monitor{MonitorConfig{"/test/path", 80.0, 85.0}};
+    StrictMock<MockMonitor> mock_monitor;
 };
 
-TEST_F(MockMonitorTest, ShouldCallCheckCPUTemperatureOnce)
+TEST_F(MockMonitorTest, ShouldCallCheckOnce)
 {
     // when: Setting up the mock to be called exactly once
-    EXPECT_CALL(mock_monitor, checkCPUTemperature()).Times(1);
+    EXPECT_CALL(mock_monitor, check()).Times(1);
 
-    // when: Calling checkCPUTemperature on the monitor once
-    mock_monitor.checkCPUTemperature();
+    // when: Calling check on the monitor once
+    mock_monitor.check();
 
-    // then: Function checkCPUTemperature was called exactly once
+    // then: Function check was called exactly once
 }
 
-TEST_F(MockMonitorTest, ShouldNotCallCheckCPUTemperature)
+TEST_F(MockMonitorTest, ShouldNotCallCheck)
 {
     // when: Setting up the mock to not be called
-    EXPECT_CALL(mock_monitor, checkCPUTemperature()).Times(0);
+    EXPECT_CALL(mock_monitor, check()).Times(0);
 
-    // when: Do not calling checkCPUTemperature
+    // when: Do not calling check
 
-    // then: Function checkCPUTemperature was not called
+    // then: Function check was not called
 }
 
-TEST_F(MockMonitorTest, ShouldCallCheckCPUTemperatureAtLeastOnce)
+TEST_F(MockMonitorTest, ShouldCallCheckAtLeastOnce)
 {
     // when: Setting up the mock to be called at least once
-    EXPECT_CALL(mock_monitor, checkCPUTemperature()).Times(AtLeast(1));
+    EXPECT_CALL(mock_monitor, check()).Times(AtLeast(1));
 
-    // when: Calling checkCPUTemperature on the monitor twice
-    mock_monitor.checkCPUTemperature();
-    mock_monitor.checkCPUTemperature();
+    // when: Calling check on the monitor twice
+    mock_monitor.check();
+    mock_monitor.check();
 
-    // then: Function checkCPUTemperature was called at least once
+    // then: Function check was called at least once
 }
