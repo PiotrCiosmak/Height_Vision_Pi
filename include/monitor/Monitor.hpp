@@ -11,11 +11,12 @@ namespace height_vision_pi
         void checkCPUTemperature() override;
         void checkCPUUsage() override;
         void checkDiskUsage() override;
-        void checkRAMUsage() override;
+        void checkRAMsUsage() override;
+        void checkGPUTemperature() override;
         void checkGPUUsage() override;
 
     private:
-        [[nodiscard]] auto getCPUTemperature() const -> float;
+        [[nodiscard]] auto getCPUTemperature() const -> double;
         [[nodiscard]] auto getCPUUsage() const -> int;
         [[nodiscard]] auto getDiskUsage() const -> int;
         [[nodiscard]] auto getDiskStatistics(const std::string& all_disk_statistics) const
@@ -26,6 +27,7 @@ namespace height_vision_pi
             -> std::vector<std::string>;
         [[nodiscard]] auto getRAMsUsagePercent(
             const std::vector<std::string>& rams_statistics) const -> std::vector<int>;
+        [[nodiscard]] auto getGPUTemperature() const -> double;
         [[nodiscard]] auto getGPUUsage() const -> int;
     };
 } // namespace height_vision_pi

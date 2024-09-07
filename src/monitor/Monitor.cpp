@@ -27,14 +27,9 @@ void Monitor::checkCPUTemperature()
                      temperature,
                      warning_temperature);
     }
-    else
-    {
-        Logger::info("CPU temperature is {} °C, which is within the normal operating range.",
-                     temperature);
-    }
 }
 
-auto Monitor::getCPUTemperature() const -> float
+auto Monitor::getCPUTemperature() const -> double
 {
     auto file = std::ifstream{monitor_config.cpu_monitor.thermal_zone_path};
     if (!file.is_open())
@@ -47,8 +42,8 @@ auto Monitor::getCPUTemperature() const -> float
     std::getline(file, temperature);
     file.close();
 
-    constexpr auto millicelsius_to_celsius = 1000.0F;
-    return std::stof(temperature) / millicelsius_to_celsius;
+    constexpr auto millicelsius_to_celsius = 1000.0;
+    return std::stod(temperature) / millicelsius_to_celsius;
 }
 
 void Monitor::checkCPUUsage()
@@ -75,7 +70,7 @@ void Monitor::checkCPUUsage()
 
 auto Monitor::getCPUUsage() const -> int
 {
-    const auto cores_number = stoi(runBashCommand("nproc").value());
+    const auto cpu_cores_number = stoi(runBashCommand("nproc").value());
     auto file = std::ifstream{monitor_config.cpu_monitor.usage_path};
     if (!file.is_open())
     {
@@ -89,7 +84,7 @@ auto Monitor::getCPUUsage() const -> int
     auto usage = 0.0;
     if (stream >> usage)
     {
-        return static_cast<int>(usage * 100 / cores_number);
+        return static_cast<int>(usage * 100 / cpu_cores_number);
     }
     Logger::error("Unable to read CPU usage");
     return 0;
@@ -161,7 +156,7 @@ auto Monitor::getDiskUsagePercent(const std::string& disk_statistics) const -> i
     return 0;
 }
 
-void Monitor::checkRAMUsage()
+void Monitor::checkRAMsUsage()
 {
     const auto usages = getRAMsUsage();
     const auto warning_usage = monitor_config.ram_monitor.warning_usage;
@@ -253,6 +248,37 @@ auto Monitor::getRAMsUsagePercent(const std::vector<std::string>& rams_statistic
     }
 
     return rams_usage_percent;
+}
+
+void Monitor::checkGPUTemperature()
+{
+    const auto temperature = getGPUTemperature();
+    const auto warning_temperature = monitor_config.gpu_monitor.warning_temperature;
+    const auto error_temperature = monitor_config.gpu_monitor.error_temperature;
+
+    if (temperature >= error_temperature)
+    {
+        Logger::error("GPU temperature is {} °C, which exceeds the critical threshold of {} °C. "
+                      "The application will now shut down.",
+                      temperature,
+                      error_temperature);
+    }
+    else if (temperature >= warning_temperature)
+    {
+        Logger::warn("GPU temperature is {} °C, which exceeds the warning threshold of {} °C.",
+                     temperature,
+                     warning_temperature);
+    }
+}
+
+auto Monitor::getGPUTemperature() const -> double
+{
+    const auto gpu_temperature_statistics = runBashCommand("vcgencmd measure_temp").value();
+    const auto start_index = gpu_temperature_statistics.find('=') + 1;
+    const auto end_index = gpu_temperature_statistics.find('C');
+    const auto temperature_str = temperature_str.substr(start_index, end_index - start_index - 1);
+    const auto temperature = std::stod(temperature_str);
+    return temperature;
 }
 
 void Monitor::checkGPUUsage()

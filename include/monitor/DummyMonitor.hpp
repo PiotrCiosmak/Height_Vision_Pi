@@ -11,7 +11,8 @@ namespace height_vision_pi
         void checkCPUTemperature() override{};
         void checkCPUUsage() override{};
         void checkDiskUsage() override{};
-        void checkRAMUsage() override{};
+        void checkRAMsUsage() override{};
+        void checkGPUTemperature() override{};
         void checkGPUUsage() override{};
     };
 } // namespace height_vision_pi

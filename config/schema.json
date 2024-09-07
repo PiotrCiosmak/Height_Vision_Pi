@@ -246,11 +246,24 @@
           "description": "GPU usage monitoring configuration",
           "type": "object",
           "required": [
+            "warning_temperature",
+            "error_temperature",
             "warning_usage",
             "error_usage"
           ],
           "additionalProperties": false,
           "properties": {
+            "warning_temperature": {
+              "description": "Temperature threshold in Celsius at which a warning is triggered",
+              "type": "number",
+              "minimum": 0
+            },
+            "error_temperature": {
+              "description": "Temperature threshold in Celsius at which an error is triggered",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
             "warning_usage": {
               "description": "GPU usage percentage at which a warning is triggered",
               "type": "integer",

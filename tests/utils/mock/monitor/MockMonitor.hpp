@@ -14,7 +14,8 @@ namespace height_vision_pi
         MOCK_METHOD(void, checkCPUTemperature, (), (override));
         MOCK_METHOD(void, checkCPUUsage, (), (override));
         MOCK_METHOD(void, checkDiskUsage, (), (override));
-        MOCK_METHOD(void, checkRAMUsage, (), (override));
+        MOCK_METHOD(void, checkRAMsUsage, (), (override));
+        MOCK_METHOD(void, checkGPUTemperature, (), (override));
         MOCK_METHOD(void, checkGPUUsage, (), (override));
     };
 } // namespace height_vision_pi

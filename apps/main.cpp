@@ -22,7 +22,8 @@ int main()
         monitor->checkCPUTemperature();
         monitor->checkCPUUsage();
         monitor->checkDiskUsage();
-        monitor->checkRAMUsage();
+        monitor->checkRAMsUsage();
+        monitor->checkGPUTemperature();
         monitor->checkGPUUsage();
 
         auto frame = camera_controller->getFrame();

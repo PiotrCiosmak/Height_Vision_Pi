@@ -41,6 +41,8 @@
       "error_usage": 90
     },
     "gpu_monitor": {
+      "warning_temperature": 80.0,
+      "error_temperature": 85.0,
       "warning_usage": 90,
       "error_usage": 99
     }

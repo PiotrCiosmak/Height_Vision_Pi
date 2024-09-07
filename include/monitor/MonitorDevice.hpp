@@ -15,7 +15,8 @@ namespace height_vision_pi
         virtual void checkCPUTemperature() = 0;
         virtual void checkCPUUsage() = 0;
         virtual void checkDiskUsage() = 0;
-        virtual void checkRAMUsage() = 0;
+        virtual void checkRAMsUsage() = 0;
+        virtual void checkGPUTemperature() = 0;
         virtual void checkGPUUsage() = 0;
 
         virtual ~MonitorDevice() = default;
