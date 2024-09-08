@@ -18,7 +18,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     video_capture->set(cv::CAP_PROP_SATURATION, camera_config.saturation);
     video_capture->set(cv::CAP_PROP_HUE, camera_config.hue);
     video_capture->set(cv::CAP_PROP_GAIN, camera_config.gain);
-    video_capture->set(cv::CAP_PROP_AUTOFOCUS, camera_config.auto_focus);
+    video_capture->set(cv::CAP_PROP_FOCUS, 10);
     video_capture->set(cv::CAP_PROP_AUTO_EXPOSURE, camera_config.auto_exposure);
     Logger::info("Autofocus is set to: " + std::to_string(video_capture->get(cv::CAP_PROP_AUTOFOCUS)));
     if (!video_capture->isOpened())
