@@ -9,9 +9,9 @@ namespace height_vision_pi
     public:
         HumanDetector();
 
-        [[nodiscard]] auto detect(cv::Mat& frame) const -> cv::Mat&;
+        [[nodiscard]] auto detect(cv::Mat& frame) -> cv::Mat&;
 
     private:
-        cv::HOGDescriptor hog;
+        cv::dnn::Net net;
     };
 } // namespace height_vision_pi
