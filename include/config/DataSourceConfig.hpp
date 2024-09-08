@@ -7,10 +7,10 @@ namespace height_vision_pi
     enum DataSourceConfig
     {
         stream,
-        none
+        file
     };
 
     NLOHMANN_JSON_SERIALIZE_ENUM(DataSourceConfig,
                                  {{DataSourceConfig::stream, "stream"},
-                                  {DataSourceConfig::none, "none"}})
+                                  {DataSourceConfig::file, "file"}})
 } // namespace height_vision_pi

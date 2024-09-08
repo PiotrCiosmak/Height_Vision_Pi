@@ -9,5 +9,8 @@ namespace height_vision_pi
     public:
         DummyCameraController();
         [[nodiscard]] auto getFrame() -> cv::Mat override;
+
+    private:
+        std::unique_ptr<cv::VideoCapture> video_capture;
     };
 } // namespace height_vision_pi
