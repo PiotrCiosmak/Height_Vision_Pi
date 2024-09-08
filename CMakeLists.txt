@@ -36,7 +36,7 @@ if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
     )
 endif ()
 
-add_library(HeightVisionPiSources
+set(HEIGHT_VISION_PI_SOURCES
         src/camera/DummyCameraController.cpp
         src/Injector.cpp
         src/config/Config.cpp
@@ -46,6 +46,12 @@ add_library(HeightVisionPiSources
         src/monitor/utils/BashCommand.cpp
         src/detector/HumanDetector.cpp
 )
+
+if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
+    list(APPEND HEIGHT_VISION_PI_SOURCES src/camera/ArduCamCameraController.cpp)
+endif ()
+
+add_library(HeightVisionPiSources ${HEIGHT_VISION_PI_SOURCES})
 
 if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
     add_library(HeightVisionPiSources
