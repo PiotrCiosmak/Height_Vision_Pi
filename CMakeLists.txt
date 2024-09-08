@@ -26,6 +26,7 @@ add_library(HeightVisionPiSources
         src/monitor/Monitor.cpp
         src/monitor/DummyMonitor.cpp
         src/monitor/utils/BashCommand.cpp
+        src/detector/HumanDetector.cpp
 )
 
 target_link_libraries(HeightVisionPiSources

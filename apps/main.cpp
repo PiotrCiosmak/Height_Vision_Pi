@@ -15,6 +15,8 @@ int main()
     const auto monitor = monitorInjector().create<std::unique_ptr<MonitorDevice>>();
     const auto camera_controller =
         cameraControllerInjector().create<std::unique_ptr<CameraController>>();
+
+    const auto human_detector = humanDetectorInjector().create<std::unique_ptr<HumanDetector>>();
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
@@ -23,6 +25,7 @@ int main()
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {
+            frame = human_detector->detect(frame);
             imshow(Config::get().window.name, frame);
             cv::resizeWindow(Config::get().window.name,
                              Config::get().camera.resolution.x,
