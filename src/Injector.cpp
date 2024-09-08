@@ -13,7 +13,7 @@ auto height_vision_pi::cameraControllerInjector()
 {
     switch (Config::get().data_source)
     {
-#ifdef ARCH_ARM
+#ifdef AARCH64
     case DataSourceConfig::stream:
         return arduCamCameraControllerInjector();
 #endif
@@ -31,7 +31,7 @@ auto height_vision_pi::dummyCameraControllerInjector()
         boost::di::bind<CameraController>().to<DummyCameraController>().in(boost::di::unique));
 }
 
-#ifdef ARCH_ARM
+#ifdef AARCH64
 auto height_vision_pi::arduCamCameraControllerInjector()
     -> boost::di::injector<std::unique_ptr<CameraController>>
 {

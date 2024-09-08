@@ -10,13 +10,13 @@ execute_process(
 
 string(TOLOWER ${SYSTEM_ARCHITECTURE} SYSTEM_ARCHITECTURE)
 
-if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
-    add_definitions(-DARCH_ARM)
+if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
+    add_definitions(-DAARCH64)
 endif ()
 
 find_package(PkgConfig REQUIRED)
 find_package(OpenCV REQUIRED)
-if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
+if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
     pkg_check_modules(LIBCAMERA REQUIRED libcamera)
 endif ()
 find_package(Boost REQUIRED COMPONENTS filesystem system)
@@ -30,7 +30,7 @@ include_directories(
         /opt/boost-di/include
 )
 
-if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
+if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
     include_directories(
             ${LIBCAMERA_INCLUDE_DIRS}
     )
@@ -47,7 +47,7 @@ add_library(HeightVisionPiSources
         src/detector/HumanDetector.cpp
 )
 
-if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
+if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
     add_library(HeightVisionPiSources
             src/camera/ArduCamCameraController.cpp
     )
@@ -58,7 +58,7 @@ target_link_libraries(HeightVisionPiSources
         ${Boost_LIBRARIES}
 )
 
-if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
+if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
     target_link_libraries(HeightVisionPiSources
             ${LIBCAMERA_LIBRARIES}
     )

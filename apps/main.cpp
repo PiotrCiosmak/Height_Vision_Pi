@@ -26,7 +26,7 @@ int main()
         if (!frame.empty())
         {
             frame = human_detector->detect(frame);
-#ifdef ARCH_ARM
+#ifdef AARCH64
             imshow(Config::get().window.name, frame);
 #else
             static auto frame_counter = 0;

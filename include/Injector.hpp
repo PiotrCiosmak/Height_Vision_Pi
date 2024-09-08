@@ -11,7 +11,7 @@ namespace height_vision_pi
     template<typename T> using UniqueInjector = boost::di::injector<std::unique_ptr<T>>;
     [[nodiscard]] auto cameraControllerInjector() -> UniqueInjector<CameraController>;
     [[nodiscard]] auto dummyCameraControllerInjector() -> UniqueInjector<CameraController>;
-#ifdef ARCH_ARM
+#ifdef AARCH64
     [[nodiscard]] auto arduCamCameraControllerInjector() -> UniqueInjector<CameraController>;
 #endif
     [[nodiscard]] auto monitorDeviceInjector() -> UniqueInjector<MonitorDevice>;
