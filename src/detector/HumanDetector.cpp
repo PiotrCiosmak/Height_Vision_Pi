@@ -11,7 +11,7 @@ auto HumanDetector::detect(cv::Mat& frame) const -> cv::Mat&
 {
     std::vector<cv::Rect> humans;
 
-    hog.detectMultiScale(frame, humans, 0, cv::Size(8, 8), cv::Size(32, 32), 1.05, 2);
+    hog.detectMultiScale(frame, humans, 0, cv::Size(8, 8), cv::Size(32, 32), 1.2, 2);
 
     for (const auto& human : humans)
     {
