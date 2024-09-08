@@ -12,7 +12,7 @@ int main()
     const std::chrono::milliseconds frame_duration{1000
                                                    / static_cast<int>(Config::get().camera.fps)};
 
-    //const auto monitor = monitorInjector().create<std::unique_ptr<MonitorDevice>>();
+    // const auto monitor = monitorInjector().create<std::unique_ptr<MonitorDevice>>();
     const auto camera_controller =
         cameraControllerInjector().create<std::unique_ptr<CameraController>>();
 
@@ -20,13 +20,20 @@ int main()
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
-        //monitor->check();
+        // monitor->check();
 
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {
             frame = human_detector->detect(frame);
+#ifdef ARCH_ARM
             imshow(Config::get().window.name, frame);
+#else
+            static auto frame_counter = 0;
+            std::ostringstream filename;
+            filename << "frame_" << std::setw(4) << std::setfill('0') << frame_counter++ << ".png";
+            cv::imwrite(filename.str(), frame);
+#endif
             cv::resizeWindow(Config::get().window.name,
                              Config::get().camera.resolution.x,
                              Config::get().camera.resolution.y);
