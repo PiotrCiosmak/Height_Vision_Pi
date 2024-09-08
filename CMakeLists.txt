@@ -2,23 +2,41 @@ cmake_minimum_required(VERSION 3.25.1)
 project(Height_Vision_Pi)
 set(CMAKE_CXX_STANDARD 23)
 
+execute_process(
+        COMMAND uname -m
+        OUTPUT_VARIABLE SYSTEM_ARCHITECTURE
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+string(TOLOWER ${SYSTEM_ARCHITECTURE} SYSTEM_ARCHITECTURE)
+
+if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
+    add_definitions(-DARCH_ARM)
+endif ()
+
 find_package(PkgConfig REQUIRED)
 find_package(OpenCV REQUIRED)
-pkg_check_modules(LIBCAMERA REQUIRED libcamera)
+if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
+    pkg_check_modules(LIBCAMERA REQUIRED libcamera)
+endif ()
 find_package(Boost REQUIRED COMPONENTS filesystem system)
 
 option(ENABLE_TESTS "Build tests" ON)
 
 include_directories(
         ${PROJECT_SOURCE_DIR}/include
-        ${LIBCAMERA_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIRS}
         /opt/boost-di/include
 )
 
+if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
+    include_directories(
+            ${LIBCAMERA_INCLUDE_DIRS}
+    )
+endif ()
+
 add_library(HeightVisionPiSources
-        src/camera/ArduCamCameraController.cpp
         src/camera/DummyCameraController.cpp
         src/Injector.cpp
         src/config/Config.cpp
@@ -29,11 +47,22 @@ add_library(HeightVisionPiSources
         src/detector/HumanDetector.cpp
 )
 
+if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
+    add_library(HeightVisionPiSources
+            src/camera/ArduCamCameraController.cpp
+    )
+endif ()
+
 target_link_libraries(HeightVisionPiSources
-        ${LIBCAMERA_LIBRARIES}
         ${OpenCV_LIBS}
         ${Boost_LIBRARIES}
 )
+
+if (SYSTEM_ARCHITECTURE STREQUAL "armv8")
+    target_link_libraries(HeightVisionPiSources
+            ${LIBCAMERA_LIBRARIES}
+    )
+endif ()
 
 add_executable(Height_Vision_Pi
         apps/main.cpp
