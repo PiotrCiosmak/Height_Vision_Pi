@@ -11,16 +11,11 @@ auto HumanDetector::detect(cv::Mat& frame) const -> cv::Mat&
 {
     std::vector<cv::Rect> humans;
 
-    hog.detectMultiScale(frame, humans, 0, cv::Size(8, 8), cv::Size(32, 32), 1.2, 2);
+    hog.detectMultiScale(frame, humans);
 
     for (const auto& human : humans)
     {
-        // Filtrowanie detekcji
-        if (human.height > 100 && human.width > 50 && human.height < 400)
-        {
-            // Rysowanie ramki tylko dla spełnionych kryteriów
-            cv::rectangle(frame, human, cv::Scalar(0, 255, 0), 3);
-        }
+        cv::rectangle(frame, human, cv::Scalar(0, 255, 0), 3);
     }
 
     return frame;
