@@ -20,6 +20,7 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     video_capture->set(cv::CAP_PROP_GAIN, camera_config.gain);
     video_capture->set(cv::CAP_PROP_AUTOFOCUS, camera_config.auto_focus);
     video_capture->set(cv::CAP_PROP_AUTO_EXPOSURE, camera_config.auto_exposure);
+    Logger::info("Autofocus is set to: " + std::to_string(video_capture->get(cv::CAP_PROP_AUTOFOCUS)));
     if (!video_capture->isOpened())
     {
         Logger::error("Camera isn't working");
