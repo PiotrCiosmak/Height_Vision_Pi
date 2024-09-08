@@ -15,7 +15,7 @@ auto height_vision_pi::cameraControllerInjector()
     {
     case DataSourceConfig::stream:
         return arduCamCameraControllerInjector();
-    case DataSourceConfig::none:
+    case DataSourceConfig::file:
         return dummyCameraControllerInjector();
     }
     Logger::error("Invalid data source. Check config file!");
@@ -44,7 +44,7 @@ auto height_vision_pi::monitorDeviceInjector()
     {
     case DataSourceConfig::stream:
         return monitorInjector();
-    case DataSourceConfig::none:
+    case DataSourceConfig::file:
         return dummyMonitorInjector();
     }
     Logger::error("Invalid data source. Check config file!");

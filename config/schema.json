@@ -131,7 +131,7 @@
       "type": "string",
       "enum": [
         "stream",
-        "none"
+        "file"
       ]
     },
     "monitor": {
