@@ -21,7 +21,7 @@
       "y": 434
     }
   },
-  "data_source": "stream",
+  "data_source": "none",
   "monitor": {
     "cpu_monitor": {
       "thermal_zone_path": "/sys/class/thermal/thermal_zone0/temp",
