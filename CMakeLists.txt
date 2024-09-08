@@ -53,12 +53,6 @@ endif ()
 
 add_library(HeightVisionPiSources ${HEIGHT_VISION_PI_SOURCES})
 
-if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
-    add_library(HeightVisionPiSources
-            src/camera/ArduCamCameraController.cpp
-    )
-endif ()
-
 target_link_libraries(HeightVisionPiSources
         ${OpenCV_LIBS}
         ${Boost_LIBRARIES}
