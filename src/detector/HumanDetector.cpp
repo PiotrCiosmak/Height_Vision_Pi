@@ -10,18 +10,20 @@ HumanDetector::HumanDetector()
 
 auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
 {
-    // TODO poprawić to ale jest potencjał! :)
+    auto outputLayerNames = net.getUnconnectedOutLayersNames();
     auto blob = cv::Mat{};
     cv::dnn::blobFromImage(
-        frame, blob, 1.0 / 255.0, cv::Size(128, 128), cv::Scalar(0, 0, 0), true, false);
+        frame, blob, 1.0 / 255.0, cv::Size(96, 96), cv::Scalar(0, 0, 0), true, false); // Zmiana rozmiaru obrazu na 96x96
     net.setInput(blob);
+
     auto detections = std::vector<cv::Mat>{};
-    net.forward(detections, net.getUnconnectedOutLayersNames());
+    net.forward(detections, outputLayerNames); // Użycie wstępnie zapisanych nazw warstw wyjściowych
 
     auto indices = std::vector<int>{};
     auto boxes = std::vector<cv::Rect>{};
     auto confidences = std::vector<float>{};
 
+#pragma omp parallel for // Równoległe przetwarzanie detekcji
     for (const auto& detection : detections)
     {
         for (int i = 0; i < detection.rows; ++i)
@@ -38,13 +40,16 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
                 auto left = center_x - width / 2;
                 auto top = center_y - height / 2;
 
-                boxes.push_back(cv::Rect(left, top, width, height));
-                confidences.push_back(confidence);
+#pragma omp critical // Synchronizacja dla dostępu do wektorów
+                {
+                    boxes.push_back(cv::Rect(left, top, width, height));
+                    confidences.push_back(confidence);
+                }
             }
         }
     }
 
-    cv::dnn::NMSBoxes(boxes, confidences, 0.9, 0.1, indices);
+    cv::dnn::NMSBoxes(boxes, confidences, 0.9, 0.4, indices); // Optymalizacja NMS
 
     for (int idx : indices)
     {
