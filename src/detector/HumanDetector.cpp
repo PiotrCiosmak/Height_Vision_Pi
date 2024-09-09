@@ -1,11 +1,15 @@
 #include "detector//HumanDetector.hpp"
 
+#include <thread>
+
 using namespace height_vision_pi;
 
 HumanDetector::HumanDetector()
 {
     // TODO path to config file
     net = cv::dnn::readNetFromDarknet("../models/yolov4.cfg", "../models/yolov4.weights");
+    net.setPreferableBackend(cv::dnn::DNN_BACKEND_DEFAULT);
+    net.setPreferableTarget(cv::dnn::DNN_TARGET_OPENCL);
 }
 
 auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
@@ -16,7 +20,10 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
         frame, blob, 1.0 / 255.0, cv::Size(256, 256), cv::Scalar(0, 0, 0), true, false);
     net.setInput(blob);
     auto detections = std::vector<cv::Mat>{};
-    net.forward(detections, net.getUnconnectedOutLayersNames());
+    std::thread detectionThread([&]() {
+        net.forward(detections, net.getUnconnectedOutLayersNames());
+    });
+    detectionThread.join();
 
     auto indices = std::vector<int>{};
     auto boxes = std::vector<cv::Rect>{};
