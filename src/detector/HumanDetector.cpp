@@ -13,7 +13,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
     // TODO poprawić to ale jest potencjał! :)
     auto blob = cv::Mat{};
     cv::dnn::blobFromImage(
-        frame, blob, 1.0 / 255.0, cv::Size(128, 128), cv::Scalar(0, 0, 0), true, false);
+        frame, blob, 1.0 / 255.0, cv::Size(256, 256), cv::Scalar(0, 0, 0), true, false);
     net.setInput(blob);
     auto detections = std::vector<cv::Mat>{};
     net.forward(detections, net.getUnconnectedOutLayersNames());
@@ -28,7 +28,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
         {
             const auto* data = detection.ptr<float>(i);
             auto confidence = data[4];
-            if (confidence > 0.8) // próg pewności
+            if (confidence > 0.9) // próg pewności
             {
                 auto center_x = static_cast<int>(data[0] * frame.cols);
                 auto center_y = static_cast<int>(data[1] * frame.rows);
@@ -44,7 +44,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
         }
     }
 
-    cv::dnn::NMSBoxes(boxes, confidences, 0.5, 0.5, indices);
+    cv::dnn::NMSBoxes(boxes, confidences, 0.5, 0.4, indices);
 
     for (int idx : indices)
     {
