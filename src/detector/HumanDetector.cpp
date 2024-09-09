@@ -10,7 +10,6 @@ HumanDetector::HumanDetector()
 
 auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
 {
-    // TODO poprawić to ale jest potencjał! :)
     auto blob = cv::Mat{};
     cv::dnn::blobFromImage(
         frame, blob, 1.0 / 255.0, cv::Size(128, 128), cv::Scalar(0, 0, 0), true, false);
@@ -38,7 +37,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
                 auto left = center_x - width / 2;
                 auto top = center_y - height / 2;
 
-                boxes.push_back(cv::Rect(left, top, width, height));
+                boxes.emplace_back(left, top, width, height);
                 confidences.push_back(confidence);
             }
         }
