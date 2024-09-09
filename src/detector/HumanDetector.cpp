@@ -44,7 +44,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
         }
     }
 
-    cv::dnn::NMSBoxes(boxes, confidences, 0.5, 0.1, indices);
+    cv::dnn::NMSBoxes(boxes, confidences, 0.9, 0.1, indices);
 
     for (int idx : indices)
     {
