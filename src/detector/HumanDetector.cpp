@@ -27,7 +27,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
         {
             const auto* data = detection.ptr<float>(i);
             auto confidence = data[4];
-            if (confidence > 0.98) // próg pewności
+            if (confidence > 0.9) // próg pewności
             {
                 auto center_x = static_cast<int>(data[0] * frame.cols);
                 auto center_y = static_cast<int>(data[1] * frame.rows);
