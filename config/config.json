@@ -4,7 +4,7 @@
       "x": 2048,
       "y": 1537
     },
-    "fps": 10,
+    "fps": 5,
     "capture_mode": true,
     "brightness": 0.5,
     "contrast": 0.5,
