@@ -1,5 +1,7 @@
 #pragma once
 
+#include "config/utils/ResolutionConfig.hpp"
+
 namespace height_vision_pi
 {
     struct HumanDetectorConfig
