@@ -7,7 +7,8 @@
     "camera",
     "window",
     "data_source",
-    "monitor"
+    "monitor",
+    "human_detector"
   ],
   "additionalProperties": false,
   "properties": {
@@ -277,6 +278,68 @@
               "maximum": 100
             }
           }
+        }
+      }
+    },
+    "human_detector": {
+      "description": "Configuration for a human detector using the YOLO model",
+      "type": "object",
+      "required": [
+        "model_config_path",
+        "model_weights_path",
+        "resolution",
+        "confidence_threshold",
+        "nms_score_threshold",
+        "nms_threshold"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "model_config_path": {
+          "description": "Path to the YOLO model configuration file",
+          "type": "string"
+        },
+        "model_weights_path": {
+          "description": "Path to the YOLO model weights file",
+          "type": "string"
+        },
+        "resolution": {
+          "description": "Input image resolution for the detector",
+          "type": "object",
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "x": {
+              "description": "Width of the image in pixels",
+              "type": "integer",
+              "minimum": 0
+            },
+            "y": {
+              "description": "Height of the image in pixels",
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "confidence_threshold": {
+          "description": "Confidence threshold below which detections are ignored",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "nms_score_threshold": {
+          "description": "Score threshold for the Non-Maximum Suppression (NMS) algorithm",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "nms_threshold": {
+          "description": "Threshold for the Non-Maximum Suppression (NMS) algorithm that determines which detections are merged",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
         }
       }
     }
