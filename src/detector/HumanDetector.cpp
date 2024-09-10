@@ -2,10 +2,11 @@
 
 using namespace height_vision_pi;
 
-HumanDetector::HumanDetector()
+HumanDetector::HumanDetector(const HumanDetectorConfig& new_human_detector_config) :
+    human_detector_config{new_human_detector_config}
 {
-    // TODO path to config file
-    net = cv::dnn::readNetFromDarknet("../models/yolov4.cfg", "../models/yolov4.weights");
+    net = cv::dnn::readNetFromDarknet(human_detector_config.model_config_path,
+                                      human_detector_config.model_weights_path);
 }
 
 auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
@@ -27,7 +28,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
         {
             const auto* data = detection.ptr<float>(i);
             auto confidence = data[4];
-            if (confidence > 0.9) // próg pewności
+            if (confidence > 0.9)
             {
                 auto center_x = static_cast<int>(data[0] * frame.cols);
                 auto center_y = static_cast<int>(data[1] * frame.rows);

@@ -68,5 +68,6 @@ auto height_vision_pi::monitorInjector() -> boost::di::injector<std::unique_ptr<
 
 auto height_vision_pi::humanDetectorInjector() -> UniqueInjector<HumanDetector>
 {
-    return make_injector(boost::di::bind<HumanDetector>.to<HumanDetector>().in(boost::di::unique));
+    return make_injector(boost::di::bind<HumanDetectorConfig>().to(Config::get().human_detector),
+                         boost::di::bind<HumanDetector>.to<HumanDetector>().in(boost::di::unique));
 }
