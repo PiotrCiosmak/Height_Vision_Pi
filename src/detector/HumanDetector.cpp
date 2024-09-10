@@ -56,7 +56,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
                       human_detector_config.nms_threshold,
                       indexes);
 
-    for (int index : indexes)
+    for (const auto& index : indexes)
     {
         cv::rectangle(frame, boxes[index], cv::Scalar(0, 255, 0), 2);
     }
