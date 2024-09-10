@@ -15,6 +15,8 @@ int main()
     const auto monitor = monitorInjector().create<std::unique_ptr<MonitorDevice>>();
     const auto camera_controller =
         cameraControllerInjector().create<std::unique_ptr<CameraController>>();
+
+    const auto human_detector = humanDetectorInjector().create<std::unique_ptr<HumanDetector>>();
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
@@ -23,7 +25,15 @@ int main()
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {
+            frame = human_detector->detect(frame);
+#ifdef AARCH64
             imshow(Config::get().window.name, frame);
+#else
+            static auto frame_counter = 0;
+            std::ostringstream filename;
+            filename << "frame_" << std::setw(4) << std::setfill('0') << frame_counter++ << ".png";
+            cv::imwrite(filename.str(), frame);
+#endif
             cv::resizeWindow(Config::get().window.name,
                              Config::get().camera.resolution.x,
                              Config::get().camera.resolution.y);

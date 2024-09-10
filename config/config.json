@@ -4,7 +4,7 @@
       "x": 2048,
       "y": 1537
     },
-    "fps": 10,
+    "fps": 5,
     "capture_mode": true,
     "brightness": 0.5,
     "contrast": 0.5,
@@ -46,5 +46,16 @@
       "warning_usage": 90,
       "error_usage": 99
     }
+  },
+  "human_detector": {
+    "model_config_path": "../models/yolov4.cfg",
+    "model_weights_path": "../models/yolov4.weights",
+    "resolution": {
+      "x": 128,
+      "y": 96
+    },
+    "confidence_threshold": 0.9,
+    "nms_score_threshold": 0.9,
+    "nms_threshold": 0.1
   }
 }

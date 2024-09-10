@@ -13,8 +13,10 @@ auto height_vision_pi::cameraControllerInjector()
 {
     switch (Config::get().data_source)
     {
+#ifdef AARCH64
     case DataSourceConfig::stream:
         return arduCamCameraControllerInjector();
+#endif
     case DataSourceConfig::file:
         return dummyCameraControllerInjector();
     }
@@ -29,6 +31,7 @@ auto height_vision_pi::dummyCameraControllerInjector()
         boost::di::bind<CameraController>().to<DummyCameraController>().in(boost::di::unique));
 }
 
+#ifdef AARCH64
 auto height_vision_pi::arduCamCameraControllerInjector()
     -> boost::di::injector<std::unique_ptr<CameraController>>
 {
@@ -36,6 +39,7 @@ auto height_vision_pi::arduCamCameraControllerInjector()
         boost::di::bind<CameraConfig>().to(Config::get().camera),
         boost::di::bind<CameraController>().to<ArduCamCameraController>().in(boost::di::unique));
 }
+#endif
 
 auto height_vision_pi::monitorDeviceInjector()
     -> boost::di::injector<std::unique_ptr<MonitorDevice>>
@@ -60,4 +64,10 @@ auto height_vision_pi::monitorInjector() -> boost::di::injector<std::unique_ptr<
 {
     return make_injector(boost::di::bind<MonitorConfig>().to(Config::get().monitor),
                          boost::di::bind<MonitorDevice>.to<Monitor>().in(boost::di::unique));
+}
+
+auto height_vision_pi::humanDetectorInjector() -> UniqueInjector<HumanDetector>
+{
+    return make_injector(boost::di::bind<HumanDetectorConfig>().to(Config::get().human_detector),
+                         boost::di::bind<HumanDetector>.to<HumanDetector>().in(boost::di::unique));
 }
