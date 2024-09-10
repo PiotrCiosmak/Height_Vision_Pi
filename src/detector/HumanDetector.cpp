@@ -13,12 +13,18 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
 {
     auto blob = cv::Mat{};
     cv::dnn::blobFromImage(
-        frame, blob, 1.0 / 255.0, cv::Size(128, 128), cv::Scalar(0, 0, 0), true, false);
+        frame,
+        blob,
+        1.0 / 255.0,
+        cv::Size(human_detector_config.resolution.x, human_detector_config.resolution.y),
+        cv::Scalar(0, 0, 0),
+        true,
+        false);
     net.setInput(blob);
     auto detections = std::vector<cv::Mat>{};
     net.forward(detections, net.getUnconnectedOutLayersNames());
 
-    auto indices = std::vector<int>{};
+    auto indexes = std::vector<int>{};
     auto boxes = std::vector<cv::Rect>{};
     auto confidences = std::vector<float>{};
 
@@ -27,8 +33,8 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
         for (int i = 0; i < detection.rows; ++i)
         {
             const auto* data = detection.ptr<float>(i);
-            auto confidence = data[4];
-            if (confidence > 0.9)
+            const auto confidence = data[4];
+            if (confidence > human_detector_config.confidence_threshold)
             {
                 auto center_x = static_cast<int>(data[0] * frame.cols);
                 auto center_y = static_cast<int>(data[1] * frame.rows);
@@ -44,11 +50,15 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
         }
     }
 
-    cv::dnn::NMSBoxes(boxes, confidences, 0.9, 0.1, indices);
+    cv::dnn::NMSBoxes(boxes,
+                      confidences,
+                      human_detector_config.nms_score_threshold,
+                      human_detector_config.nms_threshold,
+                      indexes);
 
-    for (int idx : indices)
+    for (int index : indexes)
     {
-        cv::rectangle(frame, boxes[idx], cv::Scalar(0, 255, 0), 2);
+        cv::rectangle(frame, boxes[index], cv::Scalar(0, 255, 0), 2);
     }
 
     return frame;

@@ -49,6 +49,13 @@
   },
   "human_detector": {
     "model_config_path": "../models/yolov4.cfg",
-    "model_weights_path": "../models/yolov4.weights"
+    "model_weights_path": "../models/yolov4.weights",
+    "resolution": {
+      "x": 128,
+      "y": 96
+    },
+    "confidence_threshold": 0.9,
+    "nms_score_threshold": 0.9,
+    "nms_threshold": 0.1
   }
 }
