@@ -12,7 +12,7 @@ std::once_flag Config::init_flag;
 auto Config::get() -> Config&
 {
     static Config config;
-    //TODO path to config file
+    // TODO path to config file
     std::call_once(init_flag, [] { config.load("../config/config.json"); });
     return config;
 }
