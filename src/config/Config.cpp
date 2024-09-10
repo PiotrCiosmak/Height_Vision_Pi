@@ -31,4 +31,5 @@ void Config::load(const std::string& file_path)
     data_source = data["data_source"].get<DataSourceConfig>();
     window = data["window"].get<WindowConfig>();
     monitor = data["monitor"].get<MonitorConfig>();
+    human_detector = data["human_detector"].get<HumanDetectorConfig>();
 }
