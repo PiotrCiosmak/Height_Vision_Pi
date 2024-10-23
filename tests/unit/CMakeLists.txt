@@ -4,6 +4,7 @@ add_executable(AllUnitTests
         ../utils/mock/MockLogger.cpp
         MockLoggerTests.cpp
         monitor/MockMonitorTests.cpp
+        detector/HumanDetectorTest.cpp
 )
 
 find_package(GTest REQUIRED)

@@ -11,8 +11,9 @@ int main()
 {
     const std::chrono::milliseconds frame_duration{1000
                                                    / static_cast<int>(Config::get().camera.fps)};
-
+#ifdef AARCH64
     const auto monitor = monitorInjector().create<std::unique_ptr<MonitorDevice>>();
+#endif
     const auto camera_controller =
         cameraControllerInjector().create<std::unique_ptr<CameraController>>();
 
@@ -20,8 +21,9 @@ int main()
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
+#ifdef AARCH64
         monitor->check();
-
+#endif
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {
