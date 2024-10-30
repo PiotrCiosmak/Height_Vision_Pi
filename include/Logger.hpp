@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 
@@ -18,9 +20,11 @@ namespace height_vision_pi
         template<typename... Args>
         static void log(Level level, const std::string& format, Args... args)
         {
+            const auto current_time = getCurrentTime();
+            std::cout << std::put_time(&current_time, "%H:%M:%S");
+
             std::ostringstream oss;
             formatMessage(oss, format, args...);
-
             switch (level)
             {
             case Level::INFO:
@@ -69,6 +73,7 @@ namespace height_vision_pi
             }
         }
 
+        static auto getCurrentTime() -> std::tm;
         static void formatMessage(std::ostringstream& oss, const std::string& format);
     };
 } // namespace height_vision_pi
