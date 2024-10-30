@@ -21,7 +21,7 @@ namespace height_vision_pi
         static void log(Level level, const std::string& format, Args... args)
         {
             const auto current_time = getCurrentTime();
-            std::cout << std::put_time(&current_time, "%H:%M:%S");
+            std::cout << std::put_time(&current_time, "%H:%M:%S") << " ";
 
             std::ostringstream oss;
             formatMessage(oss, format, args...);
