@@ -46,8 +46,10 @@ auto height_vision_pi::monitorDeviceInjector()
 {
     switch (Config::get().data_source)
     {
+#ifdef AARCH64
     case DataSourceConfig::stream:
         return monitorInjector();
+#endif
     case DataSourceConfig::file:
         return dummyMonitorInjector();
     }
@@ -60,11 +62,13 @@ auto height_vision_pi::dummyMonitorInjector() -> boost::di::injector<std::unique
     return make_injector(boost::di::bind<MonitorDevice>.to<DummyMonitor>().in(boost::di::unique));
 }
 
+#ifdef AARCH64
 auto height_vision_pi::monitorInjector() -> boost::di::injector<std::unique_ptr<MonitorDevice>>
 {
     return make_injector(boost::di::bind<MonitorConfig>().to(Config::get().monitor),
                          boost::di::bind<MonitorDevice>.to<Monitor>().in(boost::di::unique));
 }
+#endif
 
 auto height_vision_pi::humanDetectorInjector() -> UniqueInjector<HumanDetector>
 {

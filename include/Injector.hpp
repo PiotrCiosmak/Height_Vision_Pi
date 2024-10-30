@@ -16,6 +16,8 @@ namespace height_vision_pi
 #endif
     [[nodiscard]] auto monitorDeviceInjector() -> UniqueInjector<MonitorDevice>;
     [[nodiscard]] auto dummyMonitorInjector() -> UniqueInjector<MonitorDevice>;
+#ifdef AARCH64
     [[nodiscard]] auto monitorInjector() -> UniqueInjector<MonitorDevice>;
+#endif
     [[nodiscard]] auto humanDetectorInjector() -> UniqueInjector<HumanDetector>;
 } // namespace height_vision_pi
