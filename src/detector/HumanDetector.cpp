@@ -1,4 +1,4 @@
-#include "detector//HumanDetector.hpp"
+#include "detector/HumanDetector.hpp"
 
 using namespace height_vision_pi;
 
