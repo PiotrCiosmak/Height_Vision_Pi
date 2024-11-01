@@ -27,7 +27,7 @@ int main()
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {
-            frame = human_detector->detect(frame);
+            auto detected_humans = human_detector->detect(frame);
 #ifdef AARCH64
             imshow(Config::get().window.name, frame);
 #else
