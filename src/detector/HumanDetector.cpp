@@ -9,7 +9,7 @@ HumanDetector::HumanDetector(const HumanDetectorConfig& new_human_detector_confi
                                       human_detector_config.model_weights_path);
 }
 
-auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
+auto HumanDetector::detect(cv::Mat& frame) -> std::vector<cv::Mat>
 {
     auto blob = cv::Mat{};
     cv::dnn::blobFromImage(
@@ -21,12 +21,14 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
         true,
         false);
     net.setInput(blob);
+
     auto detections = std::vector<cv::Mat>{};
     net.forward(detections, net.getUnconnectedOutLayersNames());
 
     auto indexes = std::vector<int>{};
     auto boxes = std::vector<cv::Rect>{};
     auto confidences = std::vector<float>{};
+    auto detected_humans = std::vector<cv::Mat>{};
 
     for (const auto& detection : detections)
     {
@@ -58,8 +60,15 @@ auto HumanDetector::detect(cv::Mat& frame) -> cv::Mat&
 
     for (const auto& index : indexes)
     {
-        cv::rectangle(frame, boxes[index], cv::Scalar(0, 255, 0), 2);
+        auto box = boxes[index];
+
+        if (box.x >= 0 && box.y >= 0 && box.x + box.width <= frame.cols
+            && box.y + box.height <= frame.rows)
+        {
+            cv::rectangle(frame, box, cv::Scalar(0, 255, 0), 2);
+            detected_humans.push_back(frame(box).clone());
+        }
     }
 
-    return frame;
+    return detected_humans;
 }
