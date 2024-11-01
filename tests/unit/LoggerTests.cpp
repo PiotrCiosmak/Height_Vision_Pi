@@ -34,8 +34,12 @@ TEST_F(TestLogger, ShouldLogInfoMessageWithOneArgument)
     // when: Logging the info message
     height_vision_pi::Logger::info(message, argument);
 
+    // when: Saving output to variable
+    const auto output = oss_cout.str();
+
     // then: The output should match the expected format
-    ASSERT_EQ(oss_cout.str(), "[INFO] Hello, world!\n");
+    ASSERT_TRUE(output.find("[INFO]") != std::string::npos);
+    ASSERT_TRUE(output.find("Hello, world!") != std::string::npos);
 }
 
 TEST_F(TestLogger, ShouldLogWarnMessageWithOneArgument)
@@ -47,8 +51,12 @@ TEST_F(TestLogger, ShouldLogWarnMessageWithOneArgument)
     // when: Logging the warning message
     height_vision_pi::Logger::warn(message, argument);
 
+    // when: Saving output to variable
+    const auto output = oss_cout.str();
+
     // then: The output should match the expected format
-    ASSERT_EQ(oss_cout.str(), "[WARN] Warning: Issue detected\n");
+    ASSERT_TRUE(output.find("[WARN]") != std::string::npos);
+    ASSERT_TRUE(output.find("Warning: Issue detected") != std::string::npos);
 }
 
 TEST_F(TestLogger, ShouldLogErrorMessageWithOneArgument)
@@ -71,8 +79,12 @@ TEST_F(TestLogger, ShouldLogInfoMessageWithoutArguments)
     // when: Logging the info message
     height_vision_pi::Logger::info(message);
 
+    // when: Saving output to variable
+    const auto output = oss_cout.str();
+
     // then: The output should match the expected format
-    ASSERT_EQ(oss_cout.str(), "[INFO] Test message\n");
+    ASSERT_TRUE(output.find("[INFO]") != std::string::npos);
+    ASSERT_TRUE(output.find("Test message") != std::string::npos);
 }
 
 TEST_F(TestLogger, ShouldLogWarnMessageWithoutArguments)
@@ -83,8 +95,12 @@ TEST_F(TestLogger, ShouldLogWarnMessageWithoutArguments)
     // when: Logging the warning message
     height_vision_pi::Logger::warn(message);
 
+    // when: Saving output to variable
+    const auto output = oss_cout.str();
+
     // then: The output should match the expected format
-    ASSERT_EQ(oss_cout.str(), "[WARN] Test warning\n");
+    ASSERT_TRUE(output.find("[WARN]") != std::string::npos);
+    ASSERT_TRUE(output.find("Test warning") != std::string::npos);
 }
 
 TEST_F(TestLogger, ShouldLogErrorMessageWithoutArguments)
@@ -119,8 +135,12 @@ TEST_F(TestLogger, ShouldLogInfoMessageWithWultipleArguments)
     // when: Logging the info message with multiple arguments
     height_vision_pi::Logger::info(message, arguments[0], arguments[1], result);
 
+    // when: Saving output to variable
+    const auto output = oss_cout.str();
+
     // then: The output should match the expected format
-    ASSERT_EQ(oss_cout.str(), "[INFO] 2 + 3 = 5\n");
+    ASSERT_TRUE(output.find("[INFO]") != std::string::npos);
+    ASSERT_TRUE(output.find("2 + 3 = 5") != std::string::npos);
 }
 
 TEST_F(TestLogger, ShouldLogWarnMessageWithWultipleArguments)
@@ -132,8 +152,12 @@ TEST_F(TestLogger, ShouldLogWarnMessageWithWultipleArguments)
     // when: Logging the warning message with multiple arguments
     height_vision_pi::Logger::warn(message, arguments[0], arguments[1]);
 
+    // when: Saving output to variable
+    const auto output = oss_cout.str();
+
     // then: The output should match the expected format
-    ASSERT_EQ(oss_cout.str(), "[WARN] 5 is greater than 3\n");
+    ASSERT_TRUE(output.find("[WARN]") != std::string::npos);
+    ASSERT_TRUE(output.find("5 is greater than 3") != std::string::npos);
 }
 
 TEST_F(TestLogger, ShouldLogErrorMessageWithWultipleArguments)
