@@ -1,6 +1,7 @@
 #pragma once
 
 #include "camera/CameraController.hpp"
+#include "detector/FaceDetector.hpp"
 #include "detector/HumanDetector.hpp"
 #include "monitor/MonitorDevice.hpp"
 
@@ -20,4 +21,5 @@ namespace height_vision_pi
     [[nodiscard]] auto monitorInjector() -> UniqueInjector<MonitorDevice>;
 #endif
     [[nodiscard]] auto humanDetectorInjector() -> UniqueInjector<HumanDetector>;
+    [[nodiscard]] auto faceDetectorInjector() -> UniqueInjector<FaceDetector>;
 } // namespace height_vision_pi
