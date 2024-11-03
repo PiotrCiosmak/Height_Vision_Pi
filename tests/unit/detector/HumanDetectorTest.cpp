@@ -19,13 +19,13 @@ TEST_F(HumanDetectorTest, ShouldProcessEmptyFrame)
     // when: Processing frame
     const auto detected_humans = detector.detect(empty_frame);
 
-    // then: Human isn't detected
-    EXPECT_EQ(detected_humans.size(), 0);
+    // then: Humans aren't detected
+    EXPECT_TRUE(detected_humans.empty());
 }
 
-TEST_F(HumanDetectorTest, ShouldDetectPersonIn90PercentOfVideoFrames)
+TEST_F(HumanDetectorTest, ShouldDetectHumanInVideoFrames)
 {
-    // given: Load video with person
+    // given: Load video with moving human
     auto video = cv::VideoCapture{"../../../resources/camera_video.mp4"};
 
     // then: Video should be opened
@@ -35,7 +35,7 @@ TEST_F(HumanDetectorTest, ShouldDetectPersonIn90PercentOfVideoFrames)
     auto test_frame = cv::Mat{};
     // given: Counter to keep track of the total number of frames
     auto frame_count = 0;
-    // given: Counter to keep track of the frames where person is detected
+    // given: Counter to keep track of the frames where human is detected
     auto detected_frame_count = 0;
 
     // when: Processing each frame of the video
@@ -47,7 +47,7 @@ TEST_F(HumanDetectorTest, ShouldDetectPersonIn90PercentOfVideoFrames)
         // then: Frame isn't empty
         ASSERT_FALSE(test_frame.empty());
 
-        // when: Detecting person in the current frame
+        // when: Detecting humans in the current frame
         const auto& detected_humans = detector.detect(test_frame);
 
         // when: Counting frames on which human was detected
@@ -60,7 +60,7 @@ TEST_F(HumanDetectorTest, ShouldDetectPersonIn90PercentOfVideoFrames)
     // when: Calculate the detection rate
     const auto detection_rate = static_cast<double>(detected_frame_count) / frame_count;
 
-    // then: On at least 40% of frames person should be detected
+    // then: Human should be detected in at least 40% of the frames
     ASSERT_GE(detection_rate, 0.4);
 
     // when: Cleaning up resources by releasing the video
