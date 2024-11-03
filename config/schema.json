@@ -342,6 +342,32 @@
           "maximum": 1
         }
       }
+    },
+    "face_detector": {
+      "description": "Configuration for the face detector",
+      "type": "object",
+      "required": [
+        "model_path",
+        "scale_factor",
+        "min_neighbors"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "model_path": {
+          "description": "Path to the face detection model file",
+          "type": "string"
+        },
+        "scale_factor": {
+          "description": "Parameter specifying how much the image size is reduced at each image scale",
+          "type": "number",
+          "minimum": 1.0
+        },
+        "min_neighbors": {
+          "description": "Parameter specifying how many neighbors each candidate rectangle should have to retain it",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
     }
   }
 }
