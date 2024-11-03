@@ -26,12 +26,12 @@ TEST_F(FaceDetectorTest, ShouldProcessEmptyFrames)
 
 TEST_F(FaceDetectorTest, ShouldDetectFacesInSetOfHumansFrames)
 {
-    // given:
+    // given: Path to directory that contains human frames
     const auto directory_path = std::string{"../../../resources/detected_human"};
-    // given:
+    // given: Container to hold those frames
     auto human_frames = std::vector<cv::Mat>{};
 
-    // when:
+    // when: Loading frames to container
     for (const auto& entry : std::filesystem::directory_iterator(directory_path))
     {
         const auto img = cv::imread(entry.path().string());
@@ -41,7 +41,7 @@ TEST_F(FaceDetectorTest, ShouldDetectFacesInSetOfHumansFrames)
         }
     }
 
-    // when:
+    // when: Processing the vector of human frames to detect faces
     const auto detected_faces = detector.detect(human_frames);
 
     // when: Calculate the detection rate
