@@ -14,7 +14,7 @@
 
 ## General Information
 
-A real-time vision system designed for the automatic measurement of human height using a camera and advanced image processing algorithms, along with age estimation. The project is based on the Raspberry Pi platform, making it a compact and portable solution. The system includes facial detection capabilities, allowing it to accurately identify individuals, enhance the precision of height measurements, and estimate the approximate age of the person being measured.
+A real-time vision system designed for the automatic measurement of human height using a camera and advanced image processing algorithms, along with age estimation. The project is based on the Raspberry Pi platform, making it a compact and portable solution. The system includes facial detection capabilities, allowing it to accurately identify individuals, enhance the precision of height measurements, and estimate the approximate age of the human being measured.
 
 ## Technologies Used
 
