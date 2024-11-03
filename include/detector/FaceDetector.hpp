@@ -14,8 +14,7 @@ namespace height_vision_pi
         [[nodiscard]] auto detect(const std::vector<cv::Mat>& humans) -> std::vector<cv::Rect>;
 
     private:
-        [[nodiscard]] auto findMostProbableFace(const std::vector<cv::Rect>& faces)
-            -> cv::Rect;
+        [[nodiscard]] auto findMostProbableFace(const std::vector<cv::Rect>& faces) -> cv::Rect;
 
         cv::CascadeClassifier face_detector;
         FaceDetectorConfig face_detector_config;
