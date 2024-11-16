@@ -75,3 +75,9 @@ auto height_vision_pi::humanDetectorInjector() -> UniqueInjector<HumanDetector>
     return make_injector(boost::di::bind<HumanDetectorConfig>().to(Config::get().human_detector),
                          boost::di::bind<HumanDetector>.to<HumanDetector>().in(boost::di::unique));
 }
+
+auto height_vision_pi::faceDetectorInjector() -> UniqueInjector<FaceDetector>
+{
+    return make_injector(boost::di::bind<FaceDetectorConfig>().to(Config::get().face_detector),
+                         boost::di::bind<FaceDetector>.to<FaceDetector>().in(boost::di::unique));
+}

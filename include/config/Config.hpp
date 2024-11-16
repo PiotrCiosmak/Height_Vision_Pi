@@ -2,6 +2,7 @@
 
 #include "config/CameraConfig.hpp"
 #include "config/DataSourceConfig.hpp"
+#include "config/FaceDetectorConfig.hpp"
 #include "config/HumanDetectorConfig.hpp"
 #include "config/MonitorConfig.hpp"
 #include "config/WindowConfig.hpp"
@@ -21,6 +22,7 @@ namespace height_vision_pi
         WindowConfig window;
         MonitorConfig monitor;
         HumanDetectorConfig human_detector;
+        FaceDetectorConfig face_detector;
 
     private:
         Config() = default;

@@ -1,4 +1,4 @@
-# height-vision-pi/x64:0.3.0
+# height-vision-pi/x64:0.3.1
 FROM debian:12
 
 # Noninteractive package installation set
@@ -27,7 +27,8 @@ RUN apt update && apt install -y \
     gstreamer1.0-gl \
     gstreamer1.0-gtk3 \
     libboost-all-dev \
-    nlohmann-json3-dev
+    nlohmann-json3-dev \
+    gdb
 
 # OpenCV installation
 RUN git clone https://github.com/opencv/opencv.git -b 4.10.0 && \
