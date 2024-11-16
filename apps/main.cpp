@@ -29,9 +29,11 @@ int main()
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
+
 #ifdef AARCH64
         monitor->check();
 #endif
+
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {
@@ -46,6 +48,7 @@ int main()
             saveFrame(frame);
 #endif
         }
+
         if (cv::waitKey(1) == 'q')
         {
             break;
