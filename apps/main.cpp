@@ -9,10 +9,11 @@ using namespace height_vision_pi;
 
 namespace
 {
-    void saveFrame(const cv::Mat& frame);
 #ifdef AARCH64
+    void waitForCameraInitialization();
     void showFrame(const cv::Mat& frame);
 #endif
+    void saveFrame(const cv::Mat& frame);
     void waitForNextFrame(const std::chrono::high_resolution_clock::time_point& start_time);
 } // namespace
 
@@ -25,6 +26,9 @@ int main()
         cameraControllerInjector().create<std::unique_ptr<CameraController>>();
     const auto human_detector = humanDetectorInjector().create<std::unique_ptr<HumanDetector>>();
     const auto face_detector = faceDetectorInjector().create<std::unique_ptr<FaceDetector>>();
+#ifdef AARCH64
+    waitForCameraInitialization();
+#endif
 
     while (true)
     {
@@ -60,15 +64,14 @@ int main()
 
 namespace
 {
-    void saveFrame(const cv::Mat& frame)
+#ifdef AARCH64
+    void waitForCameraInitialization()
     {
-        static auto frame_counter = 0;
-        std::ostringstream filename;
-        filename << "frame_" << std::setw(4) << std::setfill('0') << frame_counter++ << ".png";
-        cv::imwrite(filename.str(), frame);
+        Logger::info("Waiting for camera initialization...");
+        constexpr auto camera_initialization_delay_ms = std::chrono::milliseconds{500};
+        std::this_thread::sleep_for(std::chrono::milliseconds(camera_initialization_delay_ms));
     }
 
-#ifdef AARCH64
     void showFrame(const cv::Mat& frame)
     {
         imshow(Config::get().window.name, frame);
@@ -77,6 +80,14 @@ namespace
                          Config::get().camera.resolution.y);
     }
 #endif
+
+    void saveFrame(const cv::Mat& frame)
+    {
+        static auto frame_counter = 0;
+        std::ostringstream filename;
+        filename << "frame_" << std::setw(4) << std::setfill('0') << frame_counter++ << ".png";
+        cv::imwrite(filename.str(), frame);
+    }
 
     void waitForNextFrame(const std::chrono::high_resolution_clock::time_point& start_time)
     {
