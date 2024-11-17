@@ -30,7 +30,7 @@ jobs:
 
       - name: Build and run tests inside Docker
         run: |
-          ./scripts/run_docker.sh x64 0.3.1
+          script -q -c './scripts/run_docker.sh arm64 0.7.1'
           cd tests &&
           mkdir -p build && cd build &&
           cmake .. && make &&
