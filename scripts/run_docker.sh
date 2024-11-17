@@ -13,4 +13,4 @@ IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
 
 sudo xhost +Local:*
 
-docker run --network host -it -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi -v /dev:/dev -e DISPLAY=${DISPLAY} --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/$ARCHITECTURE:$VERSION
+docker run --network host -it -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --device /dev/video0:/dev/video0 --device /dev/v4l-subdev2:/dev/v4l-subdev2 --device /dev/media0:/dev/media0 -e DISPLAY=${DISPLAY} --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/$ARCHITECTURE:$VERSION
