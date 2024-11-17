@@ -8,7 +8,7 @@ on:
 
 jobs:
   build_x64:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -24,6 +24,9 @@ jobs:
       - name: Set up Docker container
         run: |
           docker pull ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1
+
+      - name: Make the script executable
+        run: chmod +x ./scripts/run_docker.sh
 
       - name: Build and run tests inside Docker
         run: |
