@@ -30,36 +30,7 @@ jobs:
 
       - name: Build and run tests inside Docker
         run: |
-          script -q -c './scripts/run_docker.sh arm64 0.7.1'
-          cd tests &&
-          mkdir -p build && cd build &&
-          cmake .. && make &&
-          ./AllUnitTests
-
-  build_arm64:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_READ }}
-
-      - name: Set up Docker container
-        run: |
-          docker pull ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1
-
-      - name: Make the script executable
-        run: chmod +x ./scripts/run_docker.sh
-
-      - name: Build and run tests inside Docker
-        run: |
-          script -q -c './scripts/run_docker.sh arm64 0.7.1'
+          script -q -c './scripts/run_docker.sh x64 0.3.1'
           cd tests &&
           mkdir -p build && cd build &&
           cmake .. && make &&
