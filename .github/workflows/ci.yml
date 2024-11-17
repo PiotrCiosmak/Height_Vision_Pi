@@ -27,7 +27,7 @@ jobs:
 
       - name: Build and run tests inside Docker
         run: |
-          ./scripts/run_docker.sh x86 0.3.1
+          ./scripts/run_docker.sh x64 0.3.1
           cd tests &&
           mkdir -p build && cd build &&
           cmake .. && make &&
