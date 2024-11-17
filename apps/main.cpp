@@ -43,7 +43,7 @@ int main()
             // TODO Calculate the distance between the pupils
             // TODO Calculate height based on age and distance between the pupils
 #ifdef AARCH64
-            showFrame();
+            showFrame(frame);
 #else
             saveFrame(frame);
 #endif
