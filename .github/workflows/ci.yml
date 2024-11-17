@@ -1,0 +1,48 @@
+name: C++ CI
+
+on:
+  push:
+    branches:
+      - master
+      - '*/*'
+
+jobs:
+  build_x64:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker container
+        run: |
+          docker pull ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1
+
+      - name: Build and run tests inside Docker
+        run: |
+          chmod +x scripts/run_docker.sh
+          ./scripts/run_docker.sh x86 0.3.1
+          cd tests &&
+          mkdir -p build && cd build &&
+          cmake .. && make &&
+          ./AllUnitTests
+
+  build_arm64:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker container
+        run: |
+          docker pull ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1
+
+      - name: Build and run tests inside Docker
+        run: |
+          chmod +x scripts/run_docker.sh
+          ./scripts/run_docker.sh arm64 0.7.1
+          cd tests &&
+          mkdir -p build && cd build &&
+          cmake .. && make &&
+          ./AllUnitTests
