@@ -27,7 +27,6 @@ jobs:
 
       - name: Build and run tests inside Docker
         run: |
-          chmod +x scripts/run_docker.sh
           ./scripts/run_docker.sh x86 0.3.1
           cd tests &&
           mkdir -p build && cd build &&
@@ -54,7 +53,6 @@ jobs:
 
       - name: Build and run tests inside Docker
         run: |
-          chmod +x scripts/run_docker.sh
           ./scripts/run_docker.sh arm64 0.7.1
           cd tests &&
           mkdir -p build && cd build &&
