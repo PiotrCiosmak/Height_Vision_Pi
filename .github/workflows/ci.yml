@@ -19,7 +19,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${GITHUB_ACCESS_TOKEN}
+          password: ${{ secrets.GHCR_READ }}
 
       - name: Set up Docker container
         run: |
@@ -46,7 +46,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${GITHUB_ACCESS_TOKEN}
+          password: ${{ secrets.GHCR_READ }}
 
       - name: Set up Docker container
         run: |
