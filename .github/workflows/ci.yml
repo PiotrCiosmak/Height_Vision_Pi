@@ -27,8 +27,9 @@ jobs:
 
       - name: Build and run tests inside Docker
         run: |
-          docker run --network host -it -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1 &&
+          docker run --network host -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1 -c "
           cd tests &&
           mkdir -p build && cd build &&
           cmake .. && make &&
           ./AllUnitTests
+          "
