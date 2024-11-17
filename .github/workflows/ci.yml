@@ -51,6 +51,9 @@ jobs:
         run: |
           docker pull ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1
 
+      - name: Make the script executable
+        run: chmod +x ./scripts/run_docker.sh
+
       - name: Build and run tests inside Docker
         run: |
           ./scripts/run_docker.sh arm64 0.7.1
