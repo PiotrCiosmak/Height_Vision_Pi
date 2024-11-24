@@ -25,10 +25,6 @@ jobs:
         run: |
           docker pull ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1
 
-      - name: Set correct permissions for files
-        run: |
-            chmod 644 ../../../models/haarcascade_frontalface_default.xml
-
       - name: Build and run tests inside Docker
         run: |
           docker run --network host -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1 -c "
