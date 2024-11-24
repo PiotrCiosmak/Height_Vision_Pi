@@ -9,6 +9,10 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     CameraController{new_camera_config},
     video_capture{std::make_unique<cv::VideoCapture>(cv::CAP_LIBCAMERA)}
 {
+    if (!video_capture->isOpened())
+    {
+        Logger::error("Camera isn't working");
+    }
     video_capture->set(cv::CAP_PROP_BUFFERSIZE, 2);
     video_capture->set(cv::CAP_PROP_FRAME_WIDTH, camera_config.resolution.x);
     video_capture->set(cv::CAP_PROP_FRAME_HEIGHT, camera_config.resolution.y);
@@ -20,10 +24,6 @@ ArduCamCameraController::ArduCamCameraController(const CameraConfig& new_camera_
     video_capture->set(cv::CAP_PROP_GAIN, camera_config.gain);
     video_capture->set(cv::CAP_PROP_AUTOFOCUS, camera_config.auto_focus);
     video_capture->set(cv::CAP_PROP_AUTO_EXPOSURE, camera_config.auto_exposure);
-    if (!video_capture->isOpened())
-    {
-        Logger::error("Camera isn't working");
-    }
 }
 
 auto ArduCamCameraController::getFrame() -> cv::Mat
@@ -33,10 +33,19 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
     {
         Logger::warn("Can't capture frame");
     }
+
     auto frame = tmp_frame.clone();
     if (frame.empty())
     {
         Logger::warn("Captured frame is empty");
     }
     return frame;
+}
+
+ArduCamCameraController::~ArduCamCameraController()
+{
+    if (video_capture && video_capture->isOpened())
+    {
+        video_capture->release();
+    }
 }

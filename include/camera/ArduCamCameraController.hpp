@@ -9,6 +9,7 @@ namespace height_vision_pi
     public:
         explicit ArduCamCameraController(const CameraConfig& new_camera_config);
         [[nodiscard]] auto getFrame() -> cv::Mat override;
+        ~ArduCamCameraController() override;
 
     private:
         std::unique_ptr<cv::VideoCapture> video_capture;
