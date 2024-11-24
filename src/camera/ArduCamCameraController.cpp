@@ -48,4 +48,12 @@ ArduCamCameraController::~ArduCamCameraController()
     {
         video_capture->release();
     }
+    if (!remove("/dev/media0"))
+    {
+        Logger::warn("Can't remove /dev/media0");
+    }
+    if (!remove("/dev/media2"))
+    {
+        Logger::warn("Can't remove /dev/media2");
+    }
 }
