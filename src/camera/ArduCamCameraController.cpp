@@ -44,10 +44,6 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
 
 ArduCamCameraController::~ArduCamCameraController()
 {
-    if (video_capture && video_capture->isOpened())
-    {
-        video_capture->release();
-    }
     if (!remove("/dev/media0"))
     {
         Logger::warn("Can't remove /dev/media0");
@@ -55,5 +51,9 @@ ArduCamCameraController::~ArduCamCameraController()
     if (!remove("/dev/media2"))
     {
         Logger::warn("Can't remove /dev/media2");
+    }
+    if (video_capture && video_capture->isOpened())
+    {
+        video_capture->release();
     }
 }
