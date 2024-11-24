@@ -28,6 +28,7 @@ jobs:
       - name: Build and run tests inside Docker
         run: |
           docker run --network host -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1 -c "
+            tree &&
             cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
             cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc)
             ./build/tests/unit/AllUnitTests
