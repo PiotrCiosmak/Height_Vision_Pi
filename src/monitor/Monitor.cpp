@@ -6,7 +6,8 @@
 
 using namespace height_vision_pi;
 
-Monitor::Monitor(const MonitorConfig& new_monitor_config) : MonitorDevice{new_monitor_config} {}
+Monitor::Monitor(const MonitorConfig& new_monitor_config) :
+    MonitorDevice{new_monitor_config} {}
 
 void Monitor::check()
 {
@@ -284,7 +285,7 @@ auto Monitor::getGPUTemperature() const -> double
 {
     const auto gpu_temperature_statistics = runBashCommand("vcgencmd measure_temp").value();
     const auto start_index = gpu_temperature_statistics.find('=') + 1;
-    const auto end_index = gpu_temperature_statistics.find('C');
+    const auto end_index = gpu_temperature_statistics.find('\'');
     const auto temperature_str =
         gpu_temperature_statistics.substr(start_index, end_index - start_index - 1);
     const auto temperature = std::stod(temperature_str);
@@ -299,21 +300,26 @@ void Monitor::checkGPUUsage()
 
     if (usage >= error_usage)
     {
-        Logger::error("GPU usage is equal to {}%, which exceeds the critical threshold of {}%. The "
-                      "application will now shut down.",
-                      usage,
-                      error_usage);
+        Logger::error(
+            "GPU usage is equal to {}V%, which exceeds the critical threshold of {}V. The "
+            "application will now shut down.",
+            usage,
+            error_usage);
     }
     else if (usage >= warning_usage)
     {
-        Logger::warn("GPU usage is equal to {}%, which exceeds the warning threshold of {}%.",
+        Logger::warn("GPU usage is equal to {}V, which exceeds the warning threshold of {}V.",
                      usage,
                      warning_usage);
     }
 }
 
-auto Monitor::getGPUUsage() const -> int
+auto Monitor::getGPUUsage() const -> double
 {
-    return 0;
-    // TODO
+    const auto gpu_volts_statistics = runBashCommand("vcgencmd measure_volts").value();
+    const auto start_index = gpu_volts_statistics.find('=') + 1;
+    const auto end_index = gpu_volts_statistics.find('V');
+    const auto volts_str = gpu_volts_statistics.substr(start_index, end_index - start_index - 1);
+    const auto volts = std::stod(volts_str);
+    return volts;
 }
