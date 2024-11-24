@@ -7,7 +7,7 @@ using namespace height_vision_pi;
 class FaceDetectorTest : public ::testing::Test
 {
 protected:
-    FaceDetector detector{{"../../models/haarcascade_frontalface_default.xml", 1.3, 5}};
+    FaceDetector detector{{"../../../models/haarcascade_frontalface_default.xml", 1.3, 5}};
 };
 
 TEST_F(FaceDetectorTest, ShouldProcessEmptyFrames)
@@ -27,7 +27,7 @@ TEST_F(FaceDetectorTest, ShouldProcessEmptyFrames)
 TEST_F(FaceDetectorTest, ShouldDetectFacesInSetOfHumansFrames)
 {
     // given: Path to directory that contains human frames
-    const auto directory_path = std::string{"../../resources/detected_human"};
+    const auto directory_path = std::string{"../../../resources/detected_human"};
     // given: Container to hold those frames
     auto human_frames = std::vector<cv::Mat>{};
 
