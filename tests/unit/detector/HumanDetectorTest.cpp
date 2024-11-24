@@ -8,7 +8,7 @@ class HumanDetectorTest : public ::testing::Test
 {
 protected:
     HumanDetector detector{
-        {"../../../models/yolov4.cfg", "../../../models/yolov4.weights", {128, 96}, 0.6, 0.6, 0.1}};
+        {"../../models/yolov4.cfg", "../../models/yolov4.weights", {128, 96}, 0.6, 0.6, 0.1}};
 };
 
 TEST_F(HumanDetectorTest, ShouldProcessEmptyFrame)
@@ -26,7 +26,7 @@ TEST_F(HumanDetectorTest, ShouldProcessEmptyFrame)
 TEST_F(HumanDetectorTest, ShouldDetectHumanInVideoFrames)
 {
     // given: Load video with moving human
-    auto video = cv::VideoCapture{"../../../resources/camera_video.mp4"};
+    auto video = cv::VideoCapture{"../../resources/camera_video.mp4"};
 
     // then: Video should be opened
     ASSERT_TRUE(video.isOpened());
