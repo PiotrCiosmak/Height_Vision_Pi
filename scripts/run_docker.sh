@@ -11,6 +11,6 @@ VERSION=${2:-0.7.1}
 IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
 ! [[ $MAJOR =~ ^[0-9]+$ ]] || ! [[ $MINOR =~ ^[0-9]+$ ]] || ! [[ $PATCH =~ ^[0-9]+$ ]] && echo "ERROR: <IMAGE_VERSION> must be in format NUMBER.NUMBER.NUMBER" && exit 1
 
-sudo xhost +Local:*
+sudo xhost +Local:* > /dev/null 2>&1
 
 docker run --network host -it -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --privileged -e DISPLAY=${DISPLAY} --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/$ARCHITECTURE:$VERSION
