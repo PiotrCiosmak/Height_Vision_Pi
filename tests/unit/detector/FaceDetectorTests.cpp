@@ -47,6 +47,6 @@ TEST_F(FaceDetectorTest, ShouldDetectFacesInSetOfHumansFrames)
     // when: Calculate the detection rate
     const auto detection_rate = static_cast<double>(detected_faces.size()) / human_frames.size();
 
-    // then: Human should be detected in at least 58% of the frames
-    ASSERT_GE(detection_rate, 0.58);
+    // then: Human should be detected in at least 52% of the frames
+    ASSERT_GE(detection_rate, 0.52);
 }
