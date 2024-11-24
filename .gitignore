@@ -1,5 +1,5 @@
 cmake-build-debug
-docker-build.log
+docker_build.log
 cmake-build-debug-docker
 cmake-build-release-docker
 models
