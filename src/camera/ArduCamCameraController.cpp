@@ -44,10 +44,6 @@ auto ArduCamCameraController::getFrame() -> cv::Mat
 
 ArduCamCameraController::~ArduCamCameraController()
 {
-    if (!system("fuser -k /dev/media0"))
-    {
-        Logger::warn("Can't remove /dev/media0");
-    }
     if (!system("fuser -k /dev/media2"))
     {
         Logger::warn("Can't remove /dev/media2");
