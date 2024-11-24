@@ -43,8 +43,8 @@
     "gpu_monitor": {
       "warning_temperature": 80.0,
       "error_temperature": 85.0,
-      "warning_usage": 90,
-      "error_usage": 99
+      "warning_usage": 1.1,
+      "error_usage": 1.2
     }
   },
   "human_detector": {

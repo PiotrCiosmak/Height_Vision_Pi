@@ -29,6 +29,6 @@ namespace height_vision_pi
         [[nodiscard]] auto getRAMsUsagePercent(
             const std::vector<std::string>& rams_statistics) const -> std::vector<int>;
         [[nodiscard]] auto getGPUTemperature() const -> double;
-        [[nodiscard]] auto getGPUUsage() const -> int;
+        [[nodiscard]] auto getGPUUsage() const -> double;
     };
 } // namespace height_vision_pi

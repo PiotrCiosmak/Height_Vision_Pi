@@ -266,16 +266,16 @@
               "maximum": 100
             },
             "warning_usage": {
-              "description": "GPU usage percentage at which a warning is triggered",
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 100
+              "description": "Voltage threshold in volts at which a warning is triggered.",
+              "type": "number",
+              "minimum": 0.85,
+              "maximum": 1.2
             },
             "error_usage": {
-              "description": "GPU usage percentage at which an error is triggered",
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 100
+              "description": "Voltage threshold in volts at which a error is triggered.",
+              "type": "number",
+              "minimum": 0.85,
+              "maximum": 1.2
             }
           }
         }
