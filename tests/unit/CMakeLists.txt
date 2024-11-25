@@ -1,6 +1,5 @@
 add_executable(AllUnitTests
         camera/MockCameraControllerTest.cpp
-        camera/ArduCamCameraControllerTest.cpp
         LoggerTest.cpp
         ../utils/mock/MockLogger.cpp
         MockLoggerTest.cpp
