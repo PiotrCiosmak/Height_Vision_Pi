@@ -28,6 +28,7 @@ A real-time vision system designed for the automatic measurement of human height
 - Clang
 - Git
 - GitHub
+- Git lfs
 
 ## Features
 
