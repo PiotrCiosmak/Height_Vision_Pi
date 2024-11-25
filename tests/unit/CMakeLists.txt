@@ -1,11 +1,12 @@
 add_executable(AllUnitTests
-        camera/MockCameraControllerTests.cpp
-        LoggerTests.cpp
+        camera/MockCameraControllerTest.cpp
+        camera/ArduCamCameraControllerTest.cpp
+        LoggerTest.cpp
         ../utils/mock/MockLogger.cpp
-        MockLoggerTests.cpp
-        monitor/MockMonitorTests.cpp
+        MockLoggerTest.cpp
+        monitor/MockMonitorTest.cpp
         detector/HumanDetectorTest.cpp
-        detector/FaceDetectorTests.cpp
+        detector/FaceDetectorTest.cpp
 )
 
 find_package(GTest REQUIRED)
