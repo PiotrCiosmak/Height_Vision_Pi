@@ -4,7 +4,9 @@
 #include "camera/DummyCameraController.hpp"
 #include "config/Config.hpp"
 #include "monitor/DummyMonitor.hpp"
+#ifdef AARCH64
 #include "monitor/Monitor.hpp"
+#endif
 
 using namespace height_vision_pi;
 
