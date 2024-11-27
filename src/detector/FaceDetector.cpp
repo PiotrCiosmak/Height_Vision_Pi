@@ -21,16 +21,30 @@ auto FaceDetector::detect(const std::vector<cv::Mat>& humans) -> std::vector<cv:
                                        face_detector_config.min_neighbors);
 
         const auto detected_faces_count = currently_detected_faces.size();
-        if (detected_faces_count > 1)
+        if (detected_faces_count > 0)
         {
-            detected_faces.push_back(findMostProbableFace(detected_faces));
+            if (detected_faces_count > 1)
+            {
+                detected_faces.push_back(findMostProbableFace(detected_faces));
+            }
+            else
+            {
+                detected_faces.push_back(currently_detected_faces.front());
+            }
         }
-        if (!currently_detected_faces.empty())
+        else
         {
-            detected_faces.push_back(currently_detected_faces.front());
+            detected_faces.push_back(cv::Rect{});
         }
     }
-    Logger::info("{} out of {} possible faces detected", detected_faces.size(), humans.size());
+
+    const auto detected_faces_count = std::ranges::count_if(detected_faces,
+                                                            [](const cv::Rect& rect)
+                                                            {
+                                                                return rect.area() > 0;
+                                                            });
+
+    Logger::info("{} out of {} possible faces detected", detected_faces_count, humans.size());
     return detected_faces;
 }
 
