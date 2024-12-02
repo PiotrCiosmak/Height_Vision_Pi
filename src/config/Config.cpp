@@ -32,4 +32,5 @@ void Config::load(const std::string& file_path)
     monitor = data["monitor"].get<MonitorConfig>();
     human_detector = data["human_detector"].get<HumanDetectorConfig>();
     face_detector = data["face_detector"].get<FaceDetectorConfig>();
+    age_detector = data["age_detector"].get<AgeDetectorConfig>();
 }
