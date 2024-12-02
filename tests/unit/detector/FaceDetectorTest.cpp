@@ -25,7 +25,7 @@ TEST_F(FaceDetectorTest, ShouldProcessEmptyFrames)
     // then: Faces aren't detected
     for (const auto& face : detected_faces)
     {
-        EXPECT_TRUE(face.area() == 0);
+        EXPECT_TRUE(face.empty());
     }
 }
 
@@ -49,9 +49,9 @@ TEST_F(FaceDetectorTest, ShouldDetectFacesInSetOfHumansFrames)
     const auto detected_faces = detector.detect(human_frames);
     // when: Count valid detections
     const auto valid_detections = std::ranges::count_if(detected_faces,
-                                                        [](const cv::Rect& rect)
+                                                        [](const cv::Mat& face)
                                                         {
-                                                            return rect.area() > 0;
+                                                            return !face.empty();
                                                         });
     // when: Calculate the detection rate
     const auto detection_rate = static_cast<double>(valid_detections) / human_frames.size();

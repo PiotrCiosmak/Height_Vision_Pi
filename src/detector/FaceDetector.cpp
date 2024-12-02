@@ -7,11 +7,15 @@ FaceDetector::FaceDetector(const FaceDetectorConfig& new_face_detector_config) :
     face_detector_config{new_face_detector_config}
 {
     face_detector.load(face_detector_config.model_path);
+    if (face_detector.empty())
+    {
+        Logger::error("Failed to load age prediction model.");
+    }
 }
 
-auto FaceDetector::detect(const std::vector<cv::Mat>& humans) -> std::vector<cv::Rect>
+auto FaceDetector::detect(const std::vector<cv::Mat>& humans) -> std::vector<cv::Mat>
 {
-    auto detected_faces = std::vector<cv::Rect>{};
+    auto detected_faces = std::vector<cv::Mat>{};
     for (const auto& human : humans)
     {
         auto currently_detected_faces = std::vector<cv::Rect>{};
@@ -25,23 +29,24 @@ auto FaceDetector::detect(const std::vector<cv::Mat>& humans) -> std::vector<cv:
         {
             if (detected_faces_count > 1)
             {
-                detected_faces.push_back(findMostProbableFace(detected_faces));
+                auto most_probable_face = findMostProbableFace(currently_detected_faces);
+                detected_faces.push_back(human(most_probable_face));
             }
             else
             {
-                detected_faces.push_back(currently_detected_faces.front());
+                detected_faces.push_back(human(currently_detected_faces.front()));
             }
         }
         else
         {
-            detected_faces.push_back(cv::Rect{});
+            detected_faces.push_back(cv::Mat{});
         }
     }
 
     const auto detected_faces_count = std::ranges::count_if(detected_faces,
-                                                            [](const cv::Rect& rect)
+                                                            [](const cv::Mat& face)
                                                             {
-                                                                return rect.area() > 0;
+                                                                return !face.empty();
                                                             });
 
     Logger::info("{} out of {} possible faces detected", detected_faces_count, humans.size());
