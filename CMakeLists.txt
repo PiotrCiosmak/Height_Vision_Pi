@@ -46,6 +46,7 @@ set(HEIGHT_VISION_PI_SOURCES
         src/monitor/utils/BashCommand.cpp
         src/detector/HumanDetector.cpp
         src/detector/FaceDetector.cpp
+        src/detector/AgeDetector.cpp
 )
 
 if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
