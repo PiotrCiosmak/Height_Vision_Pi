@@ -19,11 +19,35 @@ auto AgeDetector::detect(const std::vector<cv::Mat>& detected_faces) -> std::vec
     auto detected_ages = std::vector<int>{};
     for (const auto& face : detected_faces)
     {
-        age_net.setInput(face);
-        const auto age_predictions = std::vector<float>{age_net.forward()};
-        const auto age = findMostProbableAge(age_predictions);
-        detected_ages.push_back(age);
+        if (face.empty())
+        {
+            detected_ages.push_back(0);
+        }
+        else
+        {
+            const auto blob = cv::dnn::blobFromImage(face,
+                                                     age_detector_config.scale_factor,
+                                                     cv::Size(age_detector_config.resolution.x,
+                                                              age_detector_config.resolution.y),
+                                                     cv::Scalar(
+                                                         age_detector_config.color.red,
+                                                         age_detector_config.color.green,
+                                                         age_detector_config.color.blue),
+                                                     age_detector_config.swap_red_and_blue,
+                                                     age_detector_config.crop);
+            age_net.setInput(blob);
+            const auto age_predictions = std::vector<float>{age_net.forward()};
+            const auto age = findMostProbableAge(age_predictions);
+            detected_ages.push_back(age);
+        }
     }
+
+    const auto detected_ages_count = std::ranges::count_if(detected_ages,
+                                                           [](const auto& age)
+                                                           {
+                                                               return age > 0;
+                                                           });
+    Logger::info("{} out of {} possible ages detected", detected_ages_count, detected_ages.size());
     return detected_ages;
 }
 
