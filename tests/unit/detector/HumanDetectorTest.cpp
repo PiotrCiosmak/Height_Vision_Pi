@@ -14,10 +14,22 @@ protected:
 TEST_F(HumanDetectorTest, ShouldProcessEmptyFrame)
 {
     // given: Empty frame
-    auto empty_frame = cv::Mat(2048, 1537, CV_8UC3, cv::Scalar(0, 0, 0));
+    auto empty_frame = cv::Mat{};
 
     // when: Processing frame
     const auto detected_humans = detector.detect(empty_frame);
+
+    // then: Humans aren't detected
+    EXPECT_TRUE(detected_humans.empty());
+}
+
+TEST_F(HumanDetectorTest, ShouldProcessBlackFrame)
+{
+    // given: Black frame
+    auto black_frame = cv::Mat{2048, 1537, CV_8UC3, cv::Scalar{0, 0, 0}};
+
+    // when: Processing frame
+    const auto detected_humans = detector.detect(black_frame);
 
     // then: Humans aren't detected
     EXPECT_TRUE(detected_humans.empty());
