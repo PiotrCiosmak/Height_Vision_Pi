@@ -27,12 +27,12 @@ auto AgeDetector::detect(const std::vector<cv::Mat>& detected_faces) -> std::vec
         {
             const auto blob = cv::dnn::blobFromImage(face,
                                                      age_detector_config.scale_factor,
-                                                     cv::Size(age_detector_config.resolution.x,
-                                                              age_detector_config.resolution.y),
-                                                     cv::Scalar(
-                                                         age_detector_config.color.red,
-                                                         age_detector_config.color.green,
-                                                         age_detector_config.color.blue),
+                                                     cv::Size{age_detector_config.resolution.x,
+                                                              age_detector_config.resolution.y},
+                                                     cv::Scalar{
+                                                         age_detector_config.mean.red,
+                                                         age_detector_config.mean.green,
+                                                         age_detector_config.mean.blue},
                                                      age_detector_config.swap_red_and_blue,
                                                      age_detector_config.crop);
             age_net.setInput(blob);
