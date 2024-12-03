@@ -358,7 +358,7 @@
           "type": "string"
         },
         "scale_factor": {
-          "description": "Parameter specifying how much the image size is reduced at each image scale",
+          "description": "Scaling factor applied to normalize the input image",
           "type": "number",
           "minimum": 1.0
         },
@@ -374,7 +374,12 @@
       "type": "object",
       "required": [
         "model_path",
-        "proto_path"
+        "proto_path",
+        "scale_factor",
+        "resolution",
+        "mean",
+        "swap_red_and_blue",
+        "crop"
       ],
       "additionalItems": false,
       "properties": {
@@ -385,6 +390,70 @@
         "proto_path": {
           "description": "Path to the Caffe model prototxt file",
           "type": "string"
+        },
+        "scale_factor": {
+          "description": "Scaling factor applied to normalize the input image",
+          "type": "number",
+          "minimum": 1.0
+        },
+        "resolution": {
+          "description": "Input image resolution for the detector",
+          "type": "object",
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "x": {
+              "description": "Width of the image in pixels",
+              "type": "integer",
+              "minimum": 0
+            },
+            "y": {
+              "description": "Height of the image in pixels",
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "mean": {
+          "description": "Mean values for normalizing each color channel",
+          "type": "object",
+          "required": [
+            "red",
+            "green",
+            "blue"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "red": {
+              "description": "Mean value for the red channel",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 255
+            },
+            "green": {
+              "description": "Mean value for the green channel",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 255
+            },
+            "blue": {
+              "description": "Mean value for the blue channel",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 255
+            }
+          }
+        },
+        "swap_red_and_blue": {
+          "description": "Whether to swap the red and blue channels of the input image",
+          "type": "boolean"
+        },
+        "crop": {
+          "description": "Whether to crop the input image to fit the target resolution",
+          "type": "boolean"
         }
       }
     }
