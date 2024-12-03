@@ -17,7 +17,7 @@ TEST_F(FaceDetectorTest, ShouldProcessEmptyFrames)
     // given: Vector of empty frames
     auto empty_frames = std::vector{empty_frame, empty_frame, empty_frame, empty_frame};
 
-    // when: Processing frame
+    // when: Processing frames
     const auto detected_faces = detector.detect(empty_frames);
 
     // then: Detected faces size is equal to processed number of empty frames
