@@ -68,7 +68,7 @@ TEST_F(FaceDetectorTest, ShouldDetectFacesInSetOfHumansFrames)
     const auto detected_faces = detector.detect(human_frames);
     // when: Count valid detections
     const auto valid_detections = std::ranges::count_if(detected_faces,
-                                                        [](const cv::Mat& face)
+                                                        [](const auto& face)
                                                         {
                                                             return !face.empty();
                                                         });
