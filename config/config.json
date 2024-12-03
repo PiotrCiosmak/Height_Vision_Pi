@@ -57,7 +57,7 @@
     "confidence_threshold": 0.9,
     "nms_score_threshold": 0.9,
     "nms_threshold": 0.1
-  },`
+  },
   "face_detector": {
     "model_path": "../models/haarcascade_frontalface_default.xml",
     "scale_factor": 1.3,

@@ -13,7 +13,7 @@ namespace height_vision_pi
         std::string proto_path;
         double scale_factor;
         ResolutionConfig resolution;
-        ColorConfig color;
+        ColorConfig mean;
         bool swap_red_and_blue;
         bool crop;
 
@@ -22,7 +22,7 @@ namespace height_vision_pi
                                        proto_path,
                                        scale_factor,
                                        resolution,
-                                       color,
+                                       mean,
                                        swap_red_and_blue,
                                        crop)
     };
