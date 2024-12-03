@@ -55,6 +55,6 @@ TEST_F(AgeDetectorTest, ShouldDetectAgeInSetOfFacesFrames)
     // when: Calculate the detection rate
     const auto detection_rate = static_cast<double>(valid_detections) / faces_frames.size();
 
-    // then: Age should be detected at least 83%
+    // then: Age should be detected at least 83% of the frames
     ASSERT_GE(detection_rate, 0.83);
 }
