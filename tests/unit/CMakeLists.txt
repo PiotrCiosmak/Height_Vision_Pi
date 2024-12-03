@@ -6,6 +6,7 @@ add_executable(AllUnitTests
         monitor/MockMonitorTest.cpp
         detector/HumanDetectorTest.cpp
         detector/FaceDetectorTest.cpp
+        detector/AgeDetectorTest.cpp
 )
 
 find_package(GTest REQUIRED)
