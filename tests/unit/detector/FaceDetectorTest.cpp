@@ -12,16 +12,35 @@ protected:
 
 TEST_F(FaceDetectorTest, ShouldProcessEmptyFrames)
 {
-    // given: Empty frames
-    auto empty_frame = cv::Mat(2048, 1537, CV_8UC3, cv::Scalar(0, 0, 0));
+    // given: Empty frame
+    const auto empty_frame = cv::Mat{};
     // given: Vector of empty frames
-    auto empty_frames = std::vector{empty_frame, empty_frame, empty_frame, empty_frame};
+    const auto empty_frames = std::vector{empty_frame, empty_frame, empty_frame, empty_frame};
 
     // when: Processing frames
     const auto detected_faces = detector.detect(empty_frames);
 
-    // then: Detected faces size is equal to processed number of empty frames
+    // then: Detected faces size is equal to processed number of black frames
     EXPECT_TRUE(detected_faces.size() == empty_frames.size());
+    // then: Faces aren't detected
+    for (const auto& face : detected_faces)
+    {
+        EXPECT_TRUE(face.empty());
+    }
+}
+
+TEST_F(FaceDetectorTest, ShouldProcessBlackFrames)
+{
+    // given: Black frame
+    auto black_frame = cv::Mat{2048, 1537, CV_8UC3, cv::Scalar{0, 0, 0}};
+    // given: Vector of black frames
+    auto black_frames = std::vector{black_frame, black_frame, black_frame, black_frame};
+
+    // when: Processing frames
+    const auto detected_faces = detector.detect(black_frames);
+
+    // then: Detected faces size is equal to processed number of black frames
+    EXPECT_TRUE(detected_faces.size() == black_frames.size());
     // then: Faces aren't detected
     for (const auto& face : detected_faces)
     {
