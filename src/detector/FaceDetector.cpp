@@ -44,7 +44,7 @@ auto FaceDetector::detect(const std::vector<cv::Mat>& humans) -> std::vector<cv:
     }
 
     const auto detected_faces_count = std::ranges::count_if(detected_faces,
-                                                            [](const cv::Mat& face)
+                                                            [](const auto& face)
                                                             {
                                                                 return !face.empty();
                                                             });
