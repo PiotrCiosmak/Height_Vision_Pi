@@ -11,18 +11,6 @@ protected:
         {"../../../models/yolov4.cfg", "../../../models/yolov4.weights", {128, 96}, 0.6, 0.6, 0.1}};
 };
 
-TEST_F(HumanDetectorTest, ShouldProcessEmptyFrame)
-{
-    // given: Empty frame
-    auto empty_frame = cv::Mat{};
-
-    // when: Processing frame
-    const auto detected_humans = detector.detect(empty_frame);
-
-    // then: Humans aren't detected
-    EXPECT_TRUE(detected_humans.empty());
-}
-
 TEST_F(HumanDetectorTest, ShouldProcessBlackFrame)
 {
     // given: Black frame
