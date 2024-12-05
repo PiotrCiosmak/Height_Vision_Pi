@@ -5,5 +5,5 @@
 
 namespace height_vision_pi
 {
-    auto runBashCommand(std::string_view command) -> std::expected<std::string, std::string>;
+    [[nodiscard]] auto runBashCommand(std::string_view command) -> std::expected<std::string, std::string>;
 } // namespace height_vision_pi

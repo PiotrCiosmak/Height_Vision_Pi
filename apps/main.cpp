@@ -1,7 +1,9 @@
 #include "Injector.hpp"
 #include "Logger.hpp"
-#include "camera/ArduCamCameraController.hpp"
 #include "config/Config.hpp"
+#ifdef AARCH64
+#include "camera/ArduCamCameraController.hpp"
+#endif
 
 #include <thread>
 
@@ -60,14 +62,6 @@ int main()
 
 namespace
 {
-    void saveFrame(const cv::Mat& frame)
-    {
-        static auto frame_counter = 0;
-        std::ostringstream filename;
-        filename << "frame_" << std::setw(4) << std::setfill('0') << frame_counter++ << ".png";
-        cv::imwrite(filename.str(), frame);
-    }
-
 #ifdef AARCH64
     void showFrame(const cv::Mat& frame)
     {
@@ -75,6 +69,14 @@ namespace
         cv::resizeWindow(Config::get().window.name,
                          Config::get().camera.resolution.x,
                          Config::get().camera.resolution.y);
+    }
+#else
+    void saveFrame(const cv::Mat& frame)
+    {
+        static auto frame_counter = 0;
+        auto filename = std::ostringstream{};
+        filename << "frame_" << std::setw(4) << std::setfill('0') << frame_counter++ << ".png";
+        cv::imwrite(filename.str(), frame);
     }
 #endif
 

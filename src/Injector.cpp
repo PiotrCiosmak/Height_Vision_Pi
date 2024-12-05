@@ -1,10 +1,10 @@
 #include "Injector.hpp"
 #include "Logger.hpp"
-#include "camera/ArduCamCameraController.hpp"
 #include "camera/DummyCameraController.hpp"
 #include "config/Config.hpp"
 #include "monitor/DummyMonitor.hpp"
 #ifdef AARCH64
+#include "camera/ArduCamCameraController.hpp"
 #include "monitor/Monitor.hpp"
 #endif
 

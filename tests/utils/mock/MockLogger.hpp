@@ -19,7 +19,7 @@ namespace height_vision_pi
         template<typename... Args>
         static void log(Level level, const std::string& format, Args... args)
         {
-            std::ostringstream oss;
+            auto oss = std::ostringstream{};
             formatMessage(oss, format, args...);
 
             switch (level)

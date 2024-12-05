@@ -11,7 +11,7 @@ auto height_vision_pi::runBashCommand(std::string_view command)
     auto command_buffor = std::array<char, 128>{};
     using RailFile = std::unique_ptr<FILE, decltype([](FILE* f) { std::ignore = pclose(f); })>;
     auto result = std::string{};
-    const RailFile pipe{popen(command.data(), "r")};
+    const auto pipe = RailFile{popen(command.data(), "r")};
     if (!pipe)
     {
         Logger::error("Couldn't run bash command");
