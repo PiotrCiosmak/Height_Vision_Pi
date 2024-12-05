@@ -23,7 +23,7 @@ namespace height_vision_pi
             const auto current_time = getCurrentTime();
             std::cout << std::put_time(&current_time, "%H:%M:%S") << " ";
 
-            std::ostringstream oss;
+            auto oss = std::ostringstream{};
             formatMessage(oss, format, args...);
             switch (level)
             {
