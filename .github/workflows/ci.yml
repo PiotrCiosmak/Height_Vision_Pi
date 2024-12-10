@@ -61,7 +61,9 @@ jobs:
         run: |
           docker run --network host -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1 -c "
             echo 'Listing contents of /Height_Vision_Pi:'
-            ls -R /Height_Vision_Pi &&
+            ls /Height_Vision_Pi &&
+            echo 'Listing contents of /Height_Vision_Pi/models:'
+            ls /Height_Vision_Pi/models &&
             cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
             cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
             cd ./build/tests/unit &&
