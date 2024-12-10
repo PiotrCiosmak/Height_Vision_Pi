@@ -1,4 +1,5 @@
 #include "detector/AgeDetector.hpp"
+#include "config/Config.hpp"
 
 #include <gtest/gtest.h>
 
@@ -7,10 +8,7 @@ using namespace height_vision_pi;
 class AgeDetectorTest : public ::testing::Test
 {
 protected:
-    AgeDetector detector{
-        {std::string{MODELS_DIR} + "/age_net.caffemodel",
-         std::string{MODELS_DIR} + "/age_deploy.prototxt", 1.0,
-         {227, 227}, {78.4263377603, 87.7689143744, 114.895847746}, true, false}};
+    AgeDetector detector{Config::get().age_detector};
 };
 
 TEST_F(AgeDetectorTest, ShouldProcessEmptyFrames)
@@ -35,7 +33,8 @@ TEST_F(AgeDetectorTest, ShouldProcessEmptyFrames)
 TEST_F(AgeDetectorTest, ShouldDetectAgeInSetOfFacesFrames)
 {
     // given: Path to directory that contains face frames
-    const auto directory_path = std::string{std::string{RESOURCES_DIR} + "/detected_face"};
+    const auto directory_path = std::string{
+        std::string{PROJECT_SOURCE_DIR} + "/resources/detected_face"};
     // given: Container to hold those frames
     auto faces_frames = std::vector<cv::Mat>{};
 

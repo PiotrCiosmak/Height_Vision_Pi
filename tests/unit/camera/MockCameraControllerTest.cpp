@@ -1,4 +1,5 @@
 #include "mock/camera/MockCameraController.hpp"
+#include "config/Config.hpp"
 
 #include <gtest/gtest.h>
 
@@ -9,12 +10,11 @@ using ::testing::Return;
 TEST(MockCameraControllerTest, ShouldGetFrame)
 {
     // given: Camera config
-    constexpr auto camera_config =
-        CameraConfig{{2312, 1736}, 10.0, true, 0.5, 0.5, 0.5, 0.5, 0.5, true, true};
+    const auto camera_config = Config::get().camera;
     // given: Mocked camera controller
     const auto camera_controller = std::make_unique<MockCameraController>();
     // given: Camera resolution
-    constexpr auto camera_resolution = camera_config.resolution;
+    const auto camera_resolution = camera_config.resolution;
 
     // when: Preparing the expected frame
     const auto expected_frame = cv::Mat::zeros(camera_resolution.x, camera_resolution.y, CV_8UC3);

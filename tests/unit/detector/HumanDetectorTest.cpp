@@ -1,4 +1,5 @@
 #include "detector/HumanDetector.hpp"
+#include "config/Config.hpp"
 
 #include <gtest/gtest.h>
 
@@ -7,9 +8,7 @@ using namespace height_vision_pi;
 class HumanDetectorTest : public ::testing::Test
 {
 protected:
-    HumanDetector detector{
-        {std::string{MODELS_DIR} + "/yolov4.cfg",
-         std::string{MODELS_DIR} + "/yolov4.weights", {128, 96}, 0.6, 0.6, 0.1}};
+    HumanDetector detector{Config::get().human_detector};
 };
 
 TEST_F(HumanDetectorTest, ShouldProcessBlackFrame)
@@ -27,7 +26,7 @@ TEST_F(HumanDetectorTest, ShouldProcessBlackFrame)
 TEST_F(HumanDetectorTest, ShouldDetectHumanInVideoFrames)
 {
     // given: Load video with moving human
-    auto video = cv::VideoCapture{std::string{RESOURCES_DIR} + "/camera_video.mp4"};
+    auto video = cv::VideoCapture{std::string{PROJECT_SOURCE_DIR} + "/resources/camera_video.mp4"};
 
     // then: Video should be opened
     ASSERT_TRUE(video.isOpened());
