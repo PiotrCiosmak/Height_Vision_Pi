@@ -58,7 +58,7 @@ jobs:
           docker pull ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1
 
       - name: List files in container
-        run: docker run ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1 ls -R /Height_Vision_Pi
+        run: docker run --platform linux/arm64 ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1 ls -R /Height_Vision_Pi
 
       - name: Build and run tests inside Docker
         run: |
