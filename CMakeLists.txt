@@ -36,6 +36,14 @@ if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
     )
 endif ()
 
+set(MODELS_DIR "${PROJECT_SOURCE_DIR}/models")
+set(RESOURCES_DIR "${PROJECT_SOURCE_DIR}/resources")
+
+add_definitions(
+        -DMODELS_DIR="${MODELS_DIR}"
+        -DRESOURCES_DIR="${RESOURCES_DIR}"
+)
+
 set(HEIGHT_VISION_PI_SOURCES
         src/camera/DummyCameraController.cpp
         src/Injector.cpp

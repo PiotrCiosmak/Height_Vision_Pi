@@ -5,7 +5,8 @@ using namespace height_vision_pi;
 
 DummyCameraController::DummyCameraController() :
     CameraController{CameraConfig{}},
-    video_capture{std::make_unique<cv::VideoCapture>("../resources/camera_video.mp4")}
+    video_capture{
+        std::make_unique<cv::VideoCapture>(std::string{RESOURCES_DIR} + "/camera_video.mp4")}
 {
     if (!video_capture->isOpened())
     {
