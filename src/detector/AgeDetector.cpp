@@ -7,7 +7,7 @@ AgeDetector::AgeDetector(const AgeDetectorConfig& new_age_detector_config) :
     age_detector_config{new_age_detector_config},
     ages{1, 6, 12, 17, 28, 40, 50, 60}
 {
-    age_net = cv::dnn::readNet{age_detector_config.model_path, age_detector_config.proto_path};
+    age_net = cv::dnn::readNet(age_detector_config.model_path, age_detector_config.proto_path);
     if (age_net.empty())
     {
         Logger::error("Failed to load age prediction model.");
