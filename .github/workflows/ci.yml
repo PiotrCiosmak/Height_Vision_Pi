@@ -57,12 +57,11 @@ jobs:
         run: |
           docker pull ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1
 
-      - name: List files in container
-        run: docker run --platform linux/arm64 ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1 ls -R /Height_Vision_Pi
-
       - name: Build and run tests inside Docker
         run: |
           docker run --network host -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1 -c "
+            echo 'Listing contents of /Height_Vision_Pi:'
+            ls -R /Height_Vision_Pi &&
             cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
             cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
             cd ./build/tests/unit &&
