@@ -1,4 +1,5 @@
 #include "detector/FaceDetector.hpp"
+#include "config/Config.hpp"
 
 #include <gtest/gtest.h>
 
@@ -7,8 +8,7 @@ using namespace height_vision_pi;
 class FaceDetectorTest : public ::testing::Test
 {
 protected:
-    FaceDetector detector{
-        {std::string{PROJECT_SOURCE_DIR} + "/models/haarcascade_frontalface_default.xml", 1.3, 5}};
+    FaceDetector detector{Config::get().face_detector};
 };
 
 TEST_F(FaceDetectorTest, ShouldProcessEmptyFrames)

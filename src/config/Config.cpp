@@ -12,7 +12,7 @@ std::once_flag Config::init_flag;
 auto Config::get() -> Config&
 {
     static auto config = Config{};
-    static const auto config_path = std::getenv("CONFIG_PATH");
+    static const auto config_path = std::string{PROJECT_SOURCE_DIR} + "/config.json";
     std::call_once(init_flag, [] { config.load(config_path); });
     return config;
 }

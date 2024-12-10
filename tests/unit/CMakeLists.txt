@@ -21,6 +21,7 @@ target_include_directories(AllUnitTests PUBLIC
 )
 
 add_definitions(-DPROJECT_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
+configure_file(../../config/config.json ${CMAKE_SOURCE_DIR}/config.json @ONLY)
 
 target_link_libraries(AllUnitTests
         HeightVisionPiSources

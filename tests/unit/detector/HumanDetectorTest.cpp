@@ -1,4 +1,5 @@
 #include "detector/HumanDetector.hpp"
+#include "config/Config.hpp"
 
 #include <gtest/gtest.h>
 
@@ -7,9 +8,7 @@ using namespace height_vision_pi;
 class HumanDetectorTest : public ::testing::Test
 {
 protected:
-    HumanDetector detector{
-        {std::string{PROJECT_SOURCE_DIR} + "/models/yolov4.cfg",
-         std::string{PROJECT_SOURCE_DIR} + "/models/yolov4.weights", {128, 96}, 0.6, 0.6, 0.1}};
+    HumanDetector detector{Config::get().human_detector};
 };
 
 TEST_F(HumanDetectorTest, ShouldProcessBlackFrame)
