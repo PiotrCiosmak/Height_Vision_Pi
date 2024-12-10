@@ -67,5 +67,7 @@ jobs:
             cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
             cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
             cd ./build/tests/unit &&
+            echo 'Listing contents of /Height_Vision_Pi:'
+            ls /Height_Vision_Pi &&
             ./AllUnitTests
           "
