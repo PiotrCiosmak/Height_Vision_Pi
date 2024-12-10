@@ -20,15 +20,7 @@ target_include_directories(AllUnitTests PUBLIC
         /opt/boost-di/include
 )
 
-set(MODELS_DIR "${PROJECT_SOURCE_DIR}/models")
-set(RESOURCES_DIR "${PROJECT_SOURCE_DIR}/resources")
-set(CONFIG_DIR "${PROJECT_SOURCE_DIR}/config")
-
-add_definitions(
-        -DMODELS_DIR="${MODELS_DIR}"
-        -DRESOURCES_DIR="${RESOURCES_DIR}"
-        -DCONFIG_DIR="${CONFIG_DIR}"
-)
+add_definitions(-DPROJECT_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
 
 target_link_libraries(AllUnitTests
         HeightVisionPiSources
