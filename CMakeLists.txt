@@ -36,8 +36,9 @@ if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
     )
 endif ()
 
-add_definitions(-DPROJECT_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
-configure_file(config/config.json ${CMAKE_SOURCE_DIR}/config.json @ONLY)
+add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+
+configure_file(${PROJECT_SOURCE_DIR}/config/config.json ${PROJECT_SOURCE_DIR}/config.json @ONLY)
 
 set(HEIGHT_VISION_PI_SOURCES
         src/camera/DummyCameraController.cpp

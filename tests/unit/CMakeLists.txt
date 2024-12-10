@@ -20,8 +20,9 @@ target_include_directories(AllUnitTests PUBLIC
         /opt/boost-di/include
 )
 
-add_definitions(-DPROJECT_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
-configure_file(../../config/config.json ${CMAKE_SOURCE_DIR}/config.json @ONLY)
+add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+
+configure_file(${PROJECT_SOURCE_DIR}/config/config.json ${PROJECT_SOURCE_DIR}/config.json @ONLY)
 
 target_link_libraries(AllUnitTests
         HeightVisionPiSources
