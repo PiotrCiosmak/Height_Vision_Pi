@@ -1,7 +1,9 @@
 #include "Injector.hpp"
 #include "Logger.hpp"
-#include "camera/ArduCamCameraController.hpp"
 #include "config/Config.hpp"
+#ifdef AARCH64
+#include "camera/ArduCamCameraController.hpp"
+#endif
 
 #include <thread>
 
@@ -25,7 +27,7 @@ int main()
         cameraControllerInjector().create<std::unique_ptr<CameraController>>();
     const auto human_detector = humanDetectorInjector().create<std::unique_ptr<HumanDetector>>();
     const auto face_detector = faceDetectorInjector().create<std::unique_ptr<FaceDetector>>();
-
+    const auto age_detector = ageDetectorInjector().create<std::unique_ptr<AgeDetector>>();
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
@@ -38,8 +40,8 @@ int main()
         if (!frame.empty())
         {
             const auto detected_humans = human_detector->detect(frame);
-            [[maybe_unused]] const auto detected_faces = face_detector->detect(detected_humans);
-            // TODO Calculate age
+            const auto detected_faces = face_detector->detect(detected_humans);
+            [[maybe_unused]] const auto detected_ages = age_detector->detect(detected_faces);
             // TODO Calculate the distance between the pupils
             // TODO Calculate height based on age and distance between the pupils
 #ifdef AARCH64
@@ -60,14 +62,6 @@ int main()
 
 namespace
 {
-    void saveFrame(const cv::Mat& frame)
-    {
-        static auto frame_counter = 0;
-        std::ostringstream filename;
-        filename << "frame_" << std::setw(4) << std::setfill('0') << frame_counter++ << ".png";
-        cv::imwrite(filename.str(), frame);
-    }
-
 #ifdef AARCH64
     void showFrame(const cv::Mat& frame)
     {
@@ -75,6 +69,14 @@ namespace
         cv::resizeWindow(Config::get().window.name,
                          Config::get().camera.resolution.x,
                          Config::get().camera.resolution.y);
+    }
+#else
+    void saveFrame(const cv::Mat& frame)
+    {
+        static auto frame_counter = 0;
+        auto filename = std::ostringstream{};
+        filename << "frame_" << std::setw(4) << std::setfill('0') << frame_counter++ << ".png";
+        cv::imwrite(filename.str(), frame);
     }
 #endif
 

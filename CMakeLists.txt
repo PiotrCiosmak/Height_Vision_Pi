@@ -36,20 +36,27 @@ if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
     )
 endif ()
 
+add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+
+configure_file(${PROJECT_SOURCE_DIR}/config/config.json ${PROJECT_SOURCE_DIR}/config.json @ONLY)
+
 set(HEIGHT_VISION_PI_SOURCES
         src/camera/DummyCameraController.cpp
         src/Injector.cpp
         src/config/Config.cpp
         src/Logger.cpp
-        src/monitor/Monitor.cpp
         src/monitor/DummyMonitor.cpp
-        src/monitor/utils/BashCommand.cpp
         src/detector/HumanDetector.cpp
         src/detector/FaceDetector.cpp
+        src/detector/AgeDetector.cpp
 )
 
 if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
-    list(APPEND HEIGHT_VISION_PI_SOURCES src/camera/ArduCamCameraController.cpp)
+    list(APPEND HEIGHT_VISION_PI_SOURCES
+            src/camera/ArduCamCameraController.cpp
+            src/monitor/Monitor.cpp
+            src/monitor/utils/BashCommand.cpp
+    )
 endif ()
 
 add_library(HeightVisionPiSources ${HEIGHT_VISION_PI_SOURCES})

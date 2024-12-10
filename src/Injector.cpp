@@ -1,10 +1,12 @@
 #include "Injector.hpp"
 #include "Logger.hpp"
-#include "camera/ArduCamCameraController.hpp"
 #include "camera/DummyCameraController.hpp"
 #include "config/Config.hpp"
 #include "monitor/DummyMonitor.hpp"
+#ifdef AARCH64
+#include "camera/ArduCamCameraController.hpp"
 #include "monitor/Monitor.hpp"
+#endif
 
 using namespace height_vision_pi;
 
@@ -80,4 +82,10 @@ auto height_vision_pi::faceDetectorInjector() -> UniqueInjector<FaceDetector>
 {
     return make_injector(boost::di::bind<FaceDetectorConfig>().to(Config::get().face_detector),
                          boost::di::bind<FaceDetector>.to<FaceDetector>().in(boost::di::unique));
+}
+
+auto height_vision_pi::ageDetectorInjector() -> UniqueInjector<AgeDetector>
+{
+    return make_injector(boost::di::bind<AgeDetectorConfig>().to(Config::get().age_detector),
+                         boost::di::bind<AgeDetector>.to<AgeDetector>().in(boost::di::unique));
 }

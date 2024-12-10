@@ -17,7 +17,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> std::vector<cv::Mat>
         blob,
         1.0 / 255.0,
         cv::Size(human_detector_config.resolution.x, human_detector_config.resolution.y),
-        cv::Scalar(0, 0, 0),
+        cv::Scalar{0, 0, 0},
         true,
         false);
     net.setInput(blob);

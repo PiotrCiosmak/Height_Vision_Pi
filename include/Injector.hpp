@@ -4,12 +4,15 @@
 #include "detector/FaceDetector.hpp"
 #include "detector/HumanDetector.hpp"
 #include "monitor/MonitorDevice.hpp"
+#include "detector/AgeDetector.hpp"
 
 #include <boost/di.hpp>
 
 namespace height_vision_pi
 {
-    template<typename T> using UniqueInjector = boost::di::injector<std::unique_ptr<T>>;
+    template <typename T>
+    using UniqueInjector = boost::di::injector<std::unique_ptr<T>>;
+
     [[nodiscard]] auto cameraControllerInjector() -> UniqueInjector<CameraController>;
     [[nodiscard]] auto dummyCameraControllerInjector() -> UniqueInjector<CameraController>;
 #ifdef AARCH64
@@ -22,4 +25,5 @@ namespace height_vision_pi
 #endif
     [[nodiscard]] auto humanDetectorInjector() -> UniqueInjector<HumanDetector>;
     [[nodiscard]] auto faceDetectorInjector() -> UniqueInjector<FaceDetector>;
+    [[nodiscard]] auto ageDetectorInjector() -> UniqueInjector<AgeDetector>;
 } // namespace height_vision_pi

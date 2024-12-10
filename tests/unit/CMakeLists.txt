@@ -1,11 +1,12 @@
 add_executable(AllUnitTests
-        camera/MockCameraControllerTests.cpp
-        LoggerTests.cpp
+        camera/MockCameraControllerTest.cpp
+        LoggerTest.cpp
         ../utils/mock/MockLogger.cpp
-        MockLoggerTests.cpp
-        monitor/MockMonitorTests.cpp
+        MockLoggerTest.cpp
+        monitor/MockMonitorTest.cpp
         detector/HumanDetectorTest.cpp
-        detector/FaceDetectorTests.cpp
+        detector/FaceDetectorTest.cpp
+        detector/AgeDetectorTest.cpp
 )
 
 find_package(GTest REQUIRED)
@@ -18,6 +19,10 @@ target_include_directories(AllUnitTests PUBLIC
         ${Boost_INCLUDE_DIRS}
         /opt/boost-di/include
 )
+
+add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+
+configure_file(${PROJECT_SOURCE_DIR}/config/config.json ${PROJECT_SOURCE_DIR}/config.json @ONLY)
 
 target_link_libraries(AllUnitTests
         HeightVisionPiSources
