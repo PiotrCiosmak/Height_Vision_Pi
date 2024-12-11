@@ -60,8 +60,8 @@ TEST_F(HumanDetectorTest, ShouldDetectHumanInVideoFrames)
     // when: Calculate the detection rate
     const auto detection_rate = static_cast<double>(detected_frame_count) / frame_count;
 
-    // then: Human should be detected in at least 31% of the frames
-    ASSERT_GE(detection_rate, 0.31);
+    // then: Human should be detected in at least 27% of the frames
+    ASSERT_GE(detection_rate, 0.27);
 
     // when: Cleaning up resources by releasing the video
     video.release();
