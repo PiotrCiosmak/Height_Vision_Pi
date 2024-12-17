@@ -27,13 +27,10 @@ jobs:
         run: |
           docker pull ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1
 
-      - name: Install librares for test coverage
-        run: |
-          sudo apt install -y lcov
-
       - name: Build and run tests inside Docker
         run: |
           docker run --network host -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1 -c "
+            apt install -y lcov &&
             cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON -DCMAKE_CXX_FLAGS='--coverage'
             cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
             cd ./build/tests/unit &&
@@ -72,13 +69,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_READ }}
 
-      - name: Install librares for test coverage
-        run: |
-          sudo apt install -y lcov
-
       - name: Build and run tests inside Docker
         run: |
           docker run --network host -v /run/udev:/run/udev -v $(pwd):/Height_Vision_Pi --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/arm64:0.7.1 -c "
+            apt install -y lcov &&
             cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON -DCMAKE_CXX_FLAGS='--coverage'
             cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
             cd ./build/tests/unit &&
