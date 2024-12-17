@@ -29,7 +29,7 @@ jobs:
 
       - name: Install librares for test coverage
         run: |
-          apt install -y lcov
+          sudo apt install -y lcov
 
       - name: Build and run tests inside Docker
         run: |
@@ -74,7 +74,7 @@ jobs:
 
       - name: Install librares for test coverage
         run: |
-          apt install -y lcov
+          sudo apt install -y lcov
 
       - name: Build and run tests inside Docker
         run: |
