@@ -3,14 +3,14 @@
 #include "utils/ResolutionConfig.hpp"
 #include "utils/ColorConfig.hpp"
 
-#include <nlohmann/json.hpp>
+#include <filesystem>
 
 namespace height_vision_pi
 {
     struct AgeDetectorConfig
     {
-        std::string model_path;
-        std::string proto_path;
+        std::filesystem::path model_path;
+        std::filesystem::path proto_path;
         double scale_factor;
         ResolutionConfig resolution;
         ColorConfig mean;

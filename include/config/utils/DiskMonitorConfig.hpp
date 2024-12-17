@@ -1,12 +1,13 @@
 #pragma once
 
 #include <nlohmann/json.hpp>
+#include <filesystem>
 
 namespace height_vision_pi
 {
     struct DiskMonitorConfig
     {
-        std::string path;
+        std::filesystem::path path;
         double warning_usage;
         double error_usage;
 

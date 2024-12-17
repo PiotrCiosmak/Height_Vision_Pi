@@ -2,12 +2,14 @@
 
 #include "config/utils/ResolutionConfig.hpp"
 
+#include <filesystem>
+
 namespace height_vision_pi
 {
     struct HumanDetectorConfig
     {
-        std::string model_config_path;
-        std::string model_weights_path;
+        std::filesystem::path model_config_path;
+        std::filesystem::path model_weights_path;
         ResolutionConfig resolution;
         double confidence_threshold;
         double nms_score_threshold;
