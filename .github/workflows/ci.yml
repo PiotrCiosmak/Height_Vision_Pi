@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         architecture: [ x64, arm64 ]
-        container_version: [ x64:0.3.1, arm64:0.7.1 ]
+        container_version: [ "x64:0.3.1", "arm64:0.7.1" ]
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
           docker run --network host \
             -v /run/udev:/run/udev \
             -v $(pwd):/Height_Vision_Pi \
-            --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/x64:0.3.1 -c "
+            --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/${{ matrix.container_version }} -c "
               cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
               cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
               cd ./build/tests/unit &&
