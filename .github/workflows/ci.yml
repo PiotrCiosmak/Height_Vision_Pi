@@ -18,12 +18,12 @@ jobs:
 
       - name: Set up QEMU (for ARM64 only)
         if: matrix.architecture == 'arm64'
-        uses: docker/setup-qemu-action@v4
+        uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
