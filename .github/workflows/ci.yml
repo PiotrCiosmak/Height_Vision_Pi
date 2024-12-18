@@ -6,8 +6,11 @@ jobs:
   test:
     strategy:
       matrix:
-        architecture: [ x64, arm64 ]
-        container_version: [ "x64:0.3.1", "arm64:0.7.1" ]
+        include:
+          - architecture: x64
+            container_version: x64:0.3.1
+          - architecture: arm64
+            container_version: arm64:0.7.1
     runs-on: ubuntu-latest
 
     steps:
