@@ -78,5 +78,8 @@
     },
     "swap_red_and_blue": true,
     "crop": false
+  },
+  "pupils_distance_calculator": {
+    "model_path": "@PROJECT_SOURCE_DIR@/models/haarcascade_pupils.xml"
   }
 }
