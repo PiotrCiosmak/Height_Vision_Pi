@@ -5,6 +5,7 @@
 #include "detector/HumanDetector.hpp"
 #include "monitor/MonitorDevice.hpp"
 #include "detector/AgeDetector.hpp"
+#include <calculator/PupilsDistanceCalculator.hpp>
 
 #include <boost/di.hpp>
 
@@ -26,4 +27,5 @@ namespace height_vision_pi
     [[nodiscard]] auto humanDetectorInjector() -> UniqueInjector<HumanDetector>;
     [[nodiscard]] auto faceDetectorInjector() -> UniqueInjector<FaceDetector>;
     [[nodiscard]] auto ageDetectorInjector() -> UniqueInjector<AgeDetector>;
+    [[nodiscard]] auto pupilsDistanceCalculatorInjector() -> UniqueInjector<PupilsDistanceCalculator>;
 } // namespace height_vision_pi
