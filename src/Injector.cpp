@@ -89,3 +89,13 @@ auto height_vision_pi::ageDetectorInjector() -> UniqueInjector<AgeDetector>
     return make_injector(boost::di::bind<AgeDetectorConfig>().to(Config::get().age_detector),
                          boost::di::bind<AgeDetector>.to<AgeDetector>().in(boost::di::unique));
 }
+
+auto height_vision_pi::pupilsDistanceCalculatorInjector() -> UniqueInjector<
+    PupilsDistanceCalculator>
+{
+    return make_injector(
+        boost::di::bind<PupilsDistanceCalculatorConfig>().to(
+            Config::get().pupils_distance_calculator),
+        boost::di::bind<PupilsDistanceCalculator>.to<PupilsDistanceCalculator>().in(
+            boost::di::unique));
+}

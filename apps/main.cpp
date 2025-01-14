@@ -28,6 +28,8 @@ int main()
     const auto human_detector = humanDetectorInjector().create<std::unique_ptr<HumanDetector>>();
     const auto face_detector = faceDetectorInjector().create<std::unique_ptr<FaceDetector>>();
     const auto age_detector = ageDetectorInjector().create<std::unique_ptr<AgeDetector>>();
+    const auto pupils_distance_calculator = pupilsDistanceCalculatorInjector().create<
+        std::unique_ptr<PupilsDistanceCalculator>>();
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
@@ -39,10 +41,11 @@ int main()
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {
-            const auto detected_humans = human_detector->detect(frame);
-            const auto detected_faces = face_detector->detect(detected_humans);
-            [[maybe_unused]] const auto detected_ages = age_detector->detect(detected_faces);
-            // TODO Calculate the distance between the pupils
+            const auto humans = human_detector->detect(frame);
+            const auto faces = face_detector->detect(humans);
+            [[maybe_unused]] const auto ages = age_detector->detect(faces);
+            [[maybe_unused]] const auto distance_between_pupils = pupils_distance_calculator->
+                calculate(faces);
             // TODO Calculate height based on age and distance between the pupils
 #ifdef AARCH64
             showFrame(frame);

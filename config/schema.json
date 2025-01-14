@@ -8,7 +8,10 @@
     "window",
     "data_source",
     "monitor",
-    "human_detector"
+    "human_detector",
+    "face_detector",
+    "age_detector",
+    "pupils_distance_calculator"
   ],
   "additionalProperties": false,
   "properties": {
@@ -454,6 +457,20 @@
         "crop": {
           "description": "Whether to crop the input image to fit the target resolution",
           "type": "boolean"
+        }
+      }
+    },
+    "pupils_distance_calculator": {
+      "description": "Configuration for the pupils distance calculator",
+      "type": "object",
+      "required": [
+        "model_path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "model_path": {
+          "description": "Path to the pupils detection model file",
+          "type": "string"
         }
       }
     }

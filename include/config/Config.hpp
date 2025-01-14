@@ -7,6 +7,7 @@
 #include "config/MonitorConfig.hpp"
 #include "config/WindowConfig.hpp"
 #include "config/AgeDetectorConfig.hpp"
+#include "config/PupilsDistanceCalculatorConfig.hpp"
 
 #include <mutex>
 #include <string>
@@ -25,6 +26,7 @@ namespace height_vision_pi
         HumanDetectorConfig human_detector;
         FaceDetectorConfig face_detector;
         AgeDetectorConfig age_detector;
+        PupilsDistanceCalculatorConfig pupils_distance_calculator;
 
     private:
         Config() = default;
