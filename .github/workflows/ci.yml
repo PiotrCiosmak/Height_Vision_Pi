@@ -40,6 +40,6 @@ jobs:
             --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/${{ matrix.container_version }} -c "
               cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
               cmake --build /Height_Vision_Pi/build -- -j$(nproc) &&
-              cd /Height_Vision_Pi/build &&
+              cd ./build/tests/unit &&
               ctest --output-on-failure
           "
