@@ -16,7 +16,7 @@ namespace height_vision_pi
             ERROR
         };
 
-        template<typename... Args>
+        template <typename... Args>
         static void log(Level level, const std::string& format, Args... args)
         {
             auto oss = std::ostringstream{};
@@ -37,17 +37,20 @@ namespace height_vision_pi
             }
         }
 
-        template<typename... Args> static void info(const std::string& format, Args... args)
+        template <typename... Args>
+        static void info(const std::string& format, Args... args)
         {
             log(Level::INFO, format, args...);
         }
 
-        template<typename... Args> static void warn(const std::string& format, Args... args)
+        template <typename... Args>
+        static void warn(const std::string& format, Args... args)
         {
             log(Level::WARN, format, args...);
         }
 
-        template<typename... Args> static void error(const std::string& format, Args... args)
+        template <typename... Args>
+        static void error(const std::string& format, Args... args)
         {
             log(Level::ERROR, format, args...);
         }
@@ -63,7 +66,7 @@ namespace height_vision_pi
         }
 
     private:
-        template<typename T, typename... Args>
+        template <typename T, typename... Args>
         static void formatMessage(std::ostringstream& oss,
                                   const std::string& format,
                                   T value,
