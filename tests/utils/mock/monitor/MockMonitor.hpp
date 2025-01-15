@@ -9,7 +9,9 @@ namespace height_vision_pi
     class MockMonitor : public MonitorDevice
     {
     public:
-        explicit MockMonitor() : MonitorDevice{MonitorConfig{}} {}
+        explicit MockMonitor() : MonitorDevice{MonitorConfig{}}
+        {
+        }
 
         MOCK_METHOD(void, check, (), (override));
     };
