@@ -32,7 +32,7 @@ TEST_F(TestLogger, ShouldLogInfoMessageWithOneArgument)
     const auto argument = std::string{"world"};
 
     // when: Logging the info message
-    height_vision_pi::Logger::info(message, argument);
+    Logger::info(message, argument);
 
     // when: Saving output to variable
     const auto output = oss_cout.str();
@@ -49,7 +49,7 @@ TEST_F(TestLogger, ShouldLogWarnMessageWithOneArgument)
     const auto argument = std::string{"Issue"};
 
     // when: Logging the warning message
-    height_vision_pi::Logger::warn(message, argument);
+    Logger::warn(message, argument);
 
     // when: Saving output to variable
     const auto output = oss_cout.str();
@@ -66,7 +66,7 @@ TEST_F(TestLogger, ShouldLogErrorMessageWithOneArgument)
     const auto argument = std::string{"Critical failure"};
 
     // when: Logging the error message (which should terminate the application)
-    ASSERT_DEATH({ height_vision_pi::Logger::error(message, argument); }, "");
+    ASSERT_DEATH({ Logger::error(message, argument); }, "");
 
     // then: The application should terminate
 }
@@ -77,7 +77,7 @@ TEST_F(TestLogger, ShouldLogInfoMessageWithoutArguments)
     const auto message = std::string{"Test message"};
 
     // when: Logging the info message
-    height_vision_pi::Logger::info(message);
+    Logger::info(message);
 
     // when: Saving output to variable
     const auto output = oss_cout.str();
@@ -93,7 +93,7 @@ TEST_F(TestLogger, ShouldLogWarnMessageWithoutArguments)
     const auto message = std::string{"Test warning"};
 
     // when: Logging the warning message
-    height_vision_pi::Logger::warn(message);
+    Logger::warn(message);
 
     // when: Saving output to variable
     const auto output = oss_cout.str();
@@ -109,7 +109,7 @@ TEST_F(TestLogger, ShouldLogErrorMessageWithoutArguments)
     const auto message = std::string{"Test error"};
 
     // when: Logging the error message (which should terminate the application)
-    ASSERT_DEATH({ height_vision_pi::Logger::error(message); }, "");
+    ASSERT_DEATH({ Logger::error(message); }, "");
 
     // then: The application should terminate
 }
@@ -120,7 +120,7 @@ TEST_F(TestLogger, ShouldTerminateApplication)
     const auto message = std::string{"Fatal error, exiting"};
 
     // when: Logging the fatal error message (which should terminate the application)
-    ASSERT_DEATH({ height_vision_pi::Logger::error(message); }, "");
+    ASSERT_DEATH({ Logger::error(message); }, "");
 
     // then: The application should terminate
 }
@@ -133,7 +133,7 @@ TEST_F(TestLogger, ShouldLogInfoMessageWithWultipleArguments)
     constexpr auto result = 5;
 
     // when: Logging the info message with multiple arguments
-    height_vision_pi::Logger::info(message, arguments[0], arguments[1], result);
+    Logger::info(message, arguments[0], arguments[1], result);
 
     // when: Saving output to variable
     const auto output = oss_cout.str();
@@ -150,7 +150,7 @@ TEST_F(TestLogger, ShouldLogWarnMessageWithWultipleArguments)
     constexpr auto arguments = std::array{5, 3};
 
     // when: Logging the warning message with multiple arguments
-    height_vision_pi::Logger::warn(message, arguments[0], arguments[1]);
+    Logger::warn(message, arguments[0], arguments[1]);
 
     // when: Saving output to variable
     const auto output = oss_cout.str();
@@ -167,7 +167,7 @@ TEST_F(TestLogger, ShouldLogErrorMessageWithWultipleArguments)
     constexpr auto arguments = std::array{"Segmentation fault", "memory address"};
 
     // when: Logging the error message with multiple arguments
-    ASSERT_DEATH({ height_vision_pi::Logger::error(message, arguments[0], arguments[1]); }, "");
+    ASSERT_DEATH({ Logger::error(message, arguments[0], arguments[1]); }, "");
 
     // then: The application should terminate
 }
