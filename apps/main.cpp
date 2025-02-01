@@ -11,10 +11,13 @@ using namespace height_vision_pi;
 
 namespace
 {
-    void saveFrame(const cv::Mat& frame);
+    void logProcessingStart(int frame_number);
 #ifdef AARCH64
     void showFrame(const cv::Mat& frame);
+#else
+    void saveFrame(const cv::Mat& frame);
 #endif
+    void logProcessingEnd(int &frame_number);
     void waitForNextFrame(const std::chrono::high_resolution_clock::time_point& start_time);
 } // namespace
 
@@ -30,14 +33,14 @@ int main()
     const auto age_detector = ageDetectorInjector().create<std::unique_ptr<AgeDetector>>();
     const auto pupils_distance_calculator = pupilsDistanceCalculatorInjector().create<
         std::unique_ptr<PupilsDistanceCalculator>>();
+    static auto frame_number = 1;
     while (true)
     {
         const auto start_time = std::chrono::high_resolution_clock::now();
-
+        logProcessingStart(frame_number);
 #ifdef AARCH64
         monitor->check();
 #endif
-
         auto frame = camera_controller->getFrame();
         if (!frame.empty())
         {
@@ -59,12 +62,18 @@ int main()
             break;
         }
 
+        logProcessingEnd(frame_number);
         waitForNextFrame(start_time);
     }
 }
 
 namespace
 {
+    void logProcessingStart(const int frame_number)
+    {
+        Logger::info("Start of processing frame no. {}", frame_number);
+    }
+
 #ifdef AARCH64
     void showFrame(const cv::Mat& frame)
     {
@@ -91,10 +100,15 @@ namespace
         const auto elapsed_time = end_time - start_time;
         const auto sleep_duration =
             frame_duration - std::chrono::duration_cast<std::chrono::milliseconds>(elapsed_time);
-        Logger::info("Main loop must wait: {} ms", sleep_duration);
+        Logger::info("Main loop must wait: {} ms\n", sleep_duration);
         if (sleep_duration.count() > 0)
         {
             std::this_thread::sleep_for(sleep_duration);
         }
+    }
+
+    void logProcessingEnd(int &frame_number)
+    {
+        Logger::info("End of processing frame no. {}\n", frame_number++);
     }
 } // namespace
