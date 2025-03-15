@@ -53,7 +53,7 @@ auto PupilsDistanceCalculator::detectPupils(const cv::Mat& face) -> std::pair<cv
         pupil_positions.first = cv::Point{eyes[0].x + eyes[0].width / 2,
                                           eyes[0].y + eyes[0].height / 2};
 
-        pupil_positions.first = cv::Point{eyes[1].x + eyes[1].width / 2,
+        pupil_positions.second = cv::Point{eyes[1].x + eyes[1].width / 2,
                                           eyes[1].y + eyes[1].height / 2};
     }
 
