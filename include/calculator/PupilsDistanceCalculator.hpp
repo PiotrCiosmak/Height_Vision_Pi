@@ -10,10 +10,10 @@ namespace height_vision_pi
     {
     public:
         explicit PupilsDistanceCalculator(const PupilsDistanceCalculatorConfig& new_pupils_distance_calculator_config);
-        [[nodiscard]] auto calculate(const std::vector<cv::Mat>& detected_faces) -> std::vector<double>;
+        [[nodiscard]] auto calculate(const std::vector<std::optional<cv::Mat>>& detected_faces) -> std::vector<std::optional<double>>;
 
     private:
-        [[nodiscard]] auto detectPupils(const cv::Mat& face) -> std::pair<cv::Point, cv::Point>;
+        [[nodiscard]] auto detectPupils(const cv::Mat& face) -> std::optional<std::pair<cv::Point, cv::Point>>;
         [[nodiscard]] auto calculateDistanceBetweenPupils(
             const std::pair<cv::Point, cv::Point>& pupil_positions) -> double;
 

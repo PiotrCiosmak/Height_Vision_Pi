@@ -15,23 +15,36 @@ PupilsDistanceCalculator::PupilsDistanceCalculator(
 }
 
 auto PupilsDistanceCalculator::calculate(
-    const std::vector<cv::Mat>& detected_faces) -> std::vector<double>
+    const std::vector<std::optional<cv::Mat>>& detected_faces) -> std::vector<std::optional<double>>
 {
-    auto distances = std::vector<double>{};
+    auto distances = std::vector<std::optional<double>>{};
 
     for (const auto& face : detected_faces)
     {
-        auto pupil_positions = detectPupils(face);
+        if (!face.has_value())
+        {
+            distances.push_back(std::nullopt);
+            continue;
+        }
 
-        auto distance = calculateDistanceBetweenPupils(pupil_positions);
+        auto pupil_positions = detectPupils(face.value());
 
-        distances.push_back(distance);
+        if (pupil_positions.has_value())
+        {
+            auto distance = calculateDistanceBetweenPupils(pupil_positions.value());
+
+            distances.push_back(distance);
+        }
+        else
+        {
+            distances.push_back(std::nullopt);
+        }
     }
 
     const auto calculated_pupils_distance_count = std::ranges::count_if(distances,
         [](const auto& distance)
         {
-            return distance != 0;
+            return distance.has_value();
         });
 
     Logger::info("{} out of {} possible pupils distance calculated",
@@ -41,7 +54,8 @@ auto PupilsDistanceCalculator::calculate(
     return distances;
 }
 
-auto PupilsDistanceCalculator::detectPupils(const cv::Mat& face) -> std::pair<cv::Point, cv::Point>
+auto PupilsDistanceCalculator::detectPupils(
+    const cv::Mat& face) -> std::optional<std::pair<cv::Point, cv::Point>>
 {
     auto eyes = std::vector<cv::Rect>{};
     auto pupil_positions = std::pair<cv::Point, cv::Point>{{0, 0}, {0, 0}};
@@ -54,10 +68,12 @@ auto PupilsDistanceCalculator::detectPupils(const cv::Mat& face) -> std::pair<cv
                                           eyes[0].y + eyes[0].height / 2};
 
         pupil_positions.second = cv::Point{eyes[1].x + eyes[1].width / 2,
-                                          eyes[1].y + eyes[1].height / 2};
+                                           eyes[1].y + eyes[1].height / 2};
+
+        return pupil_positions;
     }
 
-    return pupil_positions;
+    return std::nullopt;
 }
 
 auto PupilsDistanceCalculator::calculateDistanceBetweenPupils(
