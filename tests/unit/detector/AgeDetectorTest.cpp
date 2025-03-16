@@ -14,7 +14,7 @@ protected:
 TEST_F(AgeDetectorTest, ShouldProcessEmptyFrames)
 {
     // given: Empty frame
-    const auto empty_frame = cv::Mat{};
+    const auto empty_frame = std::optional<cv::Mat>{};
     // given: Vector of empty frames
     const auto empty_frames = std::vector{empty_frame, empty_frame, empty_frame, empty_frame};
 
@@ -26,7 +26,7 @@ TEST_F(AgeDetectorTest, ShouldProcessEmptyFrames)
     // then: Ages aren't detected
     for (const auto& age : detected_ages)
     {
-        EXPECT_TRUE(age == 0);
+        EXPECT_TRUE(!age.has_value());
     }
 }
 
@@ -36,13 +36,20 @@ TEST_F(AgeDetectorTest, ShouldDetectAgeInSetOfFacesFrames)
     const auto directory_path = std::string{
         std::string{PROJECT_SOURCE_DIR} + "/resources/detected_face"};
     // given: Container to hold those frames
-    auto faces_frames = std::vector<cv::Mat>{};
+    auto faces_frames = std::vector<std::optional<cv::Mat>>{};
 
     // when: Loading frames to container
     for (const auto& entry : std::filesystem::directory_iterator(directory_path))
     {
         const auto img = cv::imread(entry.path().string());
-        faces_frames.push_back(img);
+        if (img.empty())
+        {
+            faces_frames.push_back(std::nullopt);
+        }
+        else
+        {
+            faces_frames.push_back(img);
+        }
     }
     // when: Processing the vector of face frames to detect age
     const auto detected_ages = detector.detect(faces_frames);
@@ -50,7 +57,7 @@ TEST_F(AgeDetectorTest, ShouldDetectAgeInSetOfFacesFrames)
     const auto valid_detections = std::ranges::count_if(detected_ages,
                                                         [](const auto& age)
                                                         {
-                                                            return age != 0;
+                                                            return age.has_value();
                                                         });
     // when: Calculate the detection rate
     const auto detection_rate = static_cast<double>(valid_detections) / faces_frames.size();

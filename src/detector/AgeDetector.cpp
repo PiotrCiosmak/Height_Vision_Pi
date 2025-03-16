@@ -14,18 +14,19 @@ AgeDetector::AgeDetector(const AgeDetectorConfig& new_age_detector_config) :
     }
 }
 
-auto AgeDetector::detect(const std::vector<cv::Mat>& detected_faces) -> std::vector<int>
+auto AgeDetector::detect(
+    const std::vector<std::optional<cv::Mat>>& detected_faces) -> std::vector<std::optional<int>>
 {
-    auto detected_ages = std::vector<int>{};
+    auto detected_ages = std::vector<std::optional<int>>{};
     for (const auto& face : detected_faces)
     {
-        if (face.empty())
+        if (!face.has_value())
         {
-            detected_ages.push_back(0);
+            detected_ages.push_back(std::nullopt);
         }
         else
         {
-            const auto blob = cv::dnn::blobFromImage(face,
+            const auto blob = cv::dnn::blobFromImage(face.value(),
                                                      age_detector_config.scale_factor,
                                                      cv::Size{age_detector_config.resolution.x,
                                                               age_detector_config.resolution.y},
@@ -45,7 +46,7 @@ auto AgeDetector::detect(const std::vector<cv::Mat>& detected_faces) -> std::vec
     const auto detected_ages_count = std::ranges::count_if(detected_ages,
                                                            [](const auto& age)
                                                            {
-                                                               return age > 0;
+                                                               return age.has_value();
                                                            });
     Logger::info("{} out of {} possible ages detected", detected_ages_count, detected_ages.size());
     return detected_ages;
