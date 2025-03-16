@@ -24,20 +24,21 @@ auto PupilsDistanceCalculator::calculate(
         if (!face.has_value())
         {
             distances.push_back(std::nullopt);
-            continue;
-        }
-
-        auto pupil_positions = detectPupils(face.value());
-
-        if (pupil_positions.has_value())
-        {
-            auto distance = calculateDistanceBetweenPupils(pupil_positions.value());
-
-            distances.push_back(distance);
         }
         else
         {
-            distances.push_back(std::nullopt);
+            auto pupil_positions = detectPupils(face.value());
+
+            if (pupil_positions.has_value())
+            {
+                auto distance = calculateDistanceBetweenPupils(pupil_positions.value());
+
+                distances.push_back(distance);
+            }
+            else
+            {
+                distances.push_back(std::nullopt);
+            }
         }
     }
 

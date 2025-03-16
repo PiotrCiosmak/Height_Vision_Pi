@@ -14,7 +14,7 @@ protected:
 TEST_F(PupilsDistanceCalculatorTest, ShouldProcessEmptyFrames)
 {
     // given: Empty frame
-    const auto empty_frame = std::optional{cv::Mat{}};
+    const auto empty_frame = std::optional<cv::Mat>{};
     // given: Vector of empty frames
     const auto empty_frames = std::vector{empty_frame, empty_frame, empty_frame, empty_frame};
 
