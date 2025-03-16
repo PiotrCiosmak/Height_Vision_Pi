@@ -17,7 +17,7 @@ namespace
 #else
     void saveFrame(const cv::Mat& frame);
 #endif
-    void logProcessingEnd(int &frame_number);
+    void logProcessingEnd(int& frame_number);
     void waitForNextFrame(const std::chrono::high_resolution_clock::time_point& start_time);
 } // namespace
 
@@ -107,7 +107,7 @@ namespace
         }
     }
 
-    void logProcessingEnd(int &frame_number)
+    void logProcessingEnd(int& frame_number)
     {
         Logger::info("End of processing frame no. {}\n", frame_number++);
     }
