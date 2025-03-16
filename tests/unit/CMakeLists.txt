@@ -8,6 +8,7 @@ add_executable(AllUnitTests
         detector/FaceDetectorTest.cpp
         detector/AgeDetectorTest.cpp
         calculator/PupilsDistanceCalculatorTest.cpp
+        calculator/HeightCalculatorTest.cpp
 )
 
 find_package(GTest REQUIRED)
