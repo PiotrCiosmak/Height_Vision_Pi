@@ -13,9 +13,9 @@ FaceDetector::FaceDetector(const FaceDetectorConfig& new_face_detector_config) :
     }
 }
 
-auto FaceDetector::detect(const std::vector<cv::Mat>& humans) -> std::vector<cv::Mat>
+auto FaceDetector::detect(const std::vector<cv::Mat>& humans) -> std::vector<std::optional<cv::Mat>>
 {
-    auto detected_faces = std::vector<cv::Mat>{};
+    auto detected_faces = std::vector<std::optional<cv::Mat>>{};
     for (const auto& human : humans)
     {
         auto currently_detected_faces = std::vector<cv::Rect>{};
@@ -39,14 +39,14 @@ auto FaceDetector::detect(const std::vector<cv::Mat>& humans) -> std::vector<cv:
         }
         else
         {
-            detected_faces.push_back(cv::Mat{});
+            detected_faces.push_back(std::nullopt);
         }
     }
 
     const auto detected_faces_count = std::ranges::count_if(detected_faces,
                                                             [](const auto& face)
                                                             {
-                                                                return !face.empty();
+                                                                return face.has_value();
                                                             });
 
     Logger::info("{} out of {} possible faces detected", detected_faces_count, humans.size());
