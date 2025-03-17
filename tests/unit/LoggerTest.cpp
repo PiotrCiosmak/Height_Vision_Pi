@@ -4,7 +4,7 @@
 
 using namespace height_vision_pi;
 
-class TestLogger : public ::testing::Test
+class LoggerTest : public ::testing::Test
 {
 protected:
     std::ostringstream oss_cout;
@@ -25,7 +25,7 @@ protected:
     }
 };
 
-TEST_F(TestLogger, ShouldLogInfoMessageWithOneArgument)
+TEST_F(LoggerTest, ShouldLogInfoMessageWithOneArgument)
 {
     // given: An info message with one argument
     const auto message = std::string{"Hello, {}!"};
@@ -42,7 +42,7 @@ TEST_F(TestLogger, ShouldLogInfoMessageWithOneArgument)
     ASSERT_TRUE(output.find("Hello, world!") != std::string::npos);
 }
 
-TEST_F(TestLogger, ShouldLogWarnMessageWithOneArgument)
+TEST_F(LoggerTest, ShouldLogWarnMessageWithOneArgument)
 {
     // given: A warning message with one argument
     const auto message = std::string{"Warning: {} detected"};
@@ -59,7 +59,7 @@ TEST_F(TestLogger, ShouldLogWarnMessageWithOneArgument)
     ASSERT_TRUE(output.find("Warning: Issue detected") != std::string::npos);
 }
 
-TEST_F(TestLogger, ShouldLogErrorMessageWithOneArgument)
+TEST_F(LoggerTest, ShouldLogErrorMessageWithOneArgument)
 {
     // given: An error message with one argument
     const auto message = std::string{"Error: {} occurred"};
@@ -71,7 +71,7 @@ TEST_F(TestLogger, ShouldLogErrorMessageWithOneArgument)
     // then: The application should terminate
 }
 
-TEST_F(TestLogger, ShouldLogInfoMessageWithoutArguments)
+TEST_F(LoggerTest, ShouldLogInfoMessageWithoutArguments)
 {
     // given: An info message without arguments
     const auto message = std::string{"Test message"};
@@ -87,7 +87,7 @@ TEST_F(TestLogger, ShouldLogInfoMessageWithoutArguments)
     ASSERT_TRUE(output.find("Test message") != std::string::npos);
 }
 
-TEST_F(TestLogger, ShouldLogWarnMessageWithoutArguments)
+TEST_F(LoggerTest, ShouldLogWarnMessageWithoutArguments)
 {
     // given: A warning message without arguments
     const auto message = std::string{"Test warning"};
@@ -103,7 +103,7 @@ TEST_F(TestLogger, ShouldLogWarnMessageWithoutArguments)
     ASSERT_TRUE(output.find("Test warning") != std::string::npos);
 }
 
-TEST_F(TestLogger, ShouldLogErrorMessageWithoutArguments)
+TEST_F(LoggerTest, ShouldLogErrorMessageWithoutArguments)
 {
     // given: An error message without arguments
     const auto message = std::string{"Test error"};
@@ -114,7 +114,7 @@ TEST_F(TestLogger, ShouldLogErrorMessageWithoutArguments)
     // then: The application should terminate
 }
 
-TEST_F(TestLogger, ShouldTerminateApplication)
+TEST_F(LoggerTest, ShouldTerminateApplication)
 {
     // given: A fatal error message
     const auto message = std::string{"Fatal error, exiting"};
@@ -125,7 +125,7 @@ TEST_F(TestLogger, ShouldTerminateApplication)
     // then: The application should terminate
 }
 
-TEST_F(TestLogger, ShouldLogInfoMessageWithWultipleArguments)
+TEST_F(LoggerTest, ShouldLogInfoMessageWithWultipleArguments)
 {
     // given: An info message with multiple arguments and result
     const auto message = std::string{"{} + {} = {}"};
@@ -143,7 +143,7 @@ TEST_F(TestLogger, ShouldLogInfoMessageWithWultipleArguments)
     ASSERT_TRUE(output.find("2 + 3 = 5") != std::string::npos);
 }
 
-TEST_F(TestLogger, ShouldLogWarnMessageWithWultipleArguments)
+TEST_F(LoggerTest, ShouldLogWarnMessageWithWultipleArguments)
 {
     // given: A warning message with multiple arguments
     const auto message = std::string{"{} is greater than {}"};
@@ -160,7 +160,7 @@ TEST_F(TestLogger, ShouldLogWarnMessageWithWultipleArguments)
     ASSERT_TRUE(output.find("5 is greater than 3") != std::string::npos);
 }
 
-TEST_F(TestLogger, ShouldLogErrorMessageWithWultipleArguments)
+TEST_F(LoggerTest, ShouldLogErrorMessageWithWultipleArguments)
 {
     // given: An error message with multiple arguments
     const auto message = std::string{"Fatal: {} occurred at {}"};
