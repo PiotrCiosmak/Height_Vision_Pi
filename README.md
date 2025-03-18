@@ -16,6 +16,14 @@
 
 A real-time vision system designed for the automatic measurement of human height using a camera and advanced image processing algorithms, along with age estimation. The project is based on the Raspberry Pi platform, making it a compact and portable solution. The system includes facial detection capabilities, allowing it to accurately identify individuals, enhance the precision of height measurements, and estimate the approximate age of the human being measured.
 
+## Quick Start Guide
+```
+git clone https://github.com/PiotrCiosmak/Height_Vision_Pi.git
+cd Height_Vision_Pi
+bash scripts/run_docker.sh
+bash scripts/start_app.sh
+```
+
 ## Technologies Used
 
 - C++
@@ -72,10 +80,6 @@ A real-time vision system designed for the automatic measurement of human height
     Suitable for a wide range of applications, including education, healthcare, retail, and personal use.
 
 ## Screenshots
-
-TODO
-
-## Launch
 
 TODO
 
