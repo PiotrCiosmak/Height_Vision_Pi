@@ -83,6 +83,6 @@ TEST(InjectorTest, AgeDetectorInjector)
 TEST(InjectorTest, PupilsDistanceCalculatorInjector)
 {
     auto injector = pupilsDistanceCalculatorInjector();
-    auto pupils_distanace_calculator = injector.create<std::unique_ptr<PupilsDistanceCalculator>>();
-    EXPECT_NE(pupils_distanace_calculator, nullptr);
+    auto pupils_distance_calculator = injector.create<std::unique_ptr<PupilsDistanceCalculator>>();
+    EXPECT_NE(pupils_distance_calculator, nullptr);
 }

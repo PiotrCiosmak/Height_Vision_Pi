@@ -8,7 +8,7 @@ using namespace height_vision_pi;
 class PupilsDistanceCalculatorTest : public ::testing::Test
 {
 protected:
-    PupilsDistanceCalculator calculator{Config::get().pupils_distance_calculator};
+    PupilsDistanceCalculator calculator{};
 };
 
 TEST_F(PupilsDistanceCalculatorTest, ShouldProcessEmptyFrames)
@@ -55,6 +55,6 @@ TEST_F(PupilsDistanceCalculatorTest, ShouldCalculateDistanceInSetOfFacesFrames)
     // when: Calculate the ratio
     const auto ratio = static_cast<double>(valid_calculated_pupils_distances) / faces_frames.size();
 
-    // then: Pupils distance should be calculated correctly in at least 16% of the frames
-    ASSERT_GE(ratio, 0.16);
+    // then: Pupils distance should be calculated correctly in at least 83% of the frames
+    ASSERT_GE(ratio, 0.83);
 }
