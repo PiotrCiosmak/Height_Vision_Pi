@@ -1,7 +1,5 @@
 #pragma once
 
-#include "config/PupilsDistanceCalculatorConfig.hpp"
-
 #include <opencv2/opencv.hpp>
 
 namespace height_vision_pi
@@ -9,15 +7,17 @@ namespace height_vision_pi
     class PupilsDistanceCalculator
     {
     public:
-        explicit PupilsDistanceCalculator(const PupilsDistanceCalculatorConfig& new_pupils_distance_calculator_config);
+        explicit PupilsDistanceCalculator() = default;
         [[nodiscard]] auto calculate(const std::vector<cv::Mat>& detected_faces) -> std::vector<double>;
 
     private:
-        [[nodiscard]] auto detectPupils(const cv::Mat& face) -> std::pair<cv::Point, cv::Point>;
-        [[nodiscard]] auto calculateDistanceBetweenPupils(
-            const std::pair<cv::Point, cv::Point>& pupil_positions) -> double;
-
-        PupilsDistanceCalculatorConfig pupils_distance_calculator_config;
-        cv::CascadeClassifier pupil_detector;
+        [[nodiscard]] auto preprocessFace(const cv::Mat& face) -> cv::Mat;
+        [[nodiscard]] auto getEyeRect(const cv::Mat& face_roi, double ratio_x, double ratio_y, int eye_width,
+                                      int eye_height) -> cv::Rect;
+        [[nodiscard]] auto findEyeCenterInROI(const cv::Mat& eye_ror) -> cv::Point;
+        [[nodiscard]] auto computeMatXGradient(const cv::Mat& src) -> cv::Mat;
+        [[nodiscard]] auto adjustPupilPosition(const cv::Point& pupil_position, const cv::Rect& eye_rect) -> cv::Point;
+        [[nodiscard]] auto calculateDistanceBetweenPupils(cv::Point right_pupil_position,
+                                                          cv::Point left_pupil_position) -> double;
     };
 } // namespace height_vision_pi
