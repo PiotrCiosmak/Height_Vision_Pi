@@ -13,14 +13,14 @@ TEST(InjectorTest, ShouldCreateCameraControllerInjector)
 {
     auto injector = cameraControllerInjector();
     auto camera_controller = injector.create<std::unique_ptr<CameraController>>();
-    EXPECT_NE(camera_controller, nullptr);
+    EXPECT_NE(camera_controller,nullptr);
 }
 
 TEST(InjectorTest, ShouldCreateDummyCameraControllerInjector)
 {
     auto injector = dummyCameraControllerInjector();
     auto camera_controller = injector.create<std::unique_ptr<CameraController>>();
-    EXPECT_NE(camera_controller, nullptr);
+    EXPECT_NE(camera_controller,nullptr);
     EXPECT_TRUE(dynamic_cast<DummyCameraController*>(camera_controller.get()) != nullptr);
 }
 
@@ -78,4 +78,11 @@ TEST(InjectorTest, AgeDetectorInjector)
     auto injector = ageDetectorInjector();
     auto age_detector = injector.create<std::unique_ptr<AgeDetector>>();
     EXPECT_NE(age_detector, nullptr);
+}
+
+TEST(InjectorTest, PupilsDistanceCalculatorInjector)
+{
+    auto injector = pupilsDistanceCalculatorInjector();
+    auto pupils_distance_calculator = injector.create<std::unique_ptr<PupilsDistanceCalculator>>();
+    EXPECT_NE(pupils_distance_calculator, nullptr);
 }
