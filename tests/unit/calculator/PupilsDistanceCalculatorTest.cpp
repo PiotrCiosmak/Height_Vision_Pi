@@ -8,7 +8,7 @@ using namespace height_vision_pi;
 class PupilsDistanceCalculatorTest : public ::testing::Test
 {
 protected:
-    PupilsDistanceCalculator calculator{Config::get().pupils_distance_calculator};
+    PupilsDistanceCalculator calculator{};
 };
 
 TEST_F(PupilsDistanceCalculatorTest, ShouldProcessEmptyFrames)
