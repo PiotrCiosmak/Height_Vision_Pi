@@ -190,8 +190,8 @@ auto PupilsDistanceCalculator::adjustPupilPosition(const cv::Point& pupil_positi
 }
 
 auto PupilsDistanceCalculator::calculateDistanceBetweenPupils(
-    const cv::Point right_pupil_position,
-    const cv::Point left_pupil_position) -> double
+    const cv::Point& right_pupil_position,
+    const cv::Point& left_pupil_position) -> double
 {
     return std::sqrt(
         std::pow(right_pupil_position.x - left_pupil_position.x, 2) + std::pow(

@@ -17,7 +17,7 @@ namespace height_vision_pi
         [[nodiscard]] auto findEyeCenterInROI(const cv::Mat& eye_ror) -> cv::Point;
         [[nodiscard]] auto computeMatXGradient(const cv::Mat& src) -> cv::Mat;
         [[nodiscard]] auto adjustPupilPosition(const cv::Point& pupil_position, const cv::Rect& eye_rect) -> cv::Point;
-        [[nodiscard]] auto calculateDistanceBetweenPupils(cv::Point right_pupil_position,
-                                                          cv::Point left_pupil_position) -> double;
+        [[nodiscard]] auto calculateDistanceBetweenPupils(const cv::Point& right_pupil_position,
+                                                          const cv::Point& left_pupil_position) -> double;
     };
 } // namespace height_vision_pi
