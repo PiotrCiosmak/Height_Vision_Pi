@@ -23,7 +23,7 @@ TEST_F(PupilsDistanceCalculatorTest, ShouldProcessEmptyFrames)
 
     // then: Calculated pupils distances size is equal to processed number of empty frames
     EXPECT_TRUE(calculated_pupils_distances.size() == empty_frames.size());
-    // then: Pupils distances doesn't have a value
+    // then: Pupils distances don't have a values
     for (const auto& calculated_pupils_distance : calculated_pupils_distances)
     {
         EXPECT_FALSE(calculated_pupils_distance.has_value());
