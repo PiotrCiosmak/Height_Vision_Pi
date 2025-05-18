@@ -4,15 +4,15 @@
 using namespace height_vision_pi;
 
 auto PupilsDistanceCalculator::calculate(
-    const std::vector<cv::Mat>& detected_faces) -> std::vector<double>
+    const std::vector<cv::Mat>& detected_faces) -> std::vector<std::optional<double>>
 {
-    auto distances = std::vector<double>{};
+    auto distances = std::vector<std::optional<double>>{};
 
     for (const auto& face : detected_faces)
     {
         if (face.empty())
         {
-            distances.emplace_back(0);
+            distances.emplace_back(std::nullopt);
             continue;
         }
 
@@ -53,7 +53,7 @@ auto PupilsDistanceCalculator::calculate(
     const auto calculated_pupils_distance_count = std::ranges::count_if(distances,
         [](const auto& distance)
         {
-            return distance != 0;
+            return distance.has_value();
         });
 
     Logger::info("{} out of {} possible pupils distance calculated",
