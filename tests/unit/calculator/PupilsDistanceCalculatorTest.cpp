@@ -23,10 +23,10 @@ TEST_F(PupilsDistanceCalculatorTest, ShouldProcessEmptyFrames)
 
     // then: Calculated pupils distances size is equal to processed number of empty frames
     EXPECT_TRUE(calculated_pupils_distances.size() == empty_frames.size());
-    // then: Pupils distances are zeros
+    // then: Pupils distances don't have a values
     for (const auto& calculated_pupils_distance : calculated_pupils_distances)
     {
-        EXPECT_TRUE(calculated_pupils_distance == 0.0);
+        EXPECT_FALSE(calculated_pupils_distance.has_value());
     }
 }
 
@@ -50,7 +50,7 @@ TEST_F(PupilsDistanceCalculatorTest, ShouldCalculateDistanceInSetOfFacesFrames)
     const auto valid_calculated_pupils_distances = std::ranges::count_if(calculated_pupils_distance,
         [](const auto& distance)
         {
-            return distance != 0;
+            return distance.has_value();
         });
     // when: Calculate the ratio
     const auto ratio = static_cast<double>(valid_calculated_pupils_distances) / faces_frames.size();
