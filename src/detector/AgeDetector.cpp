@@ -14,14 +14,15 @@ AgeDetector::AgeDetector(const AgeDetectorConfig& new_age_detector_config) :
     }
 }
 
-auto AgeDetector::detect(const std::vector<cv::Mat>& detected_faces) -> std::vector<int>
+auto AgeDetector::detect(
+    const std::vector<cv::Mat>& detected_faces) -> std::vector<std::optional<int>>
 {
-    auto detected_ages = std::vector<int>{};
+    auto detected_ages = std::vector<std::optional<int>>{};
     for (const auto& face : detected_faces)
     {
         if (face.empty())
         {
-            detected_ages.push_back(0);
+            detected_ages.push_back(std::nullopt);
         }
         else
         {
@@ -45,13 +46,13 @@ auto AgeDetector::detect(const std::vector<cv::Mat>& detected_faces) -> std::vec
     const auto detected_ages_count = std::ranges::count_if(detected_ages,
                                                            [](const auto& age)
                                                            {
-                                                               return age > 0;
+                                                               return age.has_value();
                                                            });
     Logger::info("{} out of {} possible ages detected", detected_ages_count, detected_ages.size());
     return detected_ages;
 }
 
-auto AgeDetector::findMostProbableAge(std::vector<float> age_predictions) -> int
+auto AgeDetector::findMostProbableAge(std::vector<float> age_predictions) const -> int
 {
     const auto most_probable_age_index = std::distance(age_predictions.begin(),
                                                        std::ranges::max_element(age_predictions));

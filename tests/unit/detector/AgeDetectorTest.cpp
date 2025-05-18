@@ -26,7 +26,7 @@ TEST_F(AgeDetectorTest, ShouldProcessEmptyFrames)
     // then: Ages aren't detected
     for (const auto& age : detected_ages)
     {
-        EXPECT_TRUE(age == 0);
+        EXPECT_FALSE(age.has_value());
     }
 }
 
@@ -50,7 +50,7 @@ TEST_F(AgeDetectorTest, ShouldDetectAgeInSetOfFacesFrames)
     const auto valid_detections = std::ranges::count_if(detected_ages,
                                                         [](const auto& age)
                                                         {
-                                                            return age != 0;
+                                                            return age.has_value();
                                                         });
     // when: Calculate the detection rate
     const auto detection_rate = static_cast<double>(valid_detections) / faces_frames.size();
