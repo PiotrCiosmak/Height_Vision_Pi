@@ -21,7 +21,7 @@ TEST_F(AgeDetectorTest, ShouldProcessEmptyFrames)
     // when: Processing frames
     const auto detected_ages = detector.detect(empty_frames);
 
-    // then: Detected ages size is equal to processed number of empty frames
+    // then: Detected ages size is equal to the processed number of empty frames
     EXPECT_TRUE(detected_ages.size() == empty_frames.size());
     // then: Ages aren't detected
     for (const auto& age : detected_ages)
@@ -32,7 +32,7 @@ TEST_F(AgeDetectorTest, ShouldProcessEmptyFrames)
 
 TEST_F(AgeDetectorTest, ShouldDetectAgeInSetOfFacesFrames)
 {
-    // given: Path to directory that contains face frames
+    // given: Path to a directory that contains face frames
     const auto directory_path = std::string{
         std::string{PROJECT_SOURCE_DIR} + "/resources/detected_face"};
     // given: Container to hold those frames

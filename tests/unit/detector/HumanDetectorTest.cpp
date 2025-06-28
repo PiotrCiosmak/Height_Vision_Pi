@@ -31,7 +31,7 @@ TEST_F(HumanDetectorTest, ShouldDetectHumanInVideoFrames)
     // then: Video should be opened
     ASSERT_TRUE(video.isOpened());
 
-    // given: Placeholder for currently processed frame
+    // given: Placeholder for a currently processed frame
     auto test_frame = cv::Mat{};
     // given: Counter to keep track of the total number of frames
     auto frame_count = 0;

@@ -21,7 +21,7 @@ TEST_F(FaceDetectorTest, ShouldProcessEmptyFrames)
     // when: Processing frames
     const auto detected_faces = detector.detect(empty_frames);
 
-    // then: Detected faces size is equal to processed number of black frames
+    // then: Detected faces size is equal to the processed number of black frames
     EXPECT_TRUE(detected_faces.size() == empty_frames.size());
     // then: Faces aren't detected
     for (const auto& face : detected_faces)
@@ -33,14 +33,14 @@ TEST_F(FaceDetectorTest, ShouldProcessEmptyFrames)
 TEST_F(FaceDetectorTest, ShouldProcessBlackFrames)
 {
     // given: Black frame
-    auto black_frame = cv::Mat{2048, 1537, CV_8UC3, cv::Scalar{0, 0, 0}};
+    const auto black_frame = cv::Mat{2048, 1537, CV_8UC3, cv::Scalar{0, 0, 0}};
     // given: Vector of black frames
-    auto black_frames = std::vector{black_frame, black_frame, black_frame, black_frame};
+    const auto black_frames = std::vector{black_frame, black_frame, black_frame, black_frame};
 
     // when: Processing frames
     const auto detected_faces = detector.detect(black_frames);
 
-    // then: Detected faces size is equal to processed number of black frames
+    // then: Detected faces size is equal to the processed number of black frames
     EXPECT_TRUE(detected_faces.size() == black_frames.size());
     // then: Faces aren't detected
     for (const auto& face : detected_faces)
@@ -51,7 +51,7 @@ TEST_F(FaceDetectorTest, ShouldProcessBlackFrames)
 
 TEST_F(FaceDetectorTest, ShouldDetectFacesInSetOfHumansFrames)
 {
-    // given: Path to directory that contains human frames
+    // given: Path to a directory that contains human frames
     const auto directory_path = std::string{
         std::string{PROJECT_SOURCE_DIR} + "/resources/detected_human"};
     // given: Container to hold those frames
