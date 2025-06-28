@@ -21,9 +21,9 @@ TEST_F(PupilsDistanceCalculatorTest, ShouldProcessEmptyFrames)
     // when: Processing frames
     const auto calculated_pupils_distances = calculator.calculate(empty_frames);
 
-    // then: Calculated pupils distances size is equal to processed number of empty frames
+    // then: Calculated pupils distances size is equal to the processed number of empty frames
     EXPECT_TRUE(calculated_pupils_distances.size() == empty_frames.size());
-    // then: Pupils distances don't have a values
+    // then: Pupils distances don't have a value
     for (const auto& calculated_pupils_distance : calculated_pupils_distances)
     {
         EXPECT_FALSE(calculated_pupils_distance.has_value());
@@ -32,7 +32,7 @@ TEST_F(PupilsDistanceCalculatorTest, ShouldProcessEmptyFrames)
 
 TEST_F(PupilsDistanceCalculatorTest, ShouldCalculateDistanceInSetOfFacesFrames)
 {
-    // given: Path to directory that contains face frames
+    // given: Path to a directory that contains face frames
     const auto directory_path = std::string{
         std::string{PROJECT_SOURCE_DIR} + "/resources/detected_face"};
     // given: Container to hold those frames
@@ -44,7 +44,7 @@ TEST_F(PupilsDistanceCalculatorTest, ShouldCalculateDistanceInSetOfFacesFrames)
         const auto img = cv::imread(entry.path().string());
         faces_frames.push_back(img);
     }
-    // when: Processing the vector of face frames to calculate pupils distances
+    // when: Processing the vector of face frames to calculate pupil distances
     const auto calculated_pupils_distance = calculator.calculate(faces_frames);
     // when: Count valid calculations
     const auto valid_calculated_pupils_distances = std::ranges::count_if(calculated_pupils_distance,
