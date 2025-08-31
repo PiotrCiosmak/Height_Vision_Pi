@@ -30,16 +30,16 @@ auto FaceDetector::detect(const std::vector<cv::Mat>& humans) -> std::vector<cv:
             if (detected_faces_count > 1)
             {
                 auto most_probable_face = findMostProbableFace(currently_detected_faces);
-                detected_faces.push_back(human(most_probable_face));
+                detected_faces.emplace_back(human(most_probable_face));
             }
             else
             {
-                detected_faces.push_back(human(currently_detected_faces.front()));
+                detected_faces.emplace_back(human(currently_detected_faces.front()));
             }
         }
         else
         {
-            detected_faces.push_back(cv::Mat{});
+            detected_faces.emplace_back(cv::Mat{});
         }
     }
 

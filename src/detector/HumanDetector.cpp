@@ -47,7 +47,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> std::vector<cv::Mat>
                 auto top = center_y - height / 2;
 
                 boxes.emplace_back(left, top, width, height);
-                confidences.push_back(confidence);
+                confidences.emplace_back(confidence);
             }
         }
     }
@@ -66,7 +66,7 @@ auto HumanDetector::detect(cv::Mat& frame) -> std::vector<cv::Mat>
             && box.y + box.height <= frame.rows)
         {
             cv::rectangle(frame, box, cv::Scalar(0, 255, 0), 2);
-            detected_humans.push_back(frame(box).clone());
+            detected_humans.emplace_back(frame(box).clone());
         }
     }
 

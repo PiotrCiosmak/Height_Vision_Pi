@@ -42,7 +42,7 @@ TEST_F(AgeDetectorTest, ShouldDetectAgeInSetOfFacesFrames)
     for (const auto& entry : std::filesystem::directory_iterator(directory_path))
     {
         const auto img = cv::imread(entry.path().string());
-        faces_frames.push_back(img);
+        faces_frames.emplace_back(img);
     }
     // when: Processing the vector of face frames to detect age
     const auto detected_ages = detector.detect(faces_frames);

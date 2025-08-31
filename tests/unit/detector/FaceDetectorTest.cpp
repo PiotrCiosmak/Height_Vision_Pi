@@ -63,7 +63,7 @@ TEST_F(FaceDetectorTest, ShouldDetectFacesInSetOfHumansFrames)
         const auto img = cv::imread(entry.path().string());
         if (!img.empty())
         {
-            human_frames.push_back(img);
+            human_frames.emplace_back(img);
         }
     }
     // when: Processing the vector of human frames to detect faces

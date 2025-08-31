@@ -37,7 +37,7 @@ auto HeightCalculator::calculate(
         if (human.empty() || face.empty() || !age.has_value() || !distance_between_pupil.
             has_value())
         {
-            heights.push_back(std::nullopt);
+            heights.emplace_back(std::nullopt);
             continue;
         }
 
@@ -52,7 +52,7 @@ auto HeightCalculator::calculate(
 
         const auto height = human.rows * cm_per_px;
 
-        heights.push_back(height);
+        heights.emplace_back(height);
     }
 
     return heights;

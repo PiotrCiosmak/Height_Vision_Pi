@@ -42,7 +42,7 @@ TEST_F(PupilsDistanceCalculatorTest, ShouldCalculateDistanceInSetOfFacesFrames)
     for (const auto& entry : std::filesystem::directory_iterator(directory_path))
     {
         const auto img = cv::imread(entry.path().string());
-        faces_frames.push_back(img);
+        faces_frames.emplace_back(img);
     }
     // when: Processing the vector of face frames to calculate pupil distances
     const auto calculated_pupils_distance = calculator.calculate(faces_frames);

@@ -22,7 +22,7 @@ auto AgeDetector::detect(
     {
         if (face.empty())
         {
-            detected_ages.push_back(std::nullopt);
+            detected_ages.emplace_back(std::nullopt);
         }
         else
         {
@@ -39,7 +39,7 @@ auto AgeDetector::detect(
             age_net.setInput(blob);
             const auto age_predictions = std::vector<float>{age_net.forward()};
             const auto age = findMostProbableAge(age_predictions);
-            detected_ages.push_back(age);
+            detected_ages.emplace_back(age);
         }
     }
 
