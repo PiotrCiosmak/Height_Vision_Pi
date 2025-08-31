@@ -97,3 +97,9 @@ auto height_vision_pi::pupilsDistanceCalculatorInjector() -> UniqueInjector<
         boost::di::bind<PupilsDistanceCalculator>.to<PupilsDistanceCalculator>().in(
             boost::di::unique));
 }
+
+auto height_vision_pi::heightCalculatorInjector() -> UniqueInjector<HeightCalculator>
+{
+    return make_injector(
+        boost::di::bind<HeightCalculator>.to<HeightCalculator>().in(boost::di::unique));
+}

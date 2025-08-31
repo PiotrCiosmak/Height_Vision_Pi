@@ -33,6 +33,8 @@ int main()
     const auto age_detector = ageDetectorInjector().create<std::unique_ptr<AgeDetector>>();
     const auto pupils_distance_calculator = pupilsDistanceCalculatorInjector().create<
         std::unique_ptr<PupilsDistanceCalculator>>();
+    const auto height_calculator = heightCalculatorInjector().create<std::unique_ptr<
+        HeightCalculator>>();
     static auto frame_number = 1;
     while (true)
     {
@@ -46,10 +48,14 @@ int main()
         {
             const auto humans = human_detector->detect(frame);
             const auto faces = face_detector->detect(humans);
-            [[maybe_unused]] const auto ages = age_detector->detect(faces);
-            [[maybe_unused]] const auto distance_between_pupils = pupils_distance_calculator->
+            const auto ages = age_detector->detect(faces);
+            const auto distance_between_pupils = pupils_distance_calculator->
                 calculate(faces);
-            // TODO Calculate height based on age and distance between the pupils
+            [[maybe_unused]] const auto heights = height_calculator->calculate(
+                humans,
+                faces,
+                ages,
+                distance_between_pupils);
 #ifdef AARCH64
             showFrame(frame);
 #else
