@@ -6,12 +6,13 @@
 #include "monitor/MonitorDevice.hpp"
 #include "detector/AgeDetector.hpp"
 #include "calculator/PupilsDistanceCalculator.hpp"
+#include "calculator/HeightCalculator.hpp"
 
 #include <boost/di.hpp>
 
 namespace height_vision_pi
 {
-    template <typename T>
+    template<typename T>
     using UniqueInjector = boost::di::injector<std::unique_ptr<T>>;
 
     [[nodiscard]] auto cameraControllerInjector() -> UniqueInjector<CameraController>;
@@ -28,4 +29,5 @@ namespace height_vision_pi
     [[nodiscard]] auto faceDetectorInjector() -> UniqueInjector<FaceDetector>;
     [[nodiscard]] auto ageDetectorInjector() -> UniqueInjector<AgeDetector>;
     [[nodiscard]] auto pupilsDistanceCalculatorInjector() -> UniqueInjector<PupilsDistanceCalculator>;
+    [[nodiscard]] auto heightCalculatorInjector() -> UniqueInjector<HeightCalculator>;
 } // namespace height_vision_pi

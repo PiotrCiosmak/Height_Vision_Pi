@@ -50,6 +50,7 @@ set(HEIGHT_VISION_PI_SOURCES
         src/detector/FaceDetector.cpp
         src/detector/AgeDetector.cpp
         src/calculator/PupilsDistanceCalculator.cpp
+        src/calculator/HeightCalculator.cpp
 )
 
 if (SYSTEM_ARCHITECTURE STREQUAL "aarch64")
