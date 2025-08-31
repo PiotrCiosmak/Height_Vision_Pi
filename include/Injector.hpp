@@ -28,7 +28,6 @@ namespace height_vision_pi
     [[nodiscard]] auto humanDetectorInjector() -> UniqueInjector<HumanDetector>;
     [[nodiscard]] auto faceDetectorInjector() -> UniqueInjector<FaceDetector>;
     [[nodiscard]] auto ageDetectorInjector() -> UniqueInjector<AgeDetector>;
-    [[nodiscard]] auto
-        pupilsDistanceCalculatorInjector() -> UniqueInjector<PupilsDistanceCalculator>;
+    [[nodiscard]] auto pupilsDistanceCalculatorInjector() -> UniqueInjector<PupilsDistanceCalculator>;
     [[nodiscard]] auto heightCalculatorInjector() -> UniqueInjector<HeightCalculator>;
 } // namespace height_vision_pi
