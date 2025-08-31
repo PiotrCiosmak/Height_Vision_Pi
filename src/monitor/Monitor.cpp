@@ -209,7 +209,7 @@ auto Monitor::getRAMsStatistics(const std::string& all_ram_statistics) const
     {
         if (line.find("Mem:") != std::string::npos)
         {
-            ram_statistics.push_back(line);
+            ram_statistics.emplace_back(line);
         }
     }
 
@@ -248,7 +248,7 @@ auto Monitor::getRAMsUsagePercent(const std::vector<std::string>& rams_statistic
         {
             const auto total = numbers[0];
             const auto used = numbers[1];
-            rams_usage_percent.push_back(static_cast<int>(std::round(1.0 * total / used)));
+            rams_usage_percent.emplace_back(static_cast<int>(std::round(1.0 * total / used)));
         }
     }
 

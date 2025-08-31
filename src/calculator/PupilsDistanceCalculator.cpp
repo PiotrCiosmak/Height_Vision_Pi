@@ -47,7 +47,7 @@ auto PupilsDistanceCalculator::calculate(
             right_pupil_position,
             left_pupil_position);
 
-        distances.push_back(distance);
+        distances.emplace_back(distance);
     }
 
     const auto calculated_pupils_distance_count = std::ranges::count_if(distances,
