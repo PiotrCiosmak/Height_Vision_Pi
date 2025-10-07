@@ -32,21 +32,21 @@ TEST_F(FullFlowTest, FullFlowTest)
     const auto directory_path = std::string{
         std::string{PROJECT_SOURCE_DIR} + "/resources/detected_human"};
     // given: Placeholder for a currently processed frame
-    auto frame = std::vector<cv::Mat>{};
+    auto frames = std::vector<cv::Mat>{};
     for (const auto& entry : std::filesystem::directory_iterator(directory_path))
     {
         const auto img = cv::imread(entry.path().string());
         if (!img.empty())
         {
-            frame.emplace_back(img);
+            frames.emplace_back(img);
         }
     }
 
-    // then: Frame isn't empty
-    ASSERT_FALSE(frame.empty());
+    // then: Vector of frames isn't empty
+    ASSERT_FALSE(frames.empty());
 
     // when: Detecting humans from one random frame
-    const auto& detected_humans = human_detector->detect(frame.at(34));
+    const auto& detected_humans = human_detector->detect(frames.at(34));
 
     // then: One human should be detected
     ASSERT_TRUE(detected_humans.size() == 1);
