@@ -48,7 +48,7 @@ jobs:
     name: Functional Tests (${{ matrix.architecture }})
     needs: unit-test
     strategy:
-      matix:
+      matrix:
         include:
           - architecture: x64
             container_version: x64:0.3.1
