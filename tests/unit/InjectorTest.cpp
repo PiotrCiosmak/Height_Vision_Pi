@@ -31,7 +31,7 @@ TEST(InjectorTest, ShouldCreateArduCamCameraControllerInjector)
 {
     auto injector = arduCamCameraControllerInjector();
     auto camera_controller = injector.create<std::unique_ptr<CameraController>>();
-    EXPECT_NE(cameraController, nullptr);
+    EXPECT_NE(camera_controller, nullptr);
     EXPECT_TRUE(dynamic_cast<ArduCamCameraController*>(camera_controller.get()) != nullptr);
 }
 #endif
