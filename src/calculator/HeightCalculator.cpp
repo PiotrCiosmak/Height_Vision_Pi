@@ -4,7 +4,7 @@
 
 using namespace height_vision_pi;
 
-inline bool isHeightInValidRange(const double height)
+inline auto isHeightInValidRange(const double height) -> bool
 {
     return height >= 60 && height <= 250;
 }
