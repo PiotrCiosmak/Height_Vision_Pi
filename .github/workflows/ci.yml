@@ -3,7 +3,8 @@ name: C++ CI
 on: push
 
 jobs:
-  test:
+  unit-test:
+    name: Unit Tests (${{ matrix.architecture }})
     strategy:
       matrix:
         include:
@@ -32,7 +33,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_READ }}
 
-      - name: Build and run tests inside Docker
+      - name: Build and run unit tests inside Docker
         run: |
           docker run --network host \
             -v /run/udev:/run/udev \
@@ -42,4 +43,46 @@ jobs:
               cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
               cd ./build/tests/unit &&
               ./AllUnitTests
+            "
+  functional-test:
+    name: Functional Tests (${{ matrix.architecture }})
+    needs: unit-test
+    strategy:
+      matix:
+        include:
+          - architecture: x64
+            container_version: x64:0.3.1
+          - architecture: arm64
+            container_version: arm64:0.7.1
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up QEMU (for ARM64 only)
+        if: matrix.architecture == 'arm64'
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: arm64
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_READ }}
+
+      - name: Build and run functional tests inside Docker
+        run: |
+          docker run --network host \
+            -v /run/udev:/run/udev \
+            -v $(pwd):/Height_Vision_Pi \
+            --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/${{ matrix.container_version }} -c "
+              cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
+              cmake --build /Height_Vision_Pi/build --target AllFunctionalTests -- -j$(nproc) &&
+              cd ./build/tests/functional &&
+              ./AllFunctionalTests
             "
