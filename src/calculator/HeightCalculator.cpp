@@ -4,6 +4,11 @@
 
 using namespace height_vision_pi;
 
+inline bool isHeightInValidRange(const double height)
+{
+    return height >= 60 && height <= 250;
+}
+
 auto HeightCalculator::calculate(
     const std::vector<cv::Mat>& humans,
     const std::vector<cv::Mat>& faces,
@@ -52,8 +57,15 @@ auto HeightCalculator::calculate(
 
         const auto height = human.rows * cm_per_px;
 
-        heights.emplace_back(height);
+        if (isHeightInValidRange(height))
+        {
+            heights.emplace_back(height);
+        }
     }
+
+    Logger::info("{} out of {} possible heights calculated",
+                 heights.size(),
+                 size);
 
     return heights;
 }
