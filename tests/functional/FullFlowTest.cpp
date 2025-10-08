@@ -1,7 +1,6 @@
 #include "Injector.hpp"
 
 #include <gtest/gtest.h>
-#include <string>
 
 using namespace height_vision_pi;
 
@@ -39,7 +38,10 @@ TEST_F(FullFlowTest, FullFlowTest)
     ASSERT_FALSE(frame.empty());
 
     // when: Detecting humans
-    const auto detected_humans = human_detector->detect(frame);
+    const auto& detected_humans = human_detector->detect(frame);
+
+    // then: One human should be detected
+    ASSERT_TRUE(detected_humans.size() == 1);
 
     // when: Detecting faces
     const auto& detected_faces = face_detector->detect(detected_humans);
