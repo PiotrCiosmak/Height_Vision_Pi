@@ -1,6 +1,7 @@
 #include "Injector.hpp"
 
 #include <gtest/gtest.h>
+#include <string>
 
 using namespace height_vision_pi;
 
@@ -29,8 +30,7 @@ protected:
 TEST_F(FullFlowTest, FullFlowTest)
 {
     // given: Path to a frame that has human
-    const auto frame_path = std::string{
-        std::string{PROJECT_SOURCE_DIR} + "/resources/detected_human/0035.jpg"};
+    const auto frame_path = std::string{PROJECT_SOURCE_DIR} + "/resources/detected_human/0035.jpg";
 
     // when: Loading frame
      auto frame = cv::imread(frame_path);
