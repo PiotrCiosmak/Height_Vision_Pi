@@ -3,17 +3,17 @@ name: C++ CI
 on: push
 
 jobs:
-#  unit-test:
-#    name: Unit Tests (${{ matrix.architecture }})
-#    strategy:
-#      matrix:
-#        include:
-#          - architecture: x64
-#            container_version: x64:0.3.1
-#          - architecture: arm64
-#            container_version: arm64:0.7.1
-#    runs-on: ubuntu-latest
-#
+  unit-test:
+    name: Unit Tests (${{ matrix.architecture }})
+    strategy:
+      matrix:
+        include:
+          - architecture: x64
+            container_version: x64:0.3.1
+          - architecture: arm64
+            container_version: arm64:0.7.1
+    runs-on: ubuntu-latest
+
 #    steps:
 #      - name: Checkout code
 #        uses: actions/checkout@v4
