@@ -1,5 +1,5 @@
 #include "Injector.hpp"
-#include "Logger.hpp"#TODO TO DEL
+
 #include <gtest/gtest.h>
 
 using namespace height_vision_pi;
@@ -28,46 +28,21 @@ protected:
 
 TEST_F(FullFlowTest, FullFlowTest)
 {
-    // given: Path to a directory that contains human frames
-    const auto directory_path = std::string{
-        std::string{PROJECT_SOURCE_DIR} + "/resources/detected_human"};
-    // given: Placeholder for a currently processed frame
-    auto frames = std::vector<cv::Mat>{};
-    for (const auto& entry : std::filesystem::directory_iterator(directory_path))
-    {
-        const auto img = cv::imread(entry.path().string());
-        if (!img.empty()) {
-            Logger::info("Wczytano obraz z ścieżki: {}", entry.path().string());
-        } else {
-            Logger::warn("Nie można wczytać obrazu z: {}", entry.path().string());
-        }
-        if (!img.empty())
-        {
-            frames.emplace_back(img);
-        }
-    }
+    // given: Path to a frame that has human
+    const auto frame_path = std::string{
+        std::string{PROJECT_SOURCE_DIR} + "/resources/detected_human/0035.jpg"};
 
-    // then: Vector of frames isn't empty
-    ASSERT_FALSE(frames.empty());
+    // when: Loading frame
+     auto frame = cv::imread(frame_path);
 
-    // Przed wywołaniem `detect`
-    auto detected_humans = human_detector->detect(frames.at(34));
-    Logger::info("Liczba wykrytych ludzi: {}", detected_humans.size());
+    // then: Frame isn't empty
+    ASSERT_FALSE(frame.empty());
 
-    // Dla każdego wykrytego elementu można wypisać jego rozmiar
-    for (size_t i = 0; i < detected_humans.size(); i++) {
-        cv::Mat human = detected_humans[i];
-        Logger::info("Human {}: rozmiar: {}x{}", i, human.cols, human.rows);
-    }
-
-    // when: Detecting humans from one random frame
-    const auto& detected_faces = face_detector->detect(detected_humans);
-
-    // then: One human should be detected
-    ASSERT_TRUE(detected_humans.size() == 1);
+    // when: Detecting humans
+    const auto detected_humans = human_detector->detect(frame);
 
     // when: Detecting faces
-    
+    const auto& detected_faces = face_detector->detect(detected_humans);
 
     // then: One face should be detected
     ASSERT_TRUE(detected_faces.size() == 1);
