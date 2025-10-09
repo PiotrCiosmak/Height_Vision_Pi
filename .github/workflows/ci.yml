@@ -42,7 +42,7 @@ jobs:
               cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
               cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
               cd ./build/tests/unit &&
-              ./AllUnitTests
+              ./AllUnitTests --gtest_death_test_style=threadsafe
             "
   functional-test:
     name: Functional Tests (${{ matrix.architecture }})
@@ -84,5 +84,5 @@ jobs:
               cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
               cmake --build /Height_Vision_Pi/build --target AllFunctionalTests -- -j$(nproc) &&
               cd ./build/tests/functional &&
-              ./AllFunctionalTests
+              ./AllFunctionalTests --gtest_death_test_style=threadsafe
             "
