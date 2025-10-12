@@ -31,7 +31,7 @@ TEST(InjectorTest, ShouldCreateArduCamCameraControllerInjector)
 {
     if (std::getenv("CI"))
     {
-        GTEST_SKIP() << "Skipping MonitorInjector test on CI";
+        GTEST_SKIP() << "Skipping ArduCamCameraControllerInjector test on CI";
     }
 
     auto injector = arduCamCameraControllerInjector();
