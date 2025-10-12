@@ -39,6 +39,8 @@ jobs:
             -v /run/udev:/run/udev \
             -v $(pwd):/Height_Vision_Pi \
             --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/${{ matrix.container_version }} -c "
+              export LIBCAMERA_LOG_LEVELS='*:0'
+              export LIBCAMERA_NO_UDEV=1
               cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
               cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
               cd ./build/tests/unit &&
