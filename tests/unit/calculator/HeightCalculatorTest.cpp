@@ -132,19 +132,29 @@ TEST_F(HeightCalculatorTest, ShouldReturnNulloptWhenDataInVectorsAreEmpty)
 
 TEST_F(HeightCalculatorTest, ShouldCalculateHeightForFakeData)
 {
-    // given: Vector of fake humans
+    std::cout << "given: Vector of fake humans" << std::endl;
     const auto humans = {cv::Mat(100, 100, CV_8UC3, cv::Scalar(0, 0, 0))};
-    // given: Vector of fake faces
+    std::cout << "humans created: " << humans.size() << std::endl;
+
+    std::cout << "given: Vector of fake faces" << std::endl;
     const auto faces = {cv::Mat(20, 30, CV_8UC3, cv::Scalar(0, 0, 0))};
-    // given: Vector of fake ages
+    std::cout << "faces created: " << faces.size() << std::endl;
+
+    std::cout << "given: Vector of fake ages" << std::endl;
     const auto ages = {std::optional{15}};
-    // given: Vector of fake distances
+    std::cout << "ages size: " << ages.size() << std::endl;
+
+    std::cout << "given: Vector of fake distances" << std::endl;
     const auto distances = {std::optional{5.0}};
+    std::cout << "distances size: " << distances.size() << std::endl;
 
-    // when: Calculating height
+    std::cout << "when: Calculating height" << std::endl;
     const auto heights = calculator.calculate(humans, faces, ages, distances);
+    std::cout << "heights calculated: " << heights.size() << std::endl;
 
-    // then: Calculated height should be non-empty and have a value
+    std::cout << "then: Calculated height should be non-empty and have a value" << std::endl;
     ASSERT_EQ(heights.size(), 1);
+    std::cout << "heights size assertion passed" << std::endl;
     ASSERT_TRUE(heights[0].has_value());
+    std::cout << "height value assertion passed" << std::endl;
 }
