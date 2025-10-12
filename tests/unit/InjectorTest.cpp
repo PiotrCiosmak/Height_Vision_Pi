@@ -29,9 +29,9 @@ TEST(InjectorTest, ShouldCreateDummyCameraControllerInjector)
 #ifdef AARCH64
 TEST(InjectorTest, ShouldCreateArduCamCameraControllerInjector)
 {
-    if (std::getenv("CI"))
+    if (std::getenv("CI_BUILD"))
     {
-        GTEST_SKIP() << "Skipping ArduCamCameraControllerInjector test on CI";
+        GTEST_SKIP() << "Skipping ArduCamCameraControllerInjector test in CI build";
     }
 
     auto injector = arduCamCameraControllerInjector();
