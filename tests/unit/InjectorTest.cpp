@@ -29,10 +29,15 @@ TEST(InjectorTest, ShouldCreateDummyCameraControllerInjector)
 #ifdef AARCH64
 TEST(InjectorTest, ShouldCreateArduCamCameraControllerInjector)
 {
+    std::cout << "ArduCamCameraControllerInjector 1" << std::endl;
     auto injector = arduCamCameraControllerInjector();
+    std::cout << "ArduCamCameraControllerInjector 2" << std::endl;
     auto camera_controller = injector.create<std::unique_ptr<CameraController>>();
+    std::cout << "ArduCamCameraControllerInjector 3" << std::endl;
     EXPECT_NE(camera_controller, nullptr);
+    std::cout << "ArduCamCameraControllerInjector 4" << std::endl;
     EXPECT_TRUE(dynamic_cast<ArduCamCameraController*>(camera_controller.get()) != nullptr);
+    std::cout << "ArduCamCameraControllerInjector 5" << std::endl;
 }
 #endif
 
