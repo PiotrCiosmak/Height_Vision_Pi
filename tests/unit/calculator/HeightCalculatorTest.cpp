@@ -132,15 +132,14 @@ TEST_F(HeightCalculatorTest, ShouldReturnNulloptWhenDataInVectorsAreEmpty)
 
 TEST_F(HeightCalculatorTest, ShouldCalculateHeightForFakeData)
 {
-    GTEST_SKIP() << "SKIPED TMP";
-    // given: ector of fake humans
+    // given: Vector of fake humans
     const auto humans = {cv::Mat(100, 100, CV_8UC3, cv::Scalar(0, 0, 0))};
     // given: Vector of fake faces
     const auto faces = {cv::Mat(20, 30, CV_8UC3, cv::Scalar(0, 0, 0))};
     // given: Vector of fake ages
     const auto ages = {std::optional{15}};
     // given: Vector of fake distances
-    const auto distances = {std::optional{5.0}};
+    const auto distances = {std::optional{15.0}};
 
     // when: Calculating height
     const auto heights = calculator.calculate(humans, faces, ages, distances);

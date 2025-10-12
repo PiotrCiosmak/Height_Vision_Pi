@@ -29,7 +29,11 @@ TEST(InjectorTest, ShouldCreateDummyCameraControllerInjector)
 #ifdef AARCH64
 TEST(InjectorTest, ShouldCreateArduCamCameraControllerInjector)
 {
-    GTEST_SKIP() << "SKIPED TMP";
+    if (std::getenv("CI_BUILD"))
+    {
+        GTEST_SKIP() << "Skipping ArduCamCameraControllerInjector test in CI build";
+    }
+
     auto injector = arduCamCameraControllerInjector();
     auto camera_controller = injector.create<std::unique_ptr<CameraController>>();
     EXPECT_NE(camera_controller, nullptr);

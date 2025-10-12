@@ -38,6 +38,7 @@ jobs:
           docker run --network host \
             -v /run/udev:/run/udev \
             -v $(pwd):/Height_Vision_Pi \
+            -e CI_BUILD=1 \
             --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/${{ matrix.container_version }} -c "
               cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
               cmake --build /Height_Vision_Pi/build --target AllUnitTests -- -j$(nproc) &&
