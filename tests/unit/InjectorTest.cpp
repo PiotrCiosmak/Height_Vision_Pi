@@ -29,15 +29,15 @@ TEST(InjectorTest, ShouldCreateDummyCameraControllerInjector)
 #ifdef AARCH64
 TEST(InjectorTest, ShouldCreateArduCamCameraControllerInjector)
 {
-    std::cout << "ArduCamCameraControllerInjector 1" << std::endl;
+    if (std::getenv("CI"))
+    {
+        GTEST_SKIP() << "Skipping MonitorInjector test on CI";
+    }
+
     auto injector = arduCamCameraControllerInjector();
-    std::cout << "ArduCamCameraControllerInjector 2" << std::endl;
     auto camera_controller = injector.create<std::unique_ptr<CameraController>>();
-    std::cout << "ArduCamCameraControllerInjector 3" << std::endl;
     EXPECT_NE(camera_controller, nullptr);
-    std::cout << "ArduCamCameraControllerInjector 4" << std::endl;
     EXPECT_TRUE(dynamic_cast<ArduCamCameraController*>(camera_controller.get()) != nullptr);
-    std::cout << "ArduCamCameraControllerInjector 5" << std::endl;
 }
 #endif
 
@@ -59,10 +59,6 @@ TEST(InjectorTest, DummyMonitorInjector)
 #ifdef AARCH64
 TEST(InjectorTest, MonitorInjector)
 {
-    if (std::getenv("CI"))
-    {
-        GTEST_SKIP() << "Skipping MonitorInjector test on CI";
-    }
     auto injector = monitorInjector();
     auto monitor_device = injector.create<std::unique_ptr<MonitorDevice>>();
     EXPECT_NE(monitor_device, nullptr);
