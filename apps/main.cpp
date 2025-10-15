@@ -1,6 +1,7 @@
 #include "Injector.hpp"
 #include "Logger.hpp"
 #include "config/Config.hpp"
+#include "SummaryStats.hpp"
 #ifdef AARCH64
 #include "camera/ArduCamCameraController.hpp"
 #endif
@@ -23,6 +24,7 @@ namespace
 
 int main()
 {
+    auto stats = SummaryStats{};
 #ifdef AARCH64
     const auto monitor = monitorInjector().create<std::unique_ptr<MonitorDevice>>();
 #endif
@@ -51,11 +53,15 @@ int main()
             const auto ages = age_detector->detect(faces);
             const auto distance_between_pupils = pupils_distance_calculator->
                 calculate(faces);
-            [[maybe_unused]] const auto heights = height_calculator->calculate(
+            const auto heights = height_calculator->calculate(
                 humans,
                 faces,
                 ages,
                 distance_between_pupils);
+            stats.collectStats(humans.size(),
+                               faces.size(),
+                               ages,
+                               heights);
 #ifdef AARCH64
             showFrame(frame);
 #else
@@ -71,6 +77,7 @@ int main()
         logProcessingEnd(frame_number);
         waitForNextFrame(start_time);
     }
+    stats.display_and_save_summary_report();
 }
 
 namespace
