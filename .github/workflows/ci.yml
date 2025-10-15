@@ -45,8 +45,8 @@ jobs:
               cd ./build/tests/unit &&
               ./AllUnitTests --gtest_death_test_style=threadsafe
             "
-  functional-test:
-    name: Functional Tests (${{ matrix.architecture }})
+  integration-test:
+    name: Integration Tests (${{ matrix.architecture }})
     needs: unit-test
     strategy:
       matrix:
@@ -76,14 +76,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_READ }}
 
-      - name: Build and run functional tests inside Docker
+      - name: Build and run integration tests inside Docker
         run: |
           docker run --network host \
             -v /run/udev:/run/udev \
             -v $(pwd):/Height_Vision_Pi \
             --entrypoint /bin/bash ghcr.io/piotrciosmak/height-vision-pi/${{ matrix.container_version }} -c "
               cmake -S /Height_Vision_Pi -B /Height_Vision_Pi/build -DENABLE_TESTS=ON
-              cmake --build /Height_Vision_Pi/build --target AllFunctionalTests -- -j$(nproc) &&
-              cd ./build/tests/functional &&
-              ./AllFunctionalTests --gtest_death_test_style=threadsafe
+              cmake --build /Height_Vision_Pi/build --target AllIntegrationTests -- -j$(nproc) &&
+              cd ./build/tests/integration &&
+              ./AllIntegrationTests --gtest_death_test_style=threadsafe
             "
