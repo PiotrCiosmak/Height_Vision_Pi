@@ -1,5 +1,5 @@
 add_executable(AllIntegrationTests
-        ../integration/FullFlowTest.cpp
+        FullFlowTest.cpp
 )
 
 find_package(GTest REQUIRED)
