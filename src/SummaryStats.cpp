@@ -147,4 +147,5 @@ void SummaryStats::display_and_save_summary_report() const
     {
         Logger::error("Could not write summary file: {}", file_name);
     }
+    file.close();
 }
