@@ -79,14 +79,6 @@ bash scripts/start_app.sh
 
     Suitable for a wide range of applications, including education, healthcare, retail, and personal use.
 
-## Screenshots
-
-TODO
-
 ## Project Status
 
-Project is: _in progress_.
-
-## Room for Improvement
-
-TODO
+First version of project is __completed__.
